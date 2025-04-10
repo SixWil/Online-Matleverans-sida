@@ -1,68 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body style="background-color: black; margin: 0px;overflow: hidden;">
+
+<body style="background-color: black; margin: 0px;"> 
+    <!-- overflow: hidden; -->
 
     <!-- Toppen av sidan, menyn, plus loggan -->
-    <div class="top" style="background-color: orchid; height: 10vw; display: flex; align-items: center; justify-content: space-between;">
-        
+    <div class="top"
+        style="background-color: orchid; display: flex; align-items: center; justify-content: space-between; padding-inline: 1.5vw; padding-block: 1vh;">
+
         <!-- logo placeholder -->
-        <div class="logo" style="width: 10vw; height: 10vw; background-color: lightblue; border-radius: 100%; margin-left: 2.5vw;"></div>
+        <!-- <div class="logo" style="width: 10vw; height: 10vw; background-color: lightblue; border-radius: 100%; margin-left: 2.5vw; margin-block: 1vh;"></div> -->
+
+        <!-- logo -->
+        <img src="Goondora.png" alt="logo goes here" style="width: 10vw; border-radius: 33px;">
 
         <!-- meny -->
-        <button class="button-1">hem</button>
-        <button class="button-1">hem</button>
-        <button class="button-1">hem</button>
-             
+        <button class="button-1">Hem</button>
+        <button class="button-1">Om oss</button>
+        <button class="button-1">Konto</button>
+
         <!-- kundvagn icon placeholder -->
-        <div class="Cart" style="background-color: aquamarine; width: 10vh; height: 10vh; margin-right: 2.5vw; border-radius: 10px; border: 0px;"></div>
-    
-    </div>
-    
-    <div class="down" style="display: flex; background-color: brown; height: 80vh" >
+        <!-- <div class="Cart" style="background-color: aquamarine; width: 10vh; height: 10vh; margin-right: 2.5vw; border-radius: 10px; border: 0px;"></div> -->
 
-    <!-- Sido menyn -->
-    <div class="left" style="background-color: orange; width: 15vw; display: flex; flex-direction: column; align-items: center; ">
-        
-        <!-- Meny -->
-        <button class="button-1" style="margin-top: 3vh;"> BUTIKER: </button>
-
-        <input style="width: 10vw; border-radius: 10px; margin-top: 3vh;">
-        
-        <div class="shops" style="background-color: yellow; overflow-y: auto; margin-top: 3vh; height: 40vh;">
-        
-        <!-- Restaurang 1 -->
-        <div class="Shop-1" style="background-color: green; width: 10vw; margin-bottom: 3vh;">
-            <button class="button-1"> Namn</button>
-            <button class="button-1"> Rätt</button>
-            <button class="button-1"> Rätt</button>
-        </div>
-       
-        <!-- Restaurang 2 -->
-        <div class="Shop-2" style="background-color: green; width: 10vw; margin-bottom: 3vh;">
-            <button class="button-1"> Namn</button>
-            <button class="button-1"> Rätt</button>
-            <button class="button-1"> Rätt</button>   
-        </div>
-        <!-- Restaurang 3 -->
-        <div class="Shop-3" style="background-color: green; width: 10vw; margin-bottom: 3vh;">
-            <button class="button-1"> Namn</button>
-            <button class="button-1"> Rätt</button>
-            <button class="button-1"> Rätt</button>   
-        </div>
+        <img src="Kundvagn.png" alt="" style="width: 10vh; background-color: wheat; border-radius: 10px; border: 0px;">
 
     </div>
-    
-    <button class="button-1" style="margin-top: 3vh;"> karta</button>
-     </div>
 
-     <div class="main-space" style="background-color: cornflowerblue; width: 85vw;"></div>
+    <div class="down" style="display: flex; background-color: brown; height: 72vh;">
+
+        <!-- Sido menyn -->
+        <div class="left"
+            style="background-color: orange; padding-block: 1vh; padding-inline: 0.5vw; display: flex; flex-direction: column;  justify-content: space-between;">
+
+            <!-- Meny -->
+            <button class="button-1" style="margin-left: 1vw;"> BUTIKER: </button>
+
+            <!-- Sök funktion -->
+            
+            <!-- Scroll meny -->
+            <input placeholder="Sök butik/rätt" style="width: 10vw; border-radius: 10px; margin-left: 0.666vw;">
+
+            <div class="shops"
+            style="background-color: yellow; overflow-y: auto; height: 40vh; border-radius: 10px; padding-inline: 0.5vw;">
+
+                <!-- Restauranger -->
+                <div class="Shop-1" style="background-color: green; width: 10vw; padding-block: 1vh; padding-inline: 0.5vw; margin-block: 1vh; border-radius: 10px;">
+                    <button class="button-2" style="margin-bottom: 1vh"> Namn</button>
+                    <button class="button-2" style="margin-top: 1vh;"> Rätt</button>
+                    <button class="button-2" style="margin-top: 1vh;"> Rätt</button>
+                    <button class="button-2" style="margin-top: 1vh;"> Rätt</button>
+                </div>
+                <div class="Shop-1" style="background-color: green; width: 10vw; padding-block: 1vh; padding-inline: 0.5vw; margin-block: 1vh; border-radius: 10px;">
+                    <button class="button-2" style="margin-bottom: 1vh"> Namn</button>
+                    <button class="button-2" style="margin-top: 1vh;"> Rätt</button>
+                    <button class="button-2" style="margin-top: 1vh;"> Rätt</button>
+                    <button class="button-2" style="margin-top: 1vh;"> Rätt</button>
+                </div>
+                <div class="Shop-1" style="background-color: green; width: 10vw; padding-block: 1vh; padding-inline: 0.5vw; margin-block: 1vh; border-radius: 10px;">
+                    <button class="button-2" style="margin-bottom: 1vh"> Namn</button>
+                    <button class="button-2" style="margin-top: 1vh;"> Rätt</button>
+                    <button class="button-2" style="margin-top: 1vh;"> Rätt</button>
+                    <button class="button-2" style="margin-top: 1vh;"> Rätt</button>
+                </div>
+
+            </div>
+
+            <button class="button-1" style="margin-left: 1vw;"> karta</button>
+        </div>
+
+        <div class="main-space" style="background-color: cornflowerblue; width: 88vw;"></div>
 
     </div>
 </body>
+
 </html>
