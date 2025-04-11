@@ -22,23 +22,46 @@
 }
 
 .image-1 {
-  width: 10vw;
-  height: 20vh;
+  width: 11vw;
+  height: 22vh;
   object-fit: cover;
 
   border-radius: 33px;
 
-  border: solid;
+  border: solid grey 0.2vw;
+
+  /* background-color: grey; */
   
   margin-block: 1vh;
   margin-inline: 0.5vw;
+  
+  /* padding-block: 1vh; */
+  /* padding-inline: 0.5vw; */
 }
 
 .text-1{
-    background-color: lightgreen;
+    background-color: lightgrey;
     border-radius: 10px;
     width: 10vw;
+    border: solid grey 0.1vw;
     /* height: 20vh; */
+
+    margin-block: 1vh;
+    margin-inline: 0.5vw;
+
+    padding-block: 1vh;
+    padding-inline: 0.5vw;
+
+    text-align: center;
+    align-self: center;
+}
+
+.sign{
+    background-color: lightgrey;
+    text-align: center;
+    width: fit-content;
+    border-radius: 10px;
+    border: solid grey 0.1vw;
 
     margin-block: 1vh;
     margin-inline: 0.5vw;
@@ -50,4 +73,41 @@
 .logo{
     width: 10vw;
     border-radius: 33px;
+    border: solid grey 0.1vw;
+
+    margin-block: 1vh;
+    margin-inline: 0.5vw;
+
+}
+
+.input-1{
+    width: 20vw;
+
+    border-radius: 10px;
+    border: solid grey 0.1vw;
+
+    margin-block: 1vh;
+    margin-inline: 0.5vw;
+
+    padding-block: 1vh;
+    padding-inline: 0.5vw;
+}
+
+.box-1{
+    background-color: darkgrey;
+    width: 33vw;
+
+    justify-content: space-evenly;
+
+    border-radius: 10px;
+    border: solid grey 0.1vw;
+
+    margin-block: 1vh;
+    margin-inline: 0.5vw;
+
+    padding-block: 1vh;
+    padding-inline: 0.5vw;
+
+    display: flex;
+    flex-wrap:wrap;
 }
