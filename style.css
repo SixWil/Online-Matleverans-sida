@@ -96,6 +96,8 @@
 .box-1{
     background-color: darkgrey;
     /* width: 33vw; */
+    width: fit-content;
+    
 
     justify-content: space-evenly;
 
