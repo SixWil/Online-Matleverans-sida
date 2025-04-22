@@ -1,0 +1,115 @@
+/* NOTES: */
+
+/* Jag tänker att standard margin, padding, etc, kan vara 0.5 vw och 1 vh */
+
+.button-1 {
+  width: 10vw;
+  height: 5vh;
+  border-radius: 10px;
+  background-color: gray;
+  /* color: white; */
+  border: solid white 0.1vw;
+}
+
+.button-2 {
+  width: 10vw; 
+  height: 3vh;
+
+  border-radius: 10px;
+  border: solid white 0.1vw;
+  
+  background-color: gray;
+}
+
+.image-1 {
+  width: 11vw;
+  height: 22vh;
+  object-fit: cover;
+
+  border-radius: 33px;
+
+  border: solid grey 0.2vw;
+
+  /* background-color: grey; */
+  
+  margin-block: 1vh;
+  margin-inline: 0.5vw;
+  
+  /* padding-block: 1vh; */
+  /* padding-inline: 0.5vw; */
+}
+
+.text-1{
+    background-color: lightgrey;
+    border-radius: 10px;
+    width: 10vw;
+    border: solid grey 0.1vw;
+    /* height: 20vh; */
+
+    margin-block: 1vh;
+    margin-inline: 0.5vw;
+
+    padding-block: 1vh;
+    padding-inline: 0.5vw;
+
+    text-align: center;
+    align-self: center;
+}
+
+.sign{
+    background-color: lightgrey;
+    text-align: center;
+    width: fit-content;
+    border-radius: 10px;
+    border: solid grey 0.1vw;
+
+    margin-block: 1vh;
+    margin-inline: 0.5vw;
+
+    padding-block: 1vh;
+    padding-inline: 0.5vw;
+}
+
+.logo{
+    width: 10vw;
+    border-radius: 20px;
+    border: solid grey 0.1vw;
+
+    margin-block: 1vh;
+    margin-inline: 0.5vw;
+
+}
+
+.input-1{
+    width: 20vw;
+
+    border-radius: 10px;
+    border: solid grey 0.1vw;
+
+    margin-block: 1vh;
+    margin-inline: 0.5vw;
+
+    padding-block: 1vh;
+    padding-inline: 0.5vw;
+}
+
+.box-1{
+    background-color: darkgrey;
+    /* width: 33vw; */
+    width: fit-content;
+    
+
+    justify-content: space-evenly;
+
+    border-radius: 10px;
+    border: solid grey 0.1vw;
+
+    margin-block: 1vh;
+    margin-inline: 0.5vw;
+
+    padding-block: 1vh;
+    padding-inline: 0.5vw;
+
+    display: flex;
+    flex-wrap:wrap;
+}
