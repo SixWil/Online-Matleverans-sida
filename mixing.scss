@@ -1,0 +1,31 @@
+@mixin margin1vh{
+    margin-block: 1vh;
+    margin-inline: 0.5vw;
+}
+
+@mixin padding1vh{
+    padding-block: 1vh;
+    padding-inline: 0.5vw;
+}
+@mixin bordergray10{
+    border-radius: 10px;
+    border: solid grey 0.1vw;
+}
+@mixin borderwhite10{
+    border-radius: 10px;
+    border: solid white 0.1vw;
+}
+@mixin pad-mar1vh{
+    
+        padding-block: 1vh;
+        padding-inline: 0.5vw;
+        margin-block: 1vh;
+        margin-inline: 0.5vw;
+}
+@mixin width($width1){
+    width:$width1;
+}
+@mixin wid-hei($width2,$height2){
+    width: $width2;
+    height: $height2;
+}

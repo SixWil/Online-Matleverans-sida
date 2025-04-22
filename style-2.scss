@@ -1,0 +1,141 @@
+/* NOTES: */
+
+/* Jag tänker att standard margin, padding, etc, kan vara 0.5 vw och 1 vh */
+
+@import 'mixing.scss';
+
+
+.button-1 {
+    @include wid-hei(10vw,10vh);
+    // width: 10vw;
+    // height: 10vh;
+    background-color: gray;
+    /* color: white; */
+    @include borderwhite10;
+    // border-radius: 10px;
+    // border: solid white 0.1vw;
+  }
+
+  .button-2 {
+    // width: 10vw; 
+    // height: 5vh;
+    @include wid-hei(10vw,5vh);
+  
+    @include borderwhite10;
+    // border-radius: 10px;
+    // border: solid white 0.1vw;
+    
+    background-color: gray;
+  }
+  
+  .image-1 {
+    // width: 11vw;
+    // height: 22vh;
+    @include wid-hei(11vw,22vh);
+    object-fit: cover;
+  
+    border-radius: 33px;
+    border: solid grey 0.2vw;
+  
+    /* background-color: grey; */
+    
+    @include margin1vh;
+    // margin-block: 1vh;
+    // margin-inline: 0.5vw;
+    
+    /* padding-block: 1vh; */
+    /* padding-inline: 0.5vw; */
+  }
+  
+  .text-1{
+      background-color: lightgrey;
+    //   width: 10vw;
+    @include width(10vw);
+
+    @include bordergray10;
+    //   border-radius: 10px;
+    //   border: solid grey 0.1vw;
+      /* height: 20vh; */
+  
+      @include pad-mar1vh;
+    //   margin-block: 1vh;
+    //   margin-inline: 0.5vw;
+  
+    //   padding-block: 1vh;
+    //   padding-inline: 0.5vw;
+  
+      text-align: center;
+      align-self: center;
+  }
+  
+  .sign{
+      background-color: lightgrey;
+      text-align: center;
+      width: fit-content;
+      @include bordergray10;
+    //   border-radius: 10px;
+    //   border: solid grey 0.1vw;
+      /* height: 20vh; */
+  
+      @include pad-mar1vh;
+    //   margin-block: 1vh;
+    //   margin-inline: 0.5vw;
+  
+   
+    //   padding-block: 1vh;
+    //   padding-inline: 0.5vw;
+  }
+  
+  .logo{
+    //   width: 10vw;
+    @include width(10vw);
+
+    
+      border-radius: 33px;
+      border: solid grey 0.1vw;
+  
+    //   margin-block: 1vh;
+    //   margin-inline: 0.5vw;
+      @include margin1vh;
+  
+  }
+  
+  .input-1{
+    //   width: 20vw;
+    @include width(10vw);
+
+    @include bordergray10;
+    //   border-radius: 10px;
+    //   border: solid grey 0.1vw;
+  
+      @include pad-mar1vh;
+    //   margin-block: 1vh;
+    //   margin-inline: 0.5vw;
+  
+    //   padding-block: 1vh;
+    //   padding-inline: 0.5vw;
+  }
+  
+  .box-1{
+      background-color: darkgrey;
+      /* width: 33vw; */
+      width: fit-content;
+      
+  
+      justify-content: space-evenly;
+  
+      @include bordergray10;
+    //   border-radius: 10px;
+    //   border: solid grey 0.1vw;
+  
+
+      @include pad-mar1vh;
+    //   margin-block: 1vh;
+    //   margin-inline: 0.5vw;
+  
+    //   padding-block: 1vh;
+    //   padding-inline: 0.5vw;
+  
+      display: flex;
+      flex-wrap:wrap;
+  }
