@@ -90,10 +90,9 @@
     //   width: 10vw;
     @include width(10vw);
 
-    
+
       border-radius: 33px;
       border: solid grey 0.1vw;
-  
     //   margin-block: 1vh;
     //   margin-inline: 0.5vw;
       @include margin1vh;
@@ -138,4 +137,45 @@
   
       display: flex;
       flex-wrap:wrap;
+  }
+
+
+  .Shop-1{
+    @include padding1vh;
+    @include width(10vw);
+    background-color: rgb(50, 50, 50);
+    margin-block: 1vh; 
+    border-radius: 10px;
+  }
+
+  .left{
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-around; 
+    background-color: rgb(50, 50, 50);
+    @include margin1vh;
+    @include bordergray10;
+    @include padding1vh;
+  }
+  .kundvagn{
+
+    background-color: grey; 
+    @include borderwhite10;
+    @include width(10vh)
+  }
+  .meny{
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    margin-inline: 10vw; 
+    background-color: rgb(50, 50, 50); 
+    @include padding1vh;
+    @include bordergray10;
+    @include width(90vw)
+  }
+  .top{
+    display: flex;
+    align-items: center; 
+    padding-inline: 1.9vw;
+    padding-block: 1vh;
   }
