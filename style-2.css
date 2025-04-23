@@ -149,4 +149,18 @@
   height: 40vh;
   border-radius: 10px;
   padding-inline: 0.5vw;
+}
+
+.main-space {
+  width: 88vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -5vh;
+}
+
+.Rea {
+  position: absolute;
+  text-align: center;
+  margin-top: 16.666vh;
 }/*# sourceMappingURL=style-2.css.map */
