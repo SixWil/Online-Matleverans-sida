@@ -8,7 +8,6 @@
   /* color: white; */
   border-radius: 10px;
   border: solid white 0.1vw;
-  cursor: pointer;
 }
 
 .button-2 {
@@ -17,7 +16,6 @@
   border-radius: 10px;
   border: solid white 0.1vw;
   background-color: gray;
-  cursor: pointer;
 }
 
 .image-1 {
