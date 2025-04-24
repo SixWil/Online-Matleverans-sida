@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Rebaz Abdul Rashid" >
+    <title>Avacado-toast</title>
+    <link rel="stylesheet" href="../../../style/style-2.css">
+</head>
+
+<body style="background-color: rgb(66, 66, 66); margin: 0px; overflow: hidden;">
+
+    <!-- Om man vill ta bort scroll menyn kan man använda: -->
+    <!-- overflow: hidden; -->
+
+    <!-- Toppen av sidan, menyn, plus loggan -->
+    <div class="top">
+        <img class="logo" src="../../../images/Goondora.png" alt="logo goes here" style="border: solid grey 0.1vw; margin-left: 0.1vw;">
+
+        <!-- logo placeholder -->
+        <!-- <div class="logo" style="width: 10vw; height: 10vw; background-color: lightblue; border-radius: 100%; margin-left: 2.5vw; margin-block: 1vh;"></div> -->
+
+        <!-- logo -->
+
+        <!-- meny -->
+        <div class="meny">
+             <button class="button-1">Hem</button>
+             <button class="button-1">Om oss</button>
+             <button class="button-1">Konto</button>
+             
+             <!-- kundvagn icon placeholder -->
+             <!-- <div class="Cart" style="background-color: aquamarine; width: 10vh; height: 10vh; margin-right: 2.5vw; border-radius: 10px; border: 0px;"></div> -->
+             
+             <img src="../../../images/Kundvagn.png" alt="bild på kundvagn" class="kundvagn">
+        </div>
+
+    </div>
+
+    <div class="down" style="display: flex; height: 76vh;">
+
+        <!-- Sido menyn -->
+        <div class="left">
+
+            <!-- Meny -->
+            <button class="button-1" style="margin-left: 1vw;"> BUTIKER: </button>
+
+            <!-- Sök funktion -->
+            <input id="searchInput" placeholder="Sök butik/rätt" style="width: 10vw; border-radius: 10px; margin-left: 0.666vw;">
+
+
+            <!-- Scroll meny -->
+
+            <div class="shops">
+
+                <!-- Restauranger -->
+                <div class="Shop-1">
+                    <a href="../../../html/dator/abra-cadabra.html"><button class="button-2" style="margin-bottom: 1vh"> Abra cadabra</button></a>
+                    <a href="../../../html/dator/Maträtt-brisket-platter.html"><button class="button-2" style="margin-top: 1vh;"> Brisket platter</button></a>
+                    <a href="../../../html/dator/Maträtt-ribs.html"><button class="button-2" style="margin-top: 1vh;"> Ribs</button></a>
+                    <a href="../../../html/dator/Maträtt-kyckling.html"><button class="button-2" style="margin-top: 1vh;"> Kyckling</button></a>
+                </div>
+                <div class="Shop-1">
+                    <a href="../../../html/dator/agatas.html"><button class="button-2" style="margin-bottom: 1vh"> Agatas </button></a>                    
+                    <a href="../../../html/dator/Maträtt-avocado-toast.html"><button class="button-2" style="margin-top: 1vh;"> Avacado-toast</button></a>
+                    <a href="../../../html/dator/Maträtt-choklad-pudding.html"><button class="button-2" style="margin-top: 1vh;"> Chocklad pudding</button></a>
+                    <a href="../../../html/dator/Maträtt-räk-soppa.html"><button class="button-2" style="margin-top: 1vh;"> Räk-soppa</button></a>
+                </div>
+                <div class="Shop-1">
+                    <a href="../../../html/dator/pretentieuse.html"><button class="button-2" style="margin-bottom: 1vh"> Prétentieuse</button></a>
+                    <button class="button-2" style="margin-top: 1vh;"> Di-väte-mono-oxid blandning</button>
+                    <button class="button-2" style="margin-top: 1vh;"> Centaur</button>
+                    <button class="button-2" style="margin-top: 1vh;"> Knuckle sandwich</button>
+                </div>
+
+            </div>
+
+            <button class="button-1" style="margin-left: 1vw;"> Karta</button>
+        </div>
+
+        <div class="main-space" style=" width: 88vw; display: flex; justify-content: space-evenly;">
+
+            <!-- Vänster rad, bilder -->
+             <div style="display: flex; flex-direction: column;">
+                <img src="../../../images/avacadoToast2.jpg" alt="" class="image-1">
+                <img src="../../../images/avacadoToast3.jpg" alt="" class="image-1">
+                <img src="../../../images/avacadoToast4.jpg" alt="" class="image-1">
+
+             </div>
+
+             <!-- höger rad, bröd text -->
+              <div class="box-1" style="width: 33vw; text-align: center;"> 
+
+                <h3>Grillat surdegsbröd med mosad avokado, chili och sesamfrön.</h3>
+
+                <p>Vår Avokado-toast är en fräsch och smakrik upplevelse, där varje tugga kombinerar krispigt grillat surdegsbröd med krämig, mosad avokado. Den toppas med finhackad chili för ett lätt sting, rostade sesamfrön för textur, och en skvätt färsk citron som lyfter varje smak till nya höjder. </p>
+
+                    <h3>
+                        Ingredienser:
+                    avokado, surdegsbröd, chili, citron, sesamfrön</h3>
+              </div>
+        </div>
+
+    </div>
+
+    <script src="../../../javascript/index.js"></script>
+</body>
+
+</html>
