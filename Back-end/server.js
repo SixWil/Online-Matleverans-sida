@@ -8,6 +8,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
+
 app.get('/', (req, res) => {
     res.render('start-sida.ejs', { title: 'Start sida' });
 });
@@ -22,6 +23,58 @@ app.get('/om-oss', (req, res) => {
 
 app.get('/beskrivningar', (req, res) => {
     res.render('beskrivningar.ejs', { title: 'Menyerna' });
+});
+
+app.get('/Abracadabra/abra-cadabra', (req, res) => {
+    res.render('Abracadabra/abra-cadabra.ejs', { title: 'Menyerna' });
+});
+
+
+var order = [];
+order.push({payment: 0}); // Initialize the order array with a payment object
+order.push({cost: 0, delivery: 0, tax: 0}); // Initialize the order array with a payment object
+///          Funktion som hanterar beställningar         ///
+///          och lägger till dem i en array           ///
+///          och uppdaterar totalsumman               ///
+function shopping(req, res, name, price, addition=1,) {
+    const existingItem = order.find( (item) => item.name === name); // Find the item in the array
+
+    if (existingItem) {
+        existingItem.amount += addition; // Increment the amount if the item exists
+        existingItem.total = existingItem.price * existingItem.amount; // Update the total price
+    } 
+    else {
+        order.push({ name: name, price: price, amount: 1, total: price }); // Add a new item if it doesn't exist
+    }
+
+    var cost = 0;
+
+    order[0].payment = 0;
+
+    for (let i = 2; i < order.length; i++) {
+        cost += order[i].total; // Calculate the total payment
+    };
+
+    order[1].cost = cost; // Update the payment in the first item of the array
+    order[1].delivery = 100; // delivery fee
+    order[1].tax = (order[1].cost + order[1].delivery) * 0.1; // Calculate the tax
+
+    order[0].payment = order[1].cost + order[1].delivery + order[1].tax; // Update the payment in the first item of the array
+    
+    console.log(order);
+
+}
+
+app.post('/buy/Oxbringa', (req, res) => { 
+    shopping(req, res, 'Oxbringa', 200 )
+});
+
+app.post('/buy/Revben', (req, res) => { 
+    shopping(req, res, 'Revben', 350 )
+});
+
+app.post('/buy/Kyckling', (req, res) => { 
+    shopping(req, res, 'Kyckling', 150 )
 });
 
 app.listen(port, () => {
