@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Rebaz Abdul Rashid" >
+    <title>Agatas</title>
+    <link rel="stylesheet" href="../../../style/style-2.css">
+    <!-- <style>
+        div{
+            border: solid;
+        }
+    </style> -->
+</head>
+
+<body style="background-color: rgb(66, 66, 66); margin: 0px; overflow: hidden;">
+
+    <!-- Om man vill ta bort scroll menyn kan man använda: -->
+    <!-- overflow: hidden; -->
+
+    <!-- Toppen av sidan, menyn, plus loggan -->
+    <div class="top">
+        <img class="logo" src="../../../images/Goondora.png" alt="logo goes here" style="border: solid grey 0.1vw; margin-left: 0.1vw;">
+
+        <!-- logo placeholder -->
+        <!-- <div class="logo" style="width: 10vw; height: 10vw; background-color: lightblue; border-radius: 100%; margin-left: 2.5vw; margin-block: 1vh;"></div> -->
+
+        <!-- logo -->
+
+        <!-- meny -->
+        <div class="meny">
+            <a href="../../../html/dator/start-sida.html">
+                <button class="button-1">Hem</button>
+            </a>
+            <a href="../../../html/dator/Om-oss.html">
+                <button class="button-1">Om oss</button>
+            </a>
+            <button class="button-1">Konto</button>
+             
+             <!-- kundvagn icon placeholder -->
+             <!-- <div class="Cart" style="background-color: aquamarine; width: 10vh; height: 10vh; margin-right: 2.5vw; border-radius: 10px; border: 0px;"></div> -->
+             
+             <img src="../../../images/Kundvagn.png" alt="Bild på en kundvagn" class="kundvagn">
+        </div>
+
+    </div>
+
+    <div class="down" style="display: flex; height: 76vh;">
+
+        <!-- Sido menyn -->
+        <div class="left">
+
+            <!-- Meny -->
+            <a href="../../../html/dator/Beskrivningar.html">
+                <button class="button-1" style="margin-left: 1vw;"> BUTIKER: </button>
+            </a>
+
+            <!-- Sök funktion -->
+            <input id="searchInput" placeholder="Sök butik/rätt" style="width: 10vw; border-radius: 10px; margin-left: 0.666vw;">
+
+
+            <!-- Scroll meny -->
+
+            <div class="shops">
+
+                <!-- Restauranger -->
+                <div class="Shop-1">
+                    <a href="../../../html/dator/Abracadabra/abra-cadabra.html"><button class="button-2" style="margin-bottom: 1vh"> Abra cadabra</button></a>
+                    <a href="../../../html/dator/Abracadabra/Maträtt-brisket-platter.html"><button class="button-2" style="margin-top: 1vh;"> Brisket platter</button></a>
+                    <a href="../../../html/dator/Abracadabra/Maträtt-ribs.html"><button class="button-2" style="margin-top: 1vh;"> Ribs</button></a>
+                    <a href="../../../html/dator/Abracadabra/Maträtt-kyckling.html"><button class="button-2" style="margin-top: 1vh;"> Kyckling</button></a>
+                </div>
+                <div class="Shop-1">
+                    <a href="../../../html/dator/Agatas/agatas.html"><button class="button-2" style="margin-bottom: 1vh"> Agatas </button></a>
+                    <a href="../../../html/dator/Agatas/Maträtt-avocado-toast.html"><button class="button-2" style="margin-top: 1vh;"> Avacado-toast</button></a>
+                    <a href="../../../html/dator/Agatas/Maträtt-choklad-pudding.html"><button class="button-2" style="margin-top: 1vh;"> Chocklad pudding</button></a>
+                    <a href="../../../html/dator/Agatas/Maträtt-räk-soppa.html"><button class="button-2" style="margin-top: 1vh;"> Räk-soppa</button></a>
+                </div>
+                <div class="Shop-1">
+                    <a href="../../../html/dator/Pretantieuse/pretentieuse.html"><button class="button-2" style="margin-bottom: 1vh"> Prétentieuse</button></a>
+                    <a href="../../../html/dator/Pretantieuse/Maträtt-moln.html"><button class="button-2" style="margin-top: 1vh;"> Di-väte-mono-oxid blandning</button></a>
+                    <a href="../../../html/dator/Pretantieuse/Maträtt-centaur.html"><button class="button-2" style="margin-top: 1vh;"> Centaur</button></a>
+                    <a href="../../../html/dator/Pretantieuse/Maträtt-slag.html"><button class="button-2" style="margin-top: 1vh;"> Knuckle sandwich</button></a>
+                </div>
+
+            </div>
+
+            <a href="https://www.google.se/maps/search/Restauranger" target="_blank">
+                <button class="button-1" style="margin-left: 1vw;"> Karta</button>
+            </a>
+        </div>
+
+        <div class="main-space" style=" width: 88vw;">
+
+            <!-- Själva restaurangen is sig -->
+            <div style="display: flex; justify-content: space-evenly;">
+                <img src="../../../images/Agata.png" alt="Agatas logo" class="logo">
+                <div class="box-1" style="width: 20vw; text-align: center; display: flex; align-items: center;"> <p>
+                    Agatas har med kärlek serverat fräsch, hälsosam och vällagad mat sedan 2021, från sitt charmiga hörn på Lavendelvägen 8.
+                </p></div>
+            </div>
+            
+            <div style=" height: 50vh; overflow-y: auto;">
+
+                <!-- Maträtterna -->
+                <div style="display: flex;  justify-content: space-evenly;">
+                    <a href="../../../html/dator/Agatas/Maträtt-avocado-toast.html"><img src="../../../images/avacadoToast.jpg" alt="Avacado-toast" class="image-1"></a>
+
+                <!-- beskrivning & pris/köp -->
+                 <div>
+
+                     <div class="box-1" style="width: 20vw; text-align: center;">
+                        <a class="links" href="../../../html/dator/Agatas/Maträtt-avocado-toast.html"><p>Grillat surdegsbröd med mosad avokado, chili och sesamfrön.
+                            </p></a>
+                    </div>
+
+                     <div class="box-1" style="width: 20vw; text-align: center; padding-block: 0px;">
+                        <a class="links" href="../../../html/dator/Maträtt-avocado-toast.html"><p> <pre>KÖP:  50 kr</pre></p></a>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex;  justify-content: space-evenly;">
+                <a href="../../../html/dator/Agatas/Maträtt-choklad-pudding.html"><img src="../../../images/chokladPudding.jpg" alt="Choklad pudding" class="image-1"></a>
+
+                <!-- beskrivning & pris/köp -->
+                 <div>
+
+                     <div class="box-1" style="width: 20vw; text-align: center;">
+                         <a class="links" href="../../../html/dator/Agatas/Maträtt-choklad-pudding.html"><p>Chokladpudding med kakao, dadlar och kokosmjölk.
+                        </p></a>
+                    </div>
+
+                     <div class="box-1" style="width: 20vw; text-align: center; padding-block: 0px;">
+                        <a class="links" href="../../../html/dator/Maträtt-choklad-pudding.html"><p> <pre>KÖP:  35 kr</pre></p></a>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-evenly;">
+                <a href="../../../html/dator/Agatas/Maträtt-räk-soppa.html"><img src="../../../images/räkSoppa.jpg" alt="Räk soppa" class="image-1"></a>
+
+                <!-- beskrivning & pris/köp -->
+                 <div>
+
+                     <div class="box-1" style="width: 20vw; text-align: center;">
+                        <a class="links" href="../../../html/dator/Agatas/Maträtt-räk-soppa.html"><p> Krämig soppa med handskalade räkor, grädde, vitt vin och en touch av dill.</p></a>
+                    </div>
+                    
+                    <div class="box-1" style="width: 20vw; text-align: center; padding-block: 0px;">
+                        <a class="links" href="../../../html/dator/Maträtt-räk-soppa.html"></a> <p> <pre>KÖP:  60 kr</pre></p></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+
+    <script src="../../../javascript/index.js"></script>
+</body>
+
+</html>

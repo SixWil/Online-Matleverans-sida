@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Rebaz Abdul Rashid" >
+    <title>Ribs</title>
+    <link rel="stylesheet" href="../../../style/style-2.css">
+</head>
+
+<body style="background-color: rgb(66, 66, 66); margin: 0px; overflow: hidden;">
+
+    <!-- Om man vill ta bort scroll menyn kan man använda: -->
+    <!-- overflow: hidden; -->
+
+    <!-- Toppen av sidan, menyn, plus loggan -->
+    <div class="top">
+        <img class="logo" src="../../../images/Goondora.png" alt="logo goes here" style="border: solid grey 0.1vw; margin-left: 0.1vw;">
+
+        <!-- logo placeholder -->
+        <!-- <div class="logo" style="width: 10vw; height: 10vw; background-color: lightblue; border-radius: 100%; margin-left: 2.5vw; margin-block: 1vh;"></div> -->
+
+        <!-- logo -->
+
+        <!-- meny -->
+        <div class="meny">
+            <a href="../../../html/dator/start-sida.html">
+                <button class="button-1">Hem</button>
+            </a>
+            <a href="../../../html/dator/Om-oss.html">
+                <button class="button-1">Om oss</button>
+            </a>
+            <button class="button-1">Konto</button>
+             
+             <!-- kundvagn icon placeholder -->
+             <!-- <div class="Cart" style="background-color: aquamarine; width: 10vh; height: 10vh; margin-right: 2.5vw; border-radius: 10px; border: 0px;"></div> -->
+             
+             <img src="../../../images/Kundvagn.png" alt="bild på kundvagn" class="kundvagn">
+        </div>
+
+    </div>
+
+    <div class="down" style="display: flex; height: 76vh;">
+
+        <!-- Sido menyn -->
+        <div class="left">
+
+            <!-- Meny -->
+            <a href="../../../html/dator/Beskrivningar.html">
+                <button class="button-1" style="margin-left: 1vw;"> BUTIKER: </button>
+            </a>
+
+            <!-- Sök funktion -->
+            <input id="searchInput" placeholder="Sök butik/rätt" style="width: 10vw; border-radius: 10px; margin-left: 0.666vw;">
+
+
+            <!-- Scroll meny -->
+
+            <div class="shops">
+
+                <!-- Restauranger -->
+                <div class="Shop-1">
+                    <a href="../../../html/dator/Abracadabra/abra-cadabra.html"><button class="button-2" style="margin-bottom: 1vh"> Abra cadabra</button></a>
+                    <a href="../../../html/dator/Abracadabra/Maträtt-brisket-platter.html"><button class="button-2" style="margin-top: 1vh;"> Brisket platter</button></a>
+                    <a href="../../../html/dator/Abracadabra/Maträtt-ribs.html"><button class="button-2" style="margin-top: 1vh;"> Ribs</button></a>
+                    <a href="../../../html/dator/Abracadabra/Maträtt-kyckling.html"><button class="button-2" style="margin-top: 1vh;"> Kyckling</button></a>
+                </div>
+                <div class="Shop-1">
+                    <a href="../../../html/dator/Agatas/agatas.html"><button class="button-2" style="margin-bottom: 1vh"> Agatas </button></a>                    
+                    <a href="../../../html/dator/Agatas/Maträtt-avocado-toast.html"><button class="button-2" style="margin-top: 1vh;"> Avacado-toast</button></a>
+                    <a href="../../../html/dator/Agatas/Maträtt-choklad-pudding.html"><button class="button-2" style="margin-top: 1vh;"> Chocklad pudding</button></a>
+                    <a href="../../../html/dator/Agatas/Maträtt-räk-soppa.html"><button class="button-2" style="margin-top: 1vh;"> Räk-soppa</button></a>
+                </div>
+                <div class="Shop-1">
+                    <a href="../../../html/dator/Pretantieuse/pretentieuse.html"><button class="button-2" style="margin-bottom: 1vh"> Prétentieuse</button></a>
+                    <a href="../../../html/dator/Pretantieuse/Maträtt-moln.html"><button class="button-2" style="margin-top: 1vh;"> Di-väte-mono-oxid blandning</button></a>
+                    <a href="../../../html/dator/Pretantieuse/Maträtt-centaur.html"><button class="button-2" style="margin-top: 1vh;"> Centaur</button></a>
+                    <a href="../../../html/dator/Pretantieuse/Maträtt-slag.html"><button class="button-2" style="margin-top: 1vh;"> Knuckle sandwich</button></a>
+                </div>
+
+            </div>
+
+            <a href="https://www.google.se/maps/search/Restauranger" target="_blank">
+                <button class="button-1" style="margin-left: 1vw;"> Karta</button>
+            </a>
+        </div>
+
+        <div class="main-space" style="width: 88vw; display: flex; flex-direction: row; justify-content: space-evenly;">
+
+            <!-- Vänster rad, bilder -->
+             <div style="display: flex; flex-direction: column;">
+                <img src="../../../images/Ribs2.jpg" alt="" class="image-1">
+                <img src="../../../images/Ribs3.jpg" alt="" class="image-1">
+                <img src="../../../images/Ribs4.jpg" alt="" class="image-1">
+
+             </div>
+
+             <!-- höger rad, bröd text -->
+              <div class="box-1" style="width: 33vw; text-align: center;"> 
+
+                <h3>Möra revbensspjäll glaserade med husets BBQ-sås – söt, rökig och med ett lätt sting av chili.</h3>
+
+                <p>Våra BBQ-ribs är långlagade för maximal smak och mörhet – köttet glider av benet med minsta lilla tryck. Revbensspjällen marineras över natten i en kryddig rub och tillagas sedan "low & slow" för att uppnå den där klassiska, rökiga karaktären. När de är som mörast penslas de generöst med en husets BBQ-sås, sötad med honung och balanserad med ett sting av chili och vitlök. Resultatet är en saftig, karamelliserad yta och ett djup av smaker som stannar kvar länge. Serveras med kärlek, kladd och gärna ett par servetter extra.</p>
+
+                    <h3>
+                        Ingredienser:
+                        revbensspjäll, honung, BBQ-sås, chili, vitlök</h3>
+              </div>
+        </div>
+
+    </div>
+
+    <script src="../../../javascript/index.js"></script>
+</body>
+
+</html>
