@@ -84,10 +84,15 @@ function shopping(req, res, name, price, addition=1,) {
 
 app.post('/confirm', async (req, res) => { 
     console.log(order); // Log the order array to the console
+
+    var batch = await (await db.query('select batch from orders')).rows.at(-1).batch +1; // Get the last batch number from the database
+    
     for (let i = 2; i < order.length; i++) {
-        await db.query('INSERT INTO orders (food, price_per, ammount, account, batch) VALUES ($1, $2, $3, $4, $5)', [order[i].name, order[i].price, order[i].amount, 123, 321]);
+        await db.query('INSERT INTO orders (food, price_per, ammount, account, batch) VALUES ($1, $2, $3, $4, $5)', [order[i].name, order[i].price, order[i].amount, 123, batch]);
     };
     
+    // console.log(batch); // Log the batch number to the console
+
     res.redirect(req.get('referer')); // Redirect to the previous page
 
 });
