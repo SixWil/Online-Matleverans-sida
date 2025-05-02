@@ -96,8 +96,6 @@
 .box-1 {
   background-color: darkgrey;
   /* width: 33vw; */
-  width: -moz-fit-content;
-  width: fit-content;
   justify-content: space-evenly;
   border-radius: 10px;
   border: solid grey 0.1vw;
@@ -107,6 +105,8 @@
   margin-inline: 0.5vw;
   display: flex;
   flex-wrap: wrap;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .box-2 {
