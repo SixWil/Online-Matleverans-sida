@@ -1,8 +1,20 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import pg from 'pg';
 
 const app = express();
 const port = 3000;
+
+const db = new pg.Client({
+    user: 'postgres',
+    host: 'localhost',
+    database: 'OnlineMatLeverans',
+    password: 'OgreMail',
+    port: 5432,
+});
+
+db.connect()
+    .then(() => console.log('Connected to PostgreSQL database'))
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -63,9 +75,24 @@ function shopping(req, res, name, price, addition=1,) {
     
     console.log(order);
 
+
+    /// BASTARD som suger jättemycket men som kanske måste vara där ///
+    res.redirect(req.get('referer')); // Redirect to the previous page
+
+
 }
 
-app.post('/buy/Oxbringa', (req, res) => { 
+app.post('/confirm', async (req, res) => { 
+    console.log(order); // Log the order array to the console
+    for (let i = 2; i < order.length; i++) {
+        await db.query('INSERT INTO orders (food, price_per, ammount, account, batch) VALUES ($1, $2, $3, $4, $5)', [order[i].name, order[i].price, order[i].amount, 123, 321]);
+    };
+    
+    res.redirect(req.get('referer')); // Redirect to the previous page
+
+});
+
+app.post('/buy/Oxbringa', (req, res) => {
     shopping(req, res, 'Oxbringa', 200 )
 });
 
