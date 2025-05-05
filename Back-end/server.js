@@ -37,8 +37,54 @@ app.get('/beskrivningar', (req, res) => {
     res.render('beskrivningar.ejs', { title: 'Menyerna' });
 });
 
+
+
 app.get('/Abracadabra/abra-cadabra', (req, res) => {
-    res.render('Abracadabra/abra-cadabra.ejs', { title: 'Menyerna' });
+    res.render('Abracadabra/abra-cadabra.ejs');
+});
+
+app.get('/Abracadabra/brisket-platter', (req, res) => {
+    res.render('Abracadabra/Maträtt-brisket-platter.ejs');
+});
+
+app.get('/Abracadabra/kyckling', (req, res) => {
+    res.render('Abracadabra/Maträtt-kyckling.ejs');
+});
+
+app.get('/Abracadabra/ribs', (req, res) => {
+    res.render('Abracadabra/Maträtt-ribs.ejs');
+});
+
+app.get('/Agatas/agatas', (req, res) => {
+    res.render('Agatas/agatas.ejs');
+});
+
+app.get('/Agatas/avocado-toast', (req, res) => {
+    res.render('Agatas/Maträtt-avocado-toast.ejs');
+});
+
+app.get('/Agatas/choklad-pudding', (req, res) => {
+    res.render('Agatas/Maträtt-choklad-pudding.ejs');
+});
+
+app.get('/Agatas/soppa', (req, res) => {
+    res.render('Agatas/Maträtt-räk-soppa.ejs');
+});
+
+app.get('/Pretantieuse/pretentieuse', (req, res) => {
+    res.render('Pretantieuse/pretentieuse.ejs');
+});
+
+app.get('/Pretantieuse/moln', (req, res) => {
+    res.render('Pretantieuse/Maträtt-moln.ejs');
+});
+
+app.get('/Pretantieuse/centaur', (req, res) => {
+    res.render('Pretantieuse/Maträtt-centaur.ejs');
+});
+
+app.get('/Pretantieuse/slag', (req, res) => {
+    res.render('Pretantieuse/Maträtt-slag.ejs');
 });
 
 
@@ -53,7 +99,7 @@ order.push({cost: 0, delivery: 0, tax: 0}); // Initialize the order array with a
 
 
 function shopping(req, res, name, price, addition=1,) {
-    
+
     const existingItem = order.find( (item) => item.name === name); // Find the item in the array
 
     if (existingItem) {
@@ -118,6 +164,30 @@ app.post('/buy/Revben', (req, res) => {
 
 app.post('/buy/Kyckling', (req, res) => { 
     shopping(req, res, 'Kyckling', 150 )
+});
+
+app.post('/buy/SurdegsBröd', (req, res) => { 
+    shopping(req, res, 'SurdegsBröd', 50 )
+});
+
+app.post('/buy/ChocladPudding', (req, res) => { 
+    shopping(req, res, 'ChocladPudding', 35 )
+});
+
+app.post('/buy/RäkSoppa', (req, res) => { 
+    shopping(req, res, 'RäkSoppa', 60 )
+});
+
+app.post('/buy/Molnd', (req, res) => { 
+    shopping(req, res, 'Molnd', 2000 )
+});
+
+app.post('/buy/Centaur', (req, res) => { 
+    shopping(req, res, 'Centaur', 35000 )
+});
+
+app.post('/buy/Slag', (req, res) => { 
+    shopping(req, res, 'Slag', 450 )
 });
 
 app.listen(port, () => {
