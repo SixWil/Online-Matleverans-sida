@@ -166,20 +166,20 @@ app.post('/buy/Kyckling', (req, res) => {
     shopping(req, res, 'Kyckling', 150 )
 });
 
-app.post('/buy/SurdegsBröd', (req, res) => { 
-    shopping(req, res, 'SurdegsBröd', 50 )
+app.post('/buy/AvacadoToast', (req, res) => { 
+    shopping(req, res, 'AvacadoToast', 50 )
 });
 
-app.post('/buy/ChocladPudding', (req, res) => { 
+app.post('/buy/ChockladPudding', (req, res) => { 
     shopping(req, res, 'ChocladPudding', 35 )
 });
 
-app.post('/buy/RäkSoppa', (req, res) => { 
+app.post('/buy/Soppa', (req, res) => { 
     shopping(req, res, 'RäkSoppa', 60 )
 });
 
-app.post('/buy/Molnd', (req, res) => { 
-    shopping(req, res, 'Molnd', 2000 )
+app.post('/buy/Moln', (req, res) => { 
+    shopping(req, res, 'Moln', 2000 )
 });
 
 app.post('/buy/Centaur', (req, res) => { 
