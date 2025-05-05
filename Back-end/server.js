@@ -45,10 +45,15 @@ app.get('/Abracadabra/abra-cadabra', (req, res) => {
 var order = [];
 order.push({payment: 0}); // Initialize the order array with a payment object
 order.push({cost: 0, delivery: 0, tax: 0}); // Initialize the order array with a payment object
+
+
 ///          Funktion som hanterar beställningar         ///
 ///          och lägger till dem i en array           ///
 ///          och uppdaterar totalsumman               ///
+
+
 function shopping(req, res, name, price, addition=1,) {
+    
     const existingItem = order.find( (item) => item.name === name); // Find the item in the array
 
     if (existingItem) {
@@ -58,7 +63,7 @@ function shopping(req, res, name, price, addition=1,) {
     else {
         order.push({ name: name, price: price, amount: 1, total: price }); // Add a new item if it doesn't exist
     }
-
+    
     var cost = 0;
 
     order[0].payment = 0;
@@ -82,14 +87,20 @@ function shopping(req, res, name, price, addition=1,) {
 
 }
 
+var account = 123; // Dummy account number
+
 app.post('/confirm', async (req, res) => { 
     console.log(order); // Log the order array to the console
 
     var batch = await (await db.query('select batch from orders')).rows.at(-1).batch +1; // Get the last batch number from the database
     
     for (let i = 2; i < order.length; i++) {
-        await db.query('INSERT INTO orders (food, price_per, ammount, account, batch) VALUES ($1, $2, $3, $4, $5)', [order[i].name, order[i].price, order[i].amount, 123, batch]);
+        await db.query('INSERT INTO orders (food, price_per, ammount, account, batch) VALUES ($1, $2, $3, $4, $5)', [order[i].name, order[i].price, order[i].amount, account, batch]);
     };
+
+    order = []; // Clear the order array after inserting into the database
+    order.push({payment: 0}); // Initialize the order array with a payment object
+    order.push({cost: 0, delivery: 0, tax: 0}); // Initialize the order array with a payment object
     
     // console.log(batch); // Log the batch number to the console
 
