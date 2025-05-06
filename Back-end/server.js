@@ -33,10 +33,18 @@ app.get('/om-oss', (req, res) => {
     res.render('om-oss.ejs', { title: 'Start sida' });
 });
 
+app.get('/login', (req, res) => {
+    res.render('konto.ejs', { title: 'Konto sida' });
+});
+
 app.get('/beskrivningar', (req, res) => {
     res.render('beskrivningar.ejs', { title: 'Menyerna' });
 });
 
+
+app.get('/registrera', (req, res) => {
+    res.render('registrera.ejs', { title: 'registrera' });
+});
 
 
 app.get('/Abracadabra/abra-cadabra', (req, res) => {
@@ -55,6 +63,8 @@ app.get('/Abracadabra/ribs', (req, res) => {
     res.render('Abracadabra/Maträtt-ribs.ejs');
 });
 
+
+
 app.get('/Agatas/agatas', (req, res) => {
     res.render('Agatas/agatas.ejs');
 });
@@ -70,6 +80,8 @@ app.get('/Agatas/choklad-pudding', (req, res) => {
 app.get('/Agatas/soppa', (req, res) => {
     res.render('Agatas/Maträtt-räk-soppa.ejs');
 });
+
+
 
 app.get('/Pretantieuse/pretentieuse', (req, res) => {
     res.render('Pretantieuse/pretentieuse.ejs');
@@ -153,6 +165,8 @@ app.post('/confirm', async (req, res) => {
     res.redirect(req.get('referer')); // Redirect to the previous page
 
 });
+
+
 
 app.post('/buy/Oxbringa', (req, res) => {
     shopping(req, res, 'Oxbringa', 200 )
