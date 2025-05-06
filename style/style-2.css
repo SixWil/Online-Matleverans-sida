@@ -246,4 +246,10 @@ a {
 
 .UserName {
   align-self: center;
+}
+
+.restauranger-div {
+  justify-content: space-evenly;
+  text-align: center;
+  margin: auto;
 }/*# sourceMappingURL=style-2.css.map */
