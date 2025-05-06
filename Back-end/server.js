@@ -43,8 +43,11 @@ app.get('/beskrivningar', (req, res) => {
 
 
 app.get('/registrera', (req, res) => {
-    res.render('registrera.ejs', { title: 'registrera' });
+    res.render('registrera.ejs', { title: 'Registrera' });
 });
+
+
+
 
 
 app.get('/Abracadabra/abra-cadabra', (req, res) => {
@@ -81,8 +84,6 @@ app.get('/Agatas/soppa', (req, res) => {
     res.render('Agatas/Maträtt-räk-soppa.ejs');
 });
 
-
-
 app.get('/Pretantieuse/pretentieuse', (req, res) => {
     res.render('Pretantieuse/pretentieuse.ejs');
 });
@@ -104,6 +105,9 @@ var order = [];
 order.push({payment: 0}); // Initialize the order array with a payment object
 order.push({cost: 0, delivery: 0, tax: 0}); // Initialize the order array with a payment object
 
+app.get('/leverans', (req, res) => {
+    res.render('leverans.ejs', { title: 'Kundvagn', order: order });
+});
 
 ///          Funktion som hanterar beställningar         ///
 ///          och lägger till dem i en array           ///
@@ -150,7 +154,7 @@ var account = 123; // Dummy account number
 app.post('/confirm', async (req, res) => { 
     console.log(order); // Log the order array to the console
 
-    var batch = await (await db.query('select batch from orders')).rows.at(-1).batch +1; // Get the last batch number from the database
+    var batch = await db.query('select batch from orders').rows.at(-1).batch +1; // Get the last batch number from the database
     
     for (let i = 2; i < order.length; i++) {
         await db.query('INSERT INTO orders (food, price_per, ammount, account, batch) VALUES ($1, $2, $3, $4, $5)', [order[i].name, order[i].price, order[i].amount, account, batch]);
