@@ -5,16 +5,16 @@ import pg from 'pg';
 const app = express();
 const port = 3000;
 
-const db = new pg.Client({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'OnlineMatLeverans',
-    password: 'OgreMail',
-    port: 5432,
-});
+// const db = new pg.Client({
+//     user: 'postgres',
+//     host: 'localhost',
+//     database: 'OnlineMatLeverans',
+//     password: 'OgreMail',
+//     port: 5432,
+// });
 
-db.connect()
-    .then(() => console.log('Connected to PostgreSQL database'))
+// db.connect()
+//     .then(() => console.log('Connected to PostgreSQL database'))
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -41,14 +41,9 @@ app.get('/beskrivningar', (req, res) => {
     res.render('beskrivningar.ejs', { title: 'Menyerna' });
 });
 
-
 app.get('/registrera', (req, res) => {
     res.render('registrera.ejs', { title: 'Registrera' });
 });
-
-
-
-
 
 app.get('/Abracadabra/abra-cadabra', (req, res) => {
     res.render('Abracadabra/abra-cadabra.ejs');
@@ -65,8 +60,6 @@ app.get('/Abracadabra/kyckling', (req, res) => {
 app.get('/Abracadabra/ribs', (req, res) => {
     res.render('Abracadabra/Maträtt-ribs.ejs');
 });
-
-
 
 app.get('/Agatas/agatas', (req, res) => {
     res.render('Agatas/agatas.ejs');
@@ -99,7 +92,6 @@ app.get('/Pretantieuse/centaur', (req, res) => {
 app.get('/Pretantieuse/slag', (req, res) => {
     res.render('Pretantieuse/Maträtt-slag.ejs');
 });
-
 
 var order = [];
 order.push({payment: 0}); // Initialize the order array with a payment object
