@@ -202,11 +202,16 @@
   </div>
 
     <script>
+      
+      const order_b = <%- JSON.stringify(order) %>; // Embed the server-side `order` array
+
       function antal(i, förändring){
+
+        order_b[i].amount += förändring; // Update the amount in the order array
 
         enhet = document.getElementById('mat_'+i);
 
-      enhet.innerHTML = parseInt(enhet.innerHTML) + förändring + "st " + enhet.innerHTML.split("st ")[1];
+        enhet.innerHTML = order_b[i].amount + "st " + enhet.innerHTML.split("st ")[1];
       }
 
       ///                   Straigt up ljuger om att detta är fel                    ///
