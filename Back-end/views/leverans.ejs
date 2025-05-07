@@ -202,16 +202,16 @@
   </div>
 
     <script>
-      
-      const order_b = <%- JSON.stringify(order) %>; // Embed the server-side `order` array
 
+      const order_b = <%- JSON.stringify(order) %>; // Embed the server-side `order` array
       function antal(i, förändring){
 
         order_b[i].amount += förändring; // Update the amount in the order array
+        order_b[i].total = order_b[i].amount * order_b[i].price; // Update the total price for the item
 
         enhet = document.getElementById('mat_'+i);
 
-        enhet.innerHTML = order_b[i].amount + "st " + enhet.innerHTML.split("st ")[1];
+        enhet.innerHTML = `${ order_b[i].amount } st ${ order_b[i].name } <br> pris per: ${ order_b[i].price } kr <br> pris alla: ${ order_b[i].total } kr `;
       }
 
       ///                   Straigt up ljuger om att detta är fel                    ///
