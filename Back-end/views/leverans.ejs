@@ -52,48 +52,170 @@
         />
       </div>
     </div>
+    <div class="down" style="display: flex; height: 76vh">
+      <!-- Sido menyn -->
+      <div class="left">
+        <!-- Meny -->
+        <a href="../../html/dator/Beskrivningar.html">
+          <button class="button-1" style="margin-left: 1vw">BUTIKER:</button>
+        </a>
 
-    <div class="main-space" style="margin-top: -3vh; background-color: green">
+        <!-- Sök funktion -->
+        <input
+          id="searchInput"
+          placeholder="Sök butik/rätt"
+          style="width: 10vw; border-radius: 10px; margin-left: 0.666vw"
+        />
 
-      <div class="mat-meny">
+        <!-- Scroll meny -->
 
-        <div class="box-2" style="margin-top: 3vh">
-          <p>Beställning</p>
+        <div class="shops">
+          <!-- Restauranger -->
+          <div class="Shop-1">
+            <a href="/Abracadabra/abra-cadabra"
+              ><button class="button-2" style="margin-bottom: 1vh">
+                Abra cadabra
+              </button></a
+            >
+            <a href="/Abracadabra/brisket-platter"
+              ><button class="button-2" style="margin-top: 1vh">
+                Brisket platter
+              </button></a
+            >
+            <a href="/Abracadabra/ribs"
+              ><button class="button-2" style="margin-top: 1vh">Ribs</button></a
+            >
+            <a href="/Abracadabra/kyckling"
+              ><button class="button-2" style="margin-top: 1vh">
+                Kyckling
+              </button></a
+            >
+          </div>
+          <div class="Shop-1">
+            <a href="/Agatas/agatas"
+              ><button class="button-2" style="margin-bottom: 1vh">
+                Agatas
+              </button></a
+            >
+            <a href="/Agatas/avocado-toast"
+              ><button class="button-2" style="margin-top: 1vh">
+                Avocado-toast
+              </button></a
+            >
+            <a href="/Agatas/choklad-pudding"
+              ><button class="button-2" style="margin-top: 1vh">
+                Choklad pudding
+              </button></a
+            >
+            <a href="/Agatas/soppa"
+              ><button class="button-2" style="margin-top: 1vh">
+                Räk-soppa
+              </button></a
+            >
+          </div>
+          <div class="Shop-1">
+            <a href="/Pretantieuse/pretentieuse"
+              ><button class="button-2" style="margin-bottom: 1vh">
+                Prétentieuse
+              </button></a
+            >
+            <a href="/Pretantieuse/moln"
+              ><button class="button-2" style="margin-top: 1vh">
+                Di-väte-mono-oxid blandning
+              </button></a
+            >
+            <a href="/Pretantieuse/centaur"
+              ><button class="button-2" style="margin-top: 1vh">
+                Centaur
+              </button></a
+            >
+            <a href="/Pretantieuse/slag"
+              ><button class="button-2" style="margin-top: 1vh">
+                Knuckle sandwich
+              </button></a
+            >
+          </div>
         </div>
 
-        <h2 style="background-color: orange">
-          Att betala: <%= order[0].payment %> kr <br />
-        </h2>
+        <a
+          href="https://www.google.se/maps/search/Restauranger"
+          target="_blank"
+        >
+          <button class="button-1" style="margin-left: 1vw">Karta</button>
+        </a>
+      </div>
 
-        <h3 style="background-color: orange; overflow-y: scroll;">
+      
+      <div class="main-space" style="margin-top: -3vh;">
+        
+        <div class="mat-meny" >
 
+        <!-- <div class="box-2" style="margin-top: 3vh">
+          <p>Beställning</p>
+        </div> -->
+
+          <h2 style="width: fit-content; padding-inline: 1vw;" class="box-2">
+            Att betala: <%= order[0].payment %> kr <br />
+          </h2>
+
+          <!-- 
+          function id_ning(klass){
+            grupp = querySelectorAll(klass);
+            for (let j = 0; j < grupp.length; j++){
+              console.log(grupp[j]);
+              };
+            }
+            -->
+        
+        <h3 style="overflow-y: scroll; height: 50%; width: fit-content; align-items: center; min-width: 10vw;" class="box-2">
           <% for (let i = 2; i < order.length; i++){ %>
 
-            
-            
-            <!-- <%= String.fromCharCode( i + 95 ) %>:  -->
-                <!--        INTE ^ AKTIV        -->
+            <div style="display: flex; align-items: center;">
 
-            <pre> <%= order[i].amount %>st <%= order[i].name %> <br> pris per: <%= order[i].price %> kr <br> pris alla: <%= order[i].total %> kr </pre>
+              <button style="height: 5vh;" class="minus" id="minus_<%=i%>" onclick="antal(<%=i%>, -1)">-</button>
+              
+              <div class="sign" style="width: 90%;">
+                <pre id="mat_<%=i%>"> <%= order[i].amount %>st <%= order[i].name %> <br> pris per: <%= order[i].price %> kr <br> pris alla: <%= order[i].total %> kr </pre>
+              </div>
+              
+              <button style="height: 5vh;" class="pluss" id="pluss_<%=i%>" onclick="antal('<%=i%>', +1)">+</button>
+              
+            </div>
 
-          <% }%>
+            <% }%>
 
-        </h3>
-
-        <h3 style="background-color: orange">
-
-          Pris: <%= order[1].cost %> <br />
-          Leverans kostnad: <%= order[1].delivery %> <br />
-          Skatt: <%= order[1].tax %>
-
-        </h3>
-
-        <button> Bekräfta </button>
-        <br>
+          </h3>
+          
+          <h3 class="box_2" style="width: fit-content; padding-inline: 1vw;">
+            Pris: <%= order[1].cost %> <br />
+            Leverans kostnad: <%= order[1].delivery %> <br />
+            Skatt: <%= order[1].tax %>
+          </h3>
+          
+          <form action="/confirm" method="post">
+            <button class="button-2" type="submit">Bekräfta</button>
+          </form>
+          
 
       </div>
     </div>
+  </div>
 
-    <script src="../../javascript/index.js"></script>
+    <script>
+      function antal(i, förändring){
+
+        enhet = document.getElementById('mat_'+i);
+
+      enhet.innerHTML = parseInt(enhet.innerHTML) + förändring + "st " + enhet.innerHTML.split("st ")[1];
+      }
+
+      ///                   Straigt up ljuger om att detta är fel                    ///
+      <% if (message){ %>
+        alert("<%= message %>");
+      <% } %>
+      
+    </script>
+  
   </body>
-</html>
+  </html>
+  

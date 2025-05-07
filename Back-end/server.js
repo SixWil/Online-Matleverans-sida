@@ -105,8 +105,13 @@ var order = [];
 order.push({payment: 0}); // Initialize the order array with a payment object
 order.push({cost: 0, delivery: 0, tax: 0}); // Initialize the order array with a payment object
 
+
 app.get('/leverans', (req, res) => {
-    res.render('leverans.ejs', { title: 'Kundvagn', order: order });
+    var message = req.query.message || null; // Get the message from the query string
+
+    console.log(message); // Log the message to the console
+
+    res.render('leverans.ejs', { title: 'Kundvagn', order: order, message: message }); // Render the leverans page with the order array and message
 });
 
 ///          Funktion som hanterar beställningar         ///
@@ -145,6 +150,8 @@ function shopping(req, res, name, price, addition=1,) {
 
     /// BASTARD som suger jättemycket men som kanske måste vara där ///
     res.redirect(req.get('referer')); // Redirect to the previous page
+    /// ♪ there that it came from, there will it go, where did you come from, cotton eye joe? ♪ ///
+    /// jag hoppas verkligen att någon kommer se och upskatta detta^ och att jag inte bara skriver till the void -sixt ///
 
 
 }
@@ -152,21 +159,34 @@ function shopping(req, res, name, price, addition=1,) {
 var account = 123; // Dummy account number
 
 app.post('/confirm', async (req, res) => { 
+
     console.log(order); // Log the order array to the console
 
-    var batch = await db.query('select batch from orders').rows.at(-1).batch +1; // Get the last batch number from the database
-    
-    for (let i = 2; i < order.length; i++) {
-        await db.query('INSERT INTO orders (food, price_per, ammount, account, batch) VALUES ($1, $2, $3, $4, $5)', [order[i].name, order[i].price, order[i].amount, account, batch]);
-    };
+    if (order[2]) { 
+ 
+        var batch = (await db.query('SELECT batch FROM orders ORDER BY batch DESC LIMIT 1')).rows[0].batch; // Get the last batch number from the database
 
-    order = []; // Clear the order array after inserting into the database
-    order.push({payment: 0}); // Initialize the order array with a payment object
-    order.push({cost: 0, delivery: 0, tax: 0}); // Initialize the order array with a payment object
-    
-    // console.log(batch); // Log the batch number to the console
+        batch++; // Increment the batch number
 
-    res.redirect(req.get('referer')); // Redirect to the previous page
+        console.log(batch); // Log the batch number to the console
+        
+        for (let i = 2; i < order.length; i++) {
+            await db.query('INSERT INTO orders (food, price_per, ammount, account, batch) VALUES ($1, $2, $3, $4, $5)', [order[i].name, order[i].price, order[i].amount, account, batch]);
+        };
+        
+        order = []; // Clear the order array after inserting into the database
+        order.push({payment: 0}); // Initialize the order array with a payment object
+        order.push({cost: 0, delivery: 0, tax: 0}); // Initialize the order array with a payment object
+        
+        // console.log(batch); // Log the batch number to the console
+        
+        res.redirect('/leverans?message=Beställning+bekräftad'); // Redirect to the delivery page with a success message
+
+    } else{
+        console.error('Ingen mat att beställa'); // Log any errors to the console
+
+        res.redirect('/leverans?message=Ingen+mat+IDIOT'); // Redirect to the delivery page with an error message
+    }
 
 });
 

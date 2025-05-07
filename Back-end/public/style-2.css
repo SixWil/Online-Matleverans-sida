@@ -247,15 +247,19 @@ a {
 
 
 .mat-meny{
-  width: 30vw;
-  height: 78vh;
-  background-color: white;
+  width: fit-content;
+  height: 80vh;
+  background-color: lightgray;
   border-radius: 10px;
   border: solid grey 0.1vw;
   justify-self: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
+
+  padding-inline: 1vw;
+
   /* gap: 20px; */
 }
 
