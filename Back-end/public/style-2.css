@@ -1,6 +1,38 @@
 @charset "UTF-8";
 /* NOTES: */
 /* Jag tänker att standard margin, padding, etc, kan vara 0.5 vw och 1 vh */
+
+
+
+/*                    SAKER SOM ÄR UNIKA FÖR DENNA VERSIONEN (rör ej)                     */
+
+
+
+@keyframes jiggle {
+
+  from {transform: rotate(0deg);}
+
+  25% {transform: rotate(10deg);}
+
+  /* 50% {transform: rotate(0deg);} */
+
+  75% {transform: rotate(-10deg);}
+
+  to {transform: rotate(0deg);}
+
+}
+
+.upmärksamma{
+  animation: jiggle .3s;
+}
+
+
+
+/*                      SAKER SOM ÄR SAMMA FÖR BÅDA VERSIONER (tror jag -sixt)                     */
+
+
+
+
 .button-1 {
   width: 10vw;
   height: 10vh;

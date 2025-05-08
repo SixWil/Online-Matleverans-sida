@@ -8,23 +8,7 @@
     <title>Prétentieuse</title>
     <link rel="stylesheet" href="../style-2.css">
     <style>
-            @keyframes jiggle {
-
-                from {transform: rotate(0deg);}
-
-                25% {transform: rotate(10deg);}
-
-                /* 50% {transform: rotate(0deg);} */
-
-                75% {transform: rotate(-10deg);}
-
-                to {transform: rotate(0deg);}
-
-            }
-
-            .upmärksamma{
-                animation: jiggle .3s;
-            }
+            
             
     </style>
 </head>
@@ -140,11 +124,8 @@
 
                             fetch('/buy/Moln', {method: 'POST', }, )
 
-                            kundvagn = document.getElementById('kundvagn_id')
+                            kunvagn_wiggle()
                             
-                            kundvagn.classList.remove('upmärksamma')
-                            void kundvagn.offsetWidth
-                            kundvagn.classList.add('upmärksamma')
                             
                             " style="width: 20vw; text-align: center; padding-block: 0px; cursor: pointer;"> <p> <pre>KÖP:  2000 kr</pre></p></button> 
                     <!-- </form> -->
@@ -165,9 +146,14 @@
                         </p></a>
                     </div>
 
-                    <form action="/buy/Centaur" method="post">
-                        <button type="submit" class="box-1" style="width: 20vw; text-align: center; padding-block: 0px; cursor: pointer;"> <p> <pre>KÖP:  35 000 kr</pre></p></button> 
-                    </form>
+                        <button type="submit" onclick="
+
+                        fetch('/buy/Centaur', {method: 'POST', }, )
+
+                        kunvagn_wiggle()
+                        
+                        
+                        " class="box-1" style="width: 20vw; text-align: center; padding-block: 0px; cursor: pointer;"> <p> <pre>KÖP:  35 000 kr</pre></p></button> 
 
                 </div>
             </div>
@@ -183,9 +169,14 @@
                          <p>Troisième ("the knuckle sandwich"): <br> för när du söker en hastig uppryckning </p></a>
                     </div>
                     
-                    <form action="/buy/Slag" method="post">
-                        <button type="submit" class="box-1" style="width: 20vw; text-align: center; padding-block: 0px; cursor: pointer;"> <p> <pre>KÖP:  450 kr</pre></p></button> 
-                    </form>
+                        <button type="submit" onclick="
+
+                        fetch('/buy/Slag', {method: 'POST', }, )
+
+                        kunvagn_wiggle()
+                        
+                        
+                        " class="box-1" style="width: 20vw; text-align: center; padding-block: 0px; cursor: pointer;"> <p> <pre>KÖP:  450 kr</pre></p></button> 
                 </div>
             </div>
 
@@ -194,7 +185,7 @@
     </div>
     </div>
 
-    <script src="../../../javascript/index.js"></script>
+    <script src="/scripting.js"></script>
 </body>
 
 </html>
