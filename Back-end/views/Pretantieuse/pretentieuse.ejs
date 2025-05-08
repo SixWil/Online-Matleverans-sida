@@ -7,11 +7,26 @@
     <meta name="author" content="Rebaz Abdul Rashid" >
     <title>Prétentieuse</title>
     <link rel="stylesheet" href="../style-2.css">
-    <!-- <style>
-        div{
-            border: solid;
-        }
-    </style> -->
+    <style>
+            @keyframes jiggle {
+
+                from {transform: rotate(0deg);}
+
+                25% {transform: rotate(10deg);}
+
+                /* 50% {transform: rotate(0deg);} */
+
+                75% {transform: rotate(-10deg);}
+
+                to {transform: rotate(0deg);}
+
+            }
+
+            .upmärksamma{
+                animation: jiggle .3s;
+            }
+            
+    </style>
 </head>
 
 <body style="background-color: rgb(66, 66, 66); margin: 0px; overflow: hidden;">
@@ -43,7 +58,7 @@
              <!-- kundvagn icon placeholder -->
              <!-- <div class="Cart" style="background-color: aquamarine; width: 10vh; height: 10vh; margin-right: 2.5vw; border-radius: 10px; border: 0px;"></div> -->
              
-             <img src="../../../images/Kundvagn.png" alt="Bild på en kundvagn" class="kundvagn" onclick="location.href='/leverans'" style="cursor: pointer;">
+             <img src="../../../images/Kundvagn.png" alt="Bild på en kundvagn" class="kundvagn" id="kundvagn_id" onclick="location.href='/leverans'" style="cursor: pointer;">
         </div>
 
     </div>
@@ -120,9 +135,19 @@
                             </p></a>
                     </div>
 
-                    <form action="/buy/Moln" method="post">
-                        <button type="submit" class="box-1" style="width: 20vw; text-align: center; padding-block: 0px; cursor: pointer;"> <p> <pre>KÖP:  2000 kr</pre></p></button> 
-                    </form>
+                    <!-- <form action="/buy/Moln" method="post"> -->
+                        <button type="submit" class="box-1" onclick="
+
+                            fetch('/buy/Moln', {method: 'POST', }, )
+
+                            kundvagn = document.getElementById('kundvagn_id')
+                            
+                            kundvagn.classList.remove('upmärksamma')
+                            void kundvagn.offsetWidth
+                            kundvagn.classList.add('upmärksamma')
+                            
+                            " style="width: 20vw; text-align: center; padding-block: 0px; cursor: pointer;"> <p> <pre>KÖP:  2000 kr</pre></p></button> 
+                    <!-- </form> -->
 
 
                 </div>
