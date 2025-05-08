@@ -145,16 +145,13 @@
         </a>
       </div>
 
-      
-      <div class="main-space" style="margin-top: -3vh;">
-        
-        <div class="mat-meny" >
-
-        <!-- <div class="box-2" style="margin-top: 3vh">
+      <div class="main-space" style="margin-top: -3vh">
+        <div class="mat-meny">
+          <!-- <div class="box-2" style="margin-top: 3vh">
           <p>Beställning</p>
         </div> -->
 
-          <h2 style="width: fit-content; padding-inline: 1vw;" class="box-2">
+          <h2 style="width: fit-content; padding-inline: 1vw" class="box-2">
             Att betala: <%= order[0].payment %> kr <br />
           </h2>
 
@@ -166,61 +163,119 @@
               };
             }
             -->
-        
-        <h3 style="overflow-y: scroll; height: 50%; width: fit-content; align-items: center; min-width: 10vw;" class="box-2">
-          <% for (let i = 2; i < order.length; i++){ %>
 
-            <div style="display: flex; align-items: center;">
+          <h3
+            style="
+              overflow-y: scroll;
+              height: 50%;
+              width: fit-content;
+              align-items: center;
+              min-width: 10vw;
+            "
+            class="box-2"
+          >
+            <% for (let i = 2; i < order.length; i++){ %>
 
-              <button style="height: 5vh;" class="minus" id="minus_<%=i%>" onclick="antal(<%=i%>, -1)">-</button>
-              
-              <div class="sign" style="width: 90%;">
-                <pre id="mat_<%=i%>"> <%= order[i].amount %>st <%= order[i].name %> <br> pris per: <%= order[i].price %> kr <br> pris alla: <%= order[i].total %> kr </pre>
+            <div style="display: flex; align-items: center">
+              <button
+                style="height: 5vh"
+                class="minus"
+                id="minus_<%=i%>"
+                onclick="antal(<%=i%>, -1)"
+              >
+                -
+              </button>
+
+              <div class="sign" style="width: 90%">
+                <pre
+                  id="mat_<%=i%>"
+                > <%= order[i].amount %>st <%= order[i].name %> <br> pris per: <%= order[i].price %> kr <br> pris alla: <%= order[i].total %> kr </pre>
               </div>
-              
-              <button style="height: 5vh;" class="pluss" id="pluss_<%=i%>" onclick="antal('<%=i%>', +1)">+</button>
-              
+
+              <button
+                style="height: 5vh"
+                class="pluss"
+                id="pluss_<%=i%>"
+                onclick="antal('<%=i%>', +1)"
+              >
+                +
+              </button>
             </div>
 
             <% }%>
-
           </h3>
-          
-          <h3 class="box_2" style="width: fit-content; padding-inline: 1vw;">
+
+          <h3 class="box_2" style="width: fit-content; padding-inline: 1vw">
             Pris: <%= order[1].cost %> <br />
             Leverans kostnad: <%= order[1].delivery %> <br />
             Skatt: <%= order[1].tax %>
           </h3>
-          
-          <form action="/confirm" method="post">
-            <button class="button-2" type="submit">Bekräfta</button>
-          </form>
-          
 
+            <button class="button-2" onclick="confirm()">
+              Bekräfta
+            </button>
+        </div>
       </div>
     </div>
-  </div>
-
+    
     <script>
-
-      const order_b = <%- JSON.stringify(order) %>; // Embed the server-side `order` array
-      function antal(i, förändring){
-
-        order_b[i].amount += förändring; // Update the amount in the order array
-        order_b[i].total = order_b[i].amount * order_b[i].price; // Update the total price for the item
-
-        enhet = document.getElementById('mat_'+i);
-
-        enhet.innerHTML = `${ order_b[i].amount } st ${ order_b[i].name } <br> pris per: ${ order_b[i].price } kr <br> pris alla: ${ order_b[i].total } kr `;
-      }
-
       ///                   Straigt up ljuger om att detta är fel                    ///
+  
       <% if (message){ %>
         alert("<%= message %>");
       <% } %>
-      
+
+        var order_b = <%- JSON.stringify(order) %>; // Embed the server-side `order` array
+
+        document.getElementById('testing').innerHTML = order_b[2].name;
+
+
+        function antal(i, förändring){
+
+          order_b[i].amount += förändring; // Update the amount in the order array
+
+          if ( order_b[i].amount < 0 ) { order_b[i].amount = 0 }
+
+          order_b[i].total = order_b[i].amount * order_b[i].price; // Update the total price for the item
+
+          enhet = document.getElementById('mat_'+i);
+
+          enhet.innerHTML = `${ order_b[i].amount } st ${ order_b[i].name } <br> pris per: ${ order_b[i].price } kr <br> pris alla: ${ order_b[i].total } kr `;
+
+        }
+
+        function confirm(){
+
+          
+          fetch('/confirm', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json',},
+            body: JSON.stringify(order_b), // Send the `order_b` array as JSON
+          })
+
+          alert("Beställning bekräftad ")
+          window.location.reload()
+          
+        // .then((response) => {
+        //   if (response.ok) {
+        //     return response.json();
+        //   } else {
+        //     throw new Error('Failed to confirm order');
+        //   }
+        // })
+        // .then((data) => {
+        //   alert(data.message); // Show success or error message
+        //   if (data.success) {
+        //     window.location.href = '/leverans?message=Beställning+bekräftad'; // Redirect on success
+        //   }
+        // })
+        // .catch((error) => {
+        //   console.error('Error confirming order:', error);
+        //   alert('An error occurred while confirming the order.');
+        // });
+        }
+
+
     </script>
-  
   </body>
-  </html>
-  
+</html>

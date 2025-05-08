@@ -1,22 +1,25 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import pg from 'pg';
 
 const app = express();
 const port = 3000;
 
-// const db = new pg.Client({
-//     user: 'postgres',
-//     host: 'localhost',
-//     database: 'OnlineMatLeverans',
-//     password: 'OgreMail',
-//     port: 5432,
-// });
+import pg from 'pg';
 
-// db.connect()
-//     .then(() => console.log('Connected to PostgreSQL database'))
+const db = new pg.Client({
+    user: 'postgres',
+    host: 'localhost',
+    database: 'OnlineMatLeverans',
+    password: 'OgreMail',
+    port: 5432,
+});
+
+db.connect()
+    .then(() => console.log('Connected to PostgreSQL database'))
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
@@ -148,23 +151,34 @@ function shopping(req, res, name, price, addition=1,) {
 
 }
 
+
+
 var account = 123; // Dummy account number
 
-app.post('/confirm', async (req, res) => { 
+app.post('/confirm', async (req, res) => {
 
-    console.log(order); // Log the order array to the console
+    const order_b = req.body; // Access the order data sent from the client
+    console.log('Received order:', order_b);
 
-    if (order[2]) { 
+    console.log("order: " + order); // Log the order array to the console
+
+    if (order_b[2]) { 
  
-        var batch = (await db.query('SELECT batch FROM orders ORDER BY batch DESC LIMIT 1')).rows[0].batch; // Get the last batch number from the database
+        var batch = (await db.query('SELECT batch FROM orders ORDER BY batch DESC LIMIT 1')).rows[0]?.batch || 0; // Get the last batch number from the database
 
         batch++; // Increment the batch number
 
         console.log(batch); // Log the batch number to the console
+
+        console.log(order_b); // Log the order array to the console
         
         for (let i = 2; i < order.length; i++) {
-            await db.query('INSERT INTO orders (food, price_per, ammount, account, batch) VALUES ($1, $2, $3, $4, $5)', [order[i].name, order[i].price, order[i].amount, account, batch]);
+            await db.query('INSERT INTO orders (food, price_per, ammount, account, batch) VALUES ($1, $2, $3, $4, $5)', [order_b[i].name, order_b[i].price, order_b[i].amount, account, batch]);
         };
+
+        // res.json({ success: true, message: 'Order confirmed successfully!' });
+
+
         
         order = []; // Clear the order array after inserting into the database
         order.push({payment: 0}); // Initialize the order array with a payment object
@@ -172,13 +186,17 @@ app.post('/confirm', async (req, res) => {
         
         // console.log(batch); // Log the batch number to the console
         
-        res.redirect('/leverans?message=Beställning+bekräftad'); // Redirect to the delivery page with a success message
+        // res.redirect('/leverans?message=Beställning+bekräftad'); // Redirect to the delivery page with a success message
 
-    } else{
-        console.error('Ingen mat att beställa'); // Log any errors to the console
-
-        res.redirect('/leverans?message=Ingen+mat+IDIOT'); // Redirect to the delivery page with an error message
     }
+    // else {
+
+    //     // res.status(400).json({ success: false, message: 'No items to confirm.' });
+
+    //     console.error('Ingen mat att beställa'); // Log any errors to the console
+
+    //     res.redirect('/leverans?message=Ingen+mat+IDIOT'); // Redirect to the delivery page with an error message
+    // }
 
 });
 
