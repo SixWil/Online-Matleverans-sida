@@ -48,7 +48,7 @@
              
              <!-- kundvagn icon placeholder -->
              <!-- <div class="Cart" style="background-color: aquamarine; width: 10vh; height: 10vh; margin-right: 2.5vw; border-radius: 10px; border: 0px;"></div> -->
-                    <img src="../../../images/Kundvagn.png" alt="Bild på en kundvagn" class="kundvagn" onclick="location.href='/leverans'" style="cursor: pointer;">
+                    <img src="../../../images/Kundvagn.png" alt="Bild på en kundvagn" class="kundvagn" id="kundvagn_id" onclick="location.href='/leverans'" style="cursor: pointer;">
         </div>
 
     </div>
@@ -122,9 +122,16 @@
                             grönsaker och majsbröd.</p></a>
                     </div>
 
-                     <div class="box-1" style="width: 20vw; padding-block: 0px;">
+                     <button class="button-2" onclick="
+
+                     fetch('/buy/Oxbringa', {method: 'POST', }, )
+
+                     kunvagn_wiggle()
+                     
+                     
+                     " style="width: 20vw; padding-block: 0px;">
                         <p> <pre>KÖP:  250 kr</pre></p>
-                    </div>
+                    </button>
                 </div>
             </div>
             <div style="justify-content: space-evenly;text-align: center;">
@@ -137,9 +144,16 @@
                         <a class="links" href="/Abracadabra/ribs"><p>Möra revbensspjäll glaserade med husets BBQ-sås. </p></a> 
                     </div>
 
-                     <div class="box-1" style="width: 20vw; padding-block: 0px;">
+                     <button class="button-2" onclick="
+
+                     fetch('/buy/revben', {method: 'POST', }, )
+
+                     kunvagn_wiggle()
+                     
+                     
+                     " style="width: 20vw; padding-block: 0px;">
                         <p> <pre>KÖP:  350 kr</pre></p>
-                    </div>
+                    </button>
                 </div>
             </div>
             <div style="justify-content: space-evenly; text-align: center;">
@@ -152,9 +166,16 @@
                          <a class="links" href="/Abracadabra/kyckling"><p>Grillad kyckling med krispigt skinn, glaserad i husets rökiga BBQ-sås.</p></a>
                     </div>
                     
-                    <div class="box-1" style="width: 20vw; padding-block: 0px;">
+                    <button class="button-2" onclick="
+
+                    fetch('/buy/Kyckling', {method: 'POST', }, )
+
+                    kunvagn_wiggle()
+                    
+                    
+                    " style="width: 20vw; padding-block: 0px;">
                     <p> <pre>KÖP:  150 kr</pre></p>
-                    </div>
+                    </button>
                 </div>
             </div>
 
@@ -163,7 +184,7 @@
     </div>
     </div>
 
-    <script src="../../../javascript/index.js"></script>
+    <script src="/scripting.js"></script>
 </body>
 
 </html>
