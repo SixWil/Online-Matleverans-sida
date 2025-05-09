@@ -7,8 +7,6 @@ import session from 'express-session';
 const app = express();
 const port = 3000;
 
-import pg from 'pg';
-
 const db = new pg.Client({
     user: 'postgres',
     host: 'localhost',
