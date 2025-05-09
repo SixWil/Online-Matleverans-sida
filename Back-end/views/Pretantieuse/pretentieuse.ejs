@@ -3,15 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"="width=device-width, initial-scale=1.0">
     <meta name="author" content="Rebaz Abdul Rashid" >
     <title>Prétentieuse</title>
     <link rel="stylesheet" href="../style-2.css">
-    <!-- <style>
-        div{
-            border: solid;
-        }
-    </style> -->
+    <style>
+            
+            
+    </style>
 </head>
 
 <body style="background-color: rgb(66, 66, 66); margin: 0px; overflow: hidden;">
@@ -43,7 +42,7 @@
              <!-- kundvagn icon placeholder -->
              <!-- <div class="Cart" style="background-color: aquamarine; width: 10vh; height: 10vh; margin-right: 2.5vw; border-radius: 10px; border: 0px;"></div> -->
              
-             <img src="../../../images/Kundvagn.png" alt="Bild på en kundvagn" class="kundvagn">
+             <img src="../../../images/Kundvagn.png" alt="Bild på en kundvagn" class="kundvagn" id="kundvagn_id" onclick="location.href='/leverans'" style="cursor: pointer;">
         </div>
 
     </div>
@@ -93,83 +92,70 @@
             </a>
         </div>
 
-        <div class="main-space" style=" width: 88vw;">
-
+        <div class="main-space" style="width: 88vw;">
             <!-- Själva restaurangen is sig -->
-            <div style="display: flex; justify-content: space-evenly;">
+            <div style="display: flex; justify-content: space-evenly; margin-bottom: 4vh;">
                 <img src="../../../images/Chair.webp" alt="Prétentieuse logo" class="logo" style="transform: rotate(180deg);">
-                <div class="box-1" style="width: 20vw; text-align: center; display: flex; align-items: center;"> <p>
-                    Prétentieuse har sedan 2022 bjudit på omsorgsfullt tillagade rätter i en varm och stilren miljö, från sitt lilla krypin på Bellevägen 3.
-                </p></div>
+                <div class="box-1" style="width: 20vw; text-align: center; display: flex; align-items: center;">
+                    <p>Prétentieuse har sedan 2022 bjudit på omsorgsfullt tillagade rätter i en varm och stilren miljö, från sitt lilla krypin på Bellevägen 3.</p>
+                </div>
             </div>
             
-            <div style=" height: 50vh; overflow-y: auto;">
-
+            <div class="matratter" style="height: 50vh; display: flex; gap: 3vw; background-color: lightgray;">
                 <!-- Maträtterna -->
-                <div style="display: flex;  justify-content: space-evenly;">
-                    <a href="../../../html/dator/Pretantieuse/moln.html">
-                    <img src="../../../images/moln.jpg" alt="Avacado-toast" class="image-1"></a>
-
-                <!-- beskrivning & pris/köp -->
-                 <div>
-
-                     <div class="box-1" style="width: 20vw; text-align: center;">
-                        <a class="links" href="../../../html/dator/Pretantieuse/moln.html">
-                         <p>D'abord: <br> Di-väte-oxid blandning, <br> förångad till perfektion.
-                            
-                            </p></a>
+                <div style="justify-content: space-evenly; text-align: center;">
+                    <a href="/Pretantieuse/moln"><img src="../../../images/moln.jpg" alt="Moln" class="image-1"></a>
+                    <div>
+                        <div class="box-1" style="width: 20vw;">
+                            <a class="links" href="/Pretantieuse/moln">
+                                <p>D'abord: Di-väte-oxid blandning, förångad till perfektion.</p>
+                            </a>
+                        </div>
+                        <button class="button-2" onclick="
+                            fetch('/buy/Moln', {method: 'POST'});
+                            kunvagn_wiggle();
+                        " style="width: 20vw; padding-block: 0px;">
+                            <p><pre>KÖP:  2000 kr</pre></p>
+                        </button>
                     </div>
-
-                    <form action="/buy/Moln" method="post">
-                        <button type="submit" class="box-1" style="width: 20vw; text-align: center; padding-block: 0px; cursor: pointer;"> <p> <pre>KÖP:  2000 kr</pre></p></button> 
-                    </form>
-
-
+                </div>
+                <div style="justify-content: space-evenly; text-align: center;">
+                    <a href="/Pretantieuse/centaur"><img src="../../../images/Centaur-nedre-hälft-1.png" alt="Centaur botten" class="image-1" style="background-color: wheat;"></a>
+                    <div>
+                        <div class="box-1" style="width: 20vw;">
+                            <a class="links" href="/Pretantieuse/centaur">
+                                <p>Autre (Centaur botten)</p>
+                            </a>
+                        </div>
+                        <button class="button-2" onclick="
+                            fetch('/buy/Centaur', {method: 'POST'});
+                            kunvagn_wiggle();
+                        " style="width: 20vw; padding-block: 0px;">
+                            <p><pre>KÖP:  35 000 kr</pre></p>
+                        </button>
+                    </div>
+                </div>
+                <div style="justify-content: space-evenly; text-align: center;">
+                    <a href="/Pretantieuse/slag"><img src="../../../images/Angry-server-1-b.jpg" alt="Knuckle sandwich" class="image-1"></a>
+                    <div>
+                        <div class="box-1" style="width: 20vw;">
+                            <a class="links" href="/Pretantieuse/slag">
+                                <p>Troisième ("the knuckle sandwich"): för när du söker en hastig uppryckning.</p>
+                            </a>
+                        </div>
+                        <button class="button-2" onclick="
+                            fetch('/buy/Slag', {method: 'POST'});
+                            kunvagn_wiggle();
+                        " style="width: 20vw; padding-block: 0px;">
+                            <p><pre>KÖP:  450 kr</pre></p>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div style="display: flex;  justify-content: space-evenly;">
-                <a class="links" href="../../../html/dator/Pretantieuse/centaur.html">
-                <img src="../../../images/Centaur-nedre-hälft-1.png" alt="Choklad pudding" class="image-1" style="background-color: wheat;">
-            </a>
-                <!-- beskrivning & pris/köp -->
-                 <div>
-
-                     <div class="box-1" style="width: 20vw; text-align: center;">
-                        <a class="links" href="../../../html/dator/Pretantieuse/centaur.html">
-                         <p>Autre <br> (Centaur botten)
-                        </p></a>
-                    </div>
-
-                    <form action="/buy/Centaur" method="post">
-                        <button type="submit" class="box-1" style="width: 20vw; text-align: center; padding-block: 0px; cursor: pointer;"> <p> <pre>KÖP:  35 000 kr</pre></p></button> 
-                    </form>
-
-                </div>
-            </div>
-            <div style="display: flex; justify-content: space-evenly;">
-                <a class="links" href="../../../html/dator/Pretantieuse/slag.html">
-                <img src="../../../images/Angry-server-1-b.jpg" alt="Knuckle sandwich" class="image-1"></a>
-
-                <!-- beskrivning & pris/köp -->
-                 <div>
-
-                     <div class="box-1" style="width: 20vw; text-align: center;">
-                        <a class="links" href="../../../html/dator/Pretantieuse/slag.html">
-                         <p>Troisième ("the knuckle sandwich"): <br> för när du söker en hastig uppryckning </p></a>
-                    </div>
-                    
-                    <form action="/buy/Slag" method="post">
-                        <button type="submit" class="box-1" style="width: 20vw; text-align: center; padding-block: 0px; cursor: pointer;"> <p> <pre>KÖP:  450 kr</pre></p></button> 
-                    </form>
-                </div>
-            </div>
-
         </div>
-
-    </div>
     </div>
 
-    <script src="../../../javascript/index.js"></script>
+    <script src="/scripting.js"></script>
 </body>
 
 </html>

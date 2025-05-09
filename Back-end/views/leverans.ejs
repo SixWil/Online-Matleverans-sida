@@ -7,9 +7,7 @@
     <link rel="stylesheet" href="style-2.css" />
   </head>
 
-  <body
-    style="background-color: rgb(66, 66, 66); margin: 0px; overflow: hidden"
-  >
+  <body style="background-color: rgb(66, 66, 66); margin: 0px">
     <!-- Om man vill ta bort scroll menyn kan man använda: -->
     <!-- overflow: hidden; -->
 
@@ -17,9 +15,9 @@
     <div class="top">
       <img
         class="logo"
-        src="images/Goondora.png"
+        src="../../images/Goondora.png"
         alt="logo goes here"
-        style="border: solid grey 0.1vw; margin-left: 0.1vw"
+        style="border: solid grey 0.1vw; margin-left: 0.1vw; overflow: hidden"
       />
 
       <!-- logo placeholder -->
@@ -32,11 +30,9 @@
         <a href="/start-sida">
           <button class="button-1">Hem</button>
         </a>
-
         <a href="/om-oss">
           <button class="button-1">Om oss</button>
         </a>
-
         <a href="/login">
           <button class="button-1">Konto</button>
         </a>
@@ -46,14 +42,16 @@
 
         <img
           src="../../images/Kundvagn.png"
-          alt="Bild på en kundvagn"
-          class="kundvagn"
-          onclick="location.href='/leverans'"
-          style="cursor: pointer"
+          alt=""
+          style="
+            width: 10vh;
+            background-color: grey;
+            border-radius: 10px;
+            border: solid white 0.1vw;
+          "
         />
       </div>
     </div>
-
     <div class="down" style="display: flex; height: 76vh">
       <!-- Sido menyn -->
       <div class="left">
@@ -101,12 +99,12 @@
             >
             <a href="/Agatas/avocado-toast"
               ><button class="button-2" style="margin-top: 1vh">
-                Avacado-toast
+                Avocado-toast
               </button></a
             >
             <a href="/Agatas/choklad-pudding"
               ><button class="button-2" style="margin-top: 1vh">
-                Chocklad pudding
+                Choklad pudding
               </button></a
             >
             <a href="/Agatas/soppa"
@@ -147,77 +145,137 @@
         </a>
       </div>
 
-      <div class="main-space">
-        <div class="box-1"><h1 style="margin-block: 0px">RESTAURANGER</h1></div>
+      <div class="main-space" style="margin-top: -3vh">
+        <div class="mat-meny">
+          <!-- <div class="box-2" style="margin-top: 3vh">
+          <p>Beställning</p>
+        </div> -->
 
-        <div
-          class="matratter"
-          style="height: 50vh; display: flex; gap: 3vw; margin: 8vh"
-        >
-          <!-- Restauranger -->
-          <div class="restauranger-div">
-            <a href="/Abracadabra/abra-cadabra"
-              ><img
-                src="../../images/Abracadabra.png"
-                alt="logo"
-                class="image-1"
-            /></a>
+          <h2 style="width: fit-content; padding-inline: 1vw" class="box-2">
+            Att betala: <%= order[0].payment %> kr <br />
+          </h2>
 
-            <div>
-              <div class="box-1" style="width: 20vw">
-                <a
-                  class="links"
-                  href="/Abracadabra/abra-cadabra"
-                >
-                  <p>
-                    Abracadabra är en BBQ-restaurang där rökiga smaker, eld och
-                    magi möts – här förvandlas kött och grönsaker till ren
-                    matmagi.
-                  </p></a
-                >
+          <!-- 
+          function id_ning(klass){
+            grupp = querySelectorAll(klass);
+            for (let j = 0; j < grupp.length; j++){
+              console.log(grupp[j]);
+              };
+            }
+            -->
+
+          <h3
+            style="
+              overflow-y: scroll;
+              height: 50%;
+              width: fit-content;
+              align-items: center;
+              min-width: 10vw;
+            "
+            class="box-2"
+          >
+            <% for (let i = 2; i < order.length; i++){ %>
+
+            <div style="display: flex; align-items: center">
+              <button
+                style="height: 5vh"
+                class="minus"
+                id="minus_<%=i%>"
+                onclick="antal(<%=i%>, -1)"
+              >
+                -
+              </button>
+
+              <div class="sign" style="width: 90%">
+                <pre
+                  id="mat_<%=i%>"
+                > <%= order[i].amount %>st <%= order[i].name %> <br> pris per: <%= order[i].price %> kr <br> pris alla: <%= order[i].total %> kr </pre>
               </div>
-            </div>
-          </div>
-          <div class="restauranger-div">
-            <a href="/Agatas/agatas"
-              ><img src="../../images/agata.png" alt="logo" class="image-1"
-            /></a>
 
-            <div>
-              <div class="box-1" style="width: 20vw">
-                <a class="links" href="/Agatas/agatas"
-                  ><p>
-                    Agatas har med kärlek serverat fräsch, hälsosam och vällagad
-                    mat sedan 2021, från sitt charmiga hörn på Lavendelvägen 8.
-                  </p></a
-                >
-              </div>
+              <button
+                style="height: 5vh"
+                class="pluss"
+                id="pluss_<%=i%>"
+                onclick="antal('<%=i%>', +1)"
+              >
+                +
+              </button>
             </div>
-          </div>
-          <div class="restauranger-div">
-            <a href="/Pretantieuse/pretentieuse"
-              ><img src="../../images/chair.webp" alt="logo" class="image-1"
-            /></a>
 
-            <div>
-              <div class="box-1" style="width: 20vw">
-                <a
-                  class="links"
-                  href="/Pretantieuse/pretentieuse"
-                  ><p>
-                    Prétentieuse har sedan 2022 bjudit på omsorgsfullt tillagade
-                    rätter i en varm och stilren miljö, från sitt lilla krypin
-                    på Bellevägen 3.
-                  </p></a
-                >
-              </div>
-            </div>
-          </div>
+            <% }%>
+          </h3>
+
+          <h3 class="box_2" style="width: fit-content; padding-inline: 1vw">
+            Pris: <%= order[1].cost %> <br />
+            Leverans kostnad: <%= order[1].delivery %> <br />
+            Skatt: <%= order[1].tax %>
+          </h3>
+
+            <button class="button-2" onclick="confirm()">
+              Bekräfta
+            </button>
         </div>
       </div>
-      </div>
     </div>
+    
+    <script>
+      ///                   Straigt up ljuger om att detta är fel                    ///
+  
+      <% if (message){ %>
+        alert("<%= message %>");
+      <% } %>
 
-    <script src="../../javascript/index.js"></script>
+        var order_b = <%- JSON.stringify(order) %>; // Embed the server-side `order` array
+
+        document.getElementById('testing').innerHTML = order_b[2].name;
+
+
+        function antal(i, förändring){
+
+          order_b[i].amount += förändring; // Update the amount in the order array
+
+          if ( order_b[i].amount < 0 ) { order_b[i].amount = 0 }
+
+          order_b[i].total = order_b[i].amount * order_b[i].price; // Update the total price for the item
+
+          enhet = document.getElementById('mat_'+i);
+
+          enhet.innerHTML = `${ order_b[i].amount } st ${ order_b[i].name } <br> pris per: ${ order_b[i].price } kr <br> pris alla: ${ order_b[i].total } kr `;
+
+        }
+
+        function confirm(){
+
+          
+          fetch('/confirm', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json',},
+            body: JSON.stringify(order_b), // Send the `order_b` array as JSON
+          })
+
+          alert("Beställning bekräftad ")
+          window.location.reload()
+          
+        // .then((response) => {
+        //   if (response.ok) {
+        //     return response.json();
+        //   } else {
+        //     throw new Error('Failed to confirm order');
+        //   }
+        // })
+        // .then((data) => {
+        //   alert(data.message); // Show success or error message
+        //   if (data.success) {
+        //     window.location.href = '/leverans?message=Beställning+bekräftad'; // Redirect on success
+        //   }
+        // })
+        // .catch((error) => {
+        //   console.error('Error confirming order:', error);
+        //   alert('An error occurred while confirming the order.');
+        // });
+        }
+
+
+    </script>
   </body>
 </html>
