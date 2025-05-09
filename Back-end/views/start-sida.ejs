@@ -160,6 +160,12 @@
         </div>
 
     </div>
+    
+    <% if (typeof successMessage !== 'undefined' && successMessage) { %>
+        <script>
+            alert('<%= successMessage %>');
+        </script>
+    <% } %>
 
     <script src="../../javascript/index.js"></script>
 </body>

@@ -27,7 +27,7 @@
             <a href="/start-sida">
                 <button class="button-1">Hem</button>
             </a>
-            <a href="/om-oss">
+            <a href="/Om-oss">
                 <button class="button-1">Om oss</button>
             </a>
             <a href="/login">
@@ -42,44 +42,39 @@
 
     </div>
 
-    <div class="login-meny">
-        
+    <div>
+        <form action="/register" method="POST" class="login-meny"> 
         <div class="box-2" style="  margin-top: 3vh;">
             <p>Registrera </p>
 
 
         </div>
 
+       
         <div class="box-2">
-            <label for="email" class="UserName">Användarnamn</label>
-            <input type="text">
+            <label for="usernamne" class="UserName">Användarnamn</label>
+            <input type="text" id="username" name="username" required>
 
         </div>
 
         <div class="box-2">
             <label for="email" class="UserName">E-post</label>
-            <input type="text">
+            <input type="text" id="email" name="email" required>
 
         </div>
         <div class="box-2">
             <label for="password" class="UserName">Lösenord</label>
-            <input type="text">
+            <input type="text" id="password" name="password" required>
 
         </div>
     
         <!-- <div >
             <a href=""><p style="margin: 0;">Glömt lösenord</p></a>
         </div> -->
-        <div>
-            <label style="display: inline-flex;">
-                Kom ihåg mig <input type="checkbox" name="remember-me" >
-
-            </label>
-        </div>
-      
+        
 
         <div>
-            <button>Bekräfta</button>
+            <button type="submit">Bekräfta</button>
 
         </div>
 
@@ -90,11 +85,13 @@
         <!-- <div>
             <a href="../../html\dator\Registrera.html"><p class="text-2">Registrera dig</p></a>
         </div> -->
-        </div>
-
+      
+    </form>
     </div>
 
+
     <script src="../../javascript/index.js"></script>
+
 </body>
 
 </html>

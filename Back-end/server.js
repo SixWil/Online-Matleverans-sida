@@ -1,6 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import pg from 'pg';
+import bcrypt from 'bcrypt';
+import session from 'express-session';
 
 const app = express();
 const port = 3000;
@@ -20,14 +22,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
+app.use(session({
+    secret: 'superhemligt',
+    resave: false,
+    saveUninitialized: false,
+}));
 
-app.get('/', (req, res) => {
-    res.render('start-sida.ejs', { title: 'Start sida' });
-});
 
 app.get('/start-sida', (req, res) => {
-    res.render('start-sida.ejs', { title: 'Start sida' });
+    const successMessage = req.session.successMessage;
+    delete req.session.successMessage; // Ta bort meddelandet efter att det har skickats
+    res.render('start-sida.ejs', { title: 'Start sida', successMessage });
 });
+
+
 
 app.get('/om-oss', (req, res) => {
     res.render('om-oss.ejs', { title: 'Start sida' });
@@ -166,6 +174,86 @@ app.post('/confirm', async (req, res) => {
 
 });
 
+
+
+
+
+
+// Hantera login
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+
+    try {
+        // Kontrollera om användaren finns i databasen
+        const result = await db.query(
+            'SELECT * FROM users WHERE username = $1 OR email = $1',
+            [username]
+        );
+        const user = result.rows[0];
+
+        if (user && await bcrypt.compare(password, user.password)) {
+            // Spara användarens ID i sessionen
+            req.session.userId = user.id;
+
+            // Lägg till ett meddelande i sessionen
+            req.session.successMessage = 'Inloggning lyckades!';
+
+            // Omdirigera till start-sida
+            res.redirect('/start-sida');
+        } else {
+            res.status(401).send('<script>alert("Felaktigt användarnamn eller lösenord."); window.location.href="/login";</script>');
+        }
+    } catch (error) {
+        console.error('Fel vid inloggning:', error);
+        res.status(500).send('<script>alert("Ett fel uppstod vid inloggning."); window.location.href="/login";</script>');
+    }
+});
+
+
+
+// Hantera registrering
+app.post('/register', async (req, res) => {
+    const { username, email, password } = req.body;
+
+    try {
+        if (!username || !email || !password) {
+            return res.status(400).send('<script>alert("Alla fält måste fyllas i."); window.location.href="/registrera";</script>');
+        }
+
+        // Hasha lösenordet
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Spara användaren i databasen
+        const result = await db.query(
+            'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id',
+            [username, email, hashedPassword]
+        );
+
+        // Spara användarens ID i sessionen
+        const userId = result.rows[0].id;
+        req.session.userId = userId;
+
+        // Lägg till ett meddelande i sessionen
+        req.session.successMessage = 'Registrering lyckades!';
+
+        // Omdirigera till start-sida
+        res.redirect('/start-sida');
+    } catch (error) {
+        console.error('Fel vid registrering:', error);
+        res.status(500).send('<script>alert("Ett fel uppstod vid registrering."); window.location.href="/registrera";</script>');
+    }
+});
+
+// Logga ut användaren
+app.post('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error('Fel vid utloggning:', err);
+            return res.status(500).send('Ett fel uppstod vid utloggning.');
+        }
+        res.redirect('/login');
+    });
+});
 
 
 app.post('/buy/Oxbringa', (req, res) => {

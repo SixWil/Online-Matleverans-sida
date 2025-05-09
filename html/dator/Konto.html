@@ -42,49 +42,46 @@
 
     <div class="login-meny">
         
-        <div class="box-2" style="  margin-top: 3vh;">
-            <p>Logga in</p>
-
-
-        </div>
-
-        <div class="box-2">
-            <label for="email" class="UserName">Användarnamn / E-post</label>
-            <input type="text">
-
-        </div>
-        <div class="box-2">
-            <label for="password" class="UserName">Lösenord</label>
-            <input type="text">
-
-        </div>
-    
-        <div >
-            <a href=""><p style="margin: 0;">Glömt lösenord</p></a>
-        </div>
-        <div>
-            <label style="display: inline-flex;">
-                Kom ihåg mig <input type="checkbox" name="remember-me" >
-
-            </label>
-        </div>
-      
-
-        <div>
-            <button>Bekräfta</button>
-
-        </div>
-
-        <div>
-            
-            <p style="margin: 0;">Har du inte något konto klicka Registrera dig</p>
-        </div>
-        <div>
-            <a href="../../html\dator\Registrera.html"><p class="text-2">Registrera dig</p></a>
-        </div>
-        </div>
-
-    </div>
+        <form action="/login" method="POST" class="login-meny">
+            <div class="box-2" style="margin-top: 3vh;">
+                <p>Logga in</p>
+            </div>
+        
+            <div class="box-2">
+                <label for="email" class="UserName">Användarnamn / E-post</label>
+                <input type="text" id="email" name="username" required>
+            </div>
+        
+            <div class="box-2">
+                <label for="password" class="UserName">Lösenord</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+        
+            <div>
+                <a href="#"><p style="margin: 0;">Glömt lösenord</p></a>
+            </div>
+        
+            <div>
+                <label style="display: inline-flex;">
+                    Kom ihåg mig <input type="checkbox" name="remember-me">
+                </label>
+            </div>
+        
+            <div>
+                <button type="submit">Bekräfta</button>
+            </div>
+        
+            <div>
+                <p style="margin: 0;">Har du inte något konto klicka Registrera dig</p>
+            </div>
+        
+            <div>
+                <a href="../../html/dator/Registrera.html">
+                    <p class="text-2">Registrera dig</p>
+                </a>
+            </div>
+        </form>
+     </div>
 
     <script src="../../javascript/index.js"></script>
 </body>
