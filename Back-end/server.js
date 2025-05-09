@@ -160,7 +160,7 @@ function shopping(req, res, name, price, addition=1,) {
 
 
 
-var account = 123; // Dummy account number
+var account = null; // Dummy account number
 
 app.post('/confirm', async (req, res) => {
 
@@ -168,6 +168,8 @@ app.post('/confirm', async (req, res) => {
     console.log('Received order:', order_b);
 
     console.log("order: " + order); // Log the order array to the console
+
+    account = req.session.userId
 
     if (order_b[2]) { 
  
