@@ -31,6 +31,11 @@ app.use(session({
 }));
 
 
+app.get('/', (req, res) => {
+    res.redirect('/start-sida')
+});
+
+
 app.get('/start-sida', (req, res) => {
     const successMessage = req.session.successMessage;
     delete req.session.successMessage; // Ta bort meddelandet efter att det har skickats
