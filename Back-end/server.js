@@ -31,6 +31,11 @@ app.use(session({
 }));
 
 
+app.get('/', (req, res) => {
+    res.redirect('/start-sida')
+});
+
+
 app.use((req, res, next) => {
     res.locals.username = req.session.username || null; // Skicka användarnamnet om det finns, annars null
     next();
