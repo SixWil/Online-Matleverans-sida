@@ -149,6 +149,7 @@
   flex-wrap: wrap;
   width: -moz-fit-content;
   width: fit-content;
+  
 }
 
 .box-2 {
@@ -182,6 +183,22 @@
   margin-block: 1vh;
   margin-inline: 0.5vw;
   margin-top: 4vh;
+}
+.box-4 {
+  background-color: darkgrey;
+  /* width: 33vw; */
+  justify-content: space-evenly;
+  border-radius: 10px;
+  border: solid grey 0.1vw;
+  padding-block: 1vh;
+  padding-inline: 0.5vw;
+  margin-block: 1vh;
+  margin-inline: 0.5vw;
+  display: flex;
+  flex-wrap: wrap;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 11vh;
 }
 
 .Shop-1 {
