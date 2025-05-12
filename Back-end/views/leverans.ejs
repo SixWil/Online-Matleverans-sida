@@ -219,43 +219,6 @@
 
         var order_b = <%- JSON.stringify(order) %>; // Embed the server-side `order` array
 
-        function shopping(req, res, name, price, addition=1,) {
-
-    const existingItem = order.find( (item) => item.name === name); // Find the item in the array
-
-    if (existingItem) {
-        existingItem.amount += addition; // Increment the amount if the item exists
-        existingItem.total = existingItem.price * existingItem.amount; // Update the total price
-    } 
-    else {
-        order.push({ name: name, price: price, amount: 1, total: price }); // Add a new item if it doesn't exist
-    }
-    
-    var cost = 0;
-
-    order[0].payment = 0;
-
-    for (let i = 2; i < order.length; i++) {
-        cost += order[i].total; // Calculate the total payment
-    };
-
-    order[1].cost = cost; // Update the payment in the first item of the array
-    order[1].delivery = 100; // delivery fee
-    order[1].tax = (order[1].cost + order[1].delivery) * 0.1; // Calculate the tax
-
-    order[0].payment = order[1].cost + order[1].delivery + order[1].tax; // Update the payment in the first item of the array
-    
-    console.log(order);
-
-
-    /// BASTARD som suger jättemycket men som kanske måste vara där ///
-    res.redirect(req.get('referer')); // Redirect to the previous page
-    /// ♪ there that it came from, there will it go, where did you come from, cotton eye joe? ♪ ///
-    /// jag hoppas verkligen att någon kommer se och upskatta detta^ och att jag inte bara skriver till the void -sixt ///
-
-
-}
-
         function antal(i, förändring){
 
           order_b[i].amount += förändring; // Update the amount in the order array
@@ -286,7 +249,6 @@
     
           document.getElementById("att_betala").innerHTML = `Att betala: ${order_b[0].payment} kr`
         }
-
 
         function confirm(){
 
