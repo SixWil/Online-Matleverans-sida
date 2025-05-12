@@ -1,117 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Rebaz Abdul Rashid" >
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Rebaz Abdul Rashid" />
     <title>Brisket Platter</title>
-    <link rel="stylesheet" href="../style-2.css">
-</head>
+    <link rel="stylesheet" href="../style-2.css" />
+  </head>
 
-<body style="background-color: rgb(66, 66, 66); margin: 0px; overflow: hidden;">
-
+  <body
+    style="background-color: rgb(66, 66, 66); margin: 0px; overflow: hidden"
+  >
     <!-- Om man vill ta bort scroll menyn kan man använda: -->
     <!-- overflow: hidden; -->
 
     <!-- Toppen av sidan, menyn, plus loggan -->
     <div class="top">
-        <img class="logo" src="../../../images/Goondora.png" alt="logo goes here" style="border: solid grey 0.1vw; margin-left: 0.1vw;">
+      <img
+        class="logo"
+        src="../../../images/Goondora.png"
+        alt="logo goes here"
+        style="border: solid grey 0.1vw; margin-left: 0.1vw"
+      />
 
-        <!-- logo placeholder -->
-        <!-- <div class="logo" style="width: 10vw; height: 10vw; background-color: lightblue; border-radius: 100%; margin-left: 2.5vw; margin-block: 1vh;"></div> -->
+      <!-- logo placeholder -->
+      <!-- <div class="logo" style="width: 10vw; height: 10vw; background-color: lightblue; border-radius: 100%; margin-left: 2.5vw; margin-block: 1vh;"></div> -->
 
-        <!-- logo -->
+      <!-- logo -->
 
-        <!-- meny -->
-        <div class="meny">
-            <a href="/start-sida">
-                <button class="button-1">Hem</button>
-            </a>
-            <a href="/om-oss">
-                <button class="button-1">Om oss</button>
-            </a>
-            <a href="/login">
-                <button class="button-1">Konto</button>
-            </a>
-             
-             <!-- kundvagn icon placeholder -->
-             <!-- <div class="Cart" style="background-color: aquamarine; width: 10vh; height: 10vh; margin-right: 2.5vw; border-radius: 10px; border: 0px;"></div> -->
-             
-             <img src="../../../images/Kundvagn.png" alt="bild på kundvagn" class="kundvagn" onclick="location.href='/leverans'" style="cursor: pointer;">
-        </div>
+      <!-- meny -->
+      <div class="meny">
+        <a href="/start-sida">
+          <button class="button-1">Hem</button>
+        </a>
+        <a href="/om-oss">
+          <button class="button-1">Om oss</button>
+        </a>
+        <a href="/login">
+          <button class="button-1">Konto</button>
+        </a>
 
+        <!-- kundvagn icon placeholder -->
+        <!-- <div class="Cart" style="background-color: aquamarine; width: 10vh; height: 10vh; margin-right: 2.5vw; border-radius: 10px; border: 0px;"></div> -->
+
+        <img
+          src="../../../images/Kundvagn.png"
+          alt="bild på kundvagn"
+          class="kundvagn"
+          id="kundvagn_id"
+          onclick="location.href='/leverans'"
+          style="cursor: pointer"
+        />
+      </div>
     </div>
 
-    <div class="down" style="display: flex; height: 76vh;">
+    <div class="down" style="display: flex; height: 76vh">
+      <!-- Sido menyn -->
+      <div class="left">
+        <!-- Meny -->
+        <a href="/Beskrivningar">
+          <button class="button-1" style="margin-left: 1vw">BUTIKER:</button>
+        </a>
 
-        <!-- Sido menyn -->
-        <div class="left">
+        <!-- Sök funktion -->
+        <input
+          id="searchInput"
+          placeholder="Sök butik/rätt"
+          style="width: 10vw; border-radius: 10px; margin-left: 0.666vw"
+        />
 
-            <!-- Meny -->
-            <a href="/Beskrivningar">
-                <button class="button-1" style="margin-left: 1vw;"> BUTIKER: </button>
-            </a>
-
-            <!-- Sök funktion -->
-            <input id="searchInput" placeholder="Sök butik/rätt" style="width: 10vw; border-radius: 10px; margin-left: 0.666vw;">
-
-            <!-- Scroll meny -->
-            <div class="shops">
-
-                <!-- Restauranger -->
-                <div class="Shop-1">
-                    <a href="/Abracadabra/abra-cadabra"><button class="button-2 res_1" style="margin-bottom: 1vh"> Abra cadabra</button></a>
-                    <a href="/Abracadabra/brisket-platter"><button class="button-2" style="margin-top: 1vh;"> Brisket platter</button></a>
-                    <a href="/Abracadabra/ribs"><button class="button-2" style="margin-top: 1vh;"> Ribs</button></a>
-                    <a href="/Abracadabra/kyckling"><button class="button-2" style="margin-top: 1vh;"> Kyckling</button></a>
-                </div>
-                <div class="Shop-1">
-                    <a href="/Agatas/agatas"><button class="button-2 res_1" style="margin-bottom: 1vh"> Agatas </button></a>                    
-                    <a href="/Agatas/avocado-toast"><button class="button-2" style="margin-top: 1vh;"> Avacado-toast</button></a>
-                    <a href="/Agatas/choklad-pudding"><button class="button-2" style="margin-top: 1vh;"> Chocklad pudding</button></a>
-                    <a href="/Agatas/soppa"><button class="button-2" style="margin-top: 1vh;"> Räk-soppa</button></a>
-                </div>
-                <div class="Shop-1">
-                    <a href="/Pretantieuse/pretentieuse"><button class="button-2 res_1" style="margin-bottom: 1vh"> Prétentieuse</button></a>
-                    <a href="/Pretantieuse/moln"><button class="button-2" style="margin-top: 1vh;"> Di-väte-mono-oxid blandning</button></a>
-                    <a href="/Pretantieuse/centaur"><button class="button-2" style="margin-top: 1vh;"> Centaur</button></a>
-                    <a href="/Pretantieuse/slag"><button class="button-2" style="margin-top: 1vh;"> Knuckle sandwich</button></a>
-                </div>
-
-            </div>
-
-            <a href="https://www.google.se/maps/search/Restauranger" target="_blank">
-                <button class="button-1" style="margin-left: 1vw;"> Karta</button>
-            </a>
+        <!-- Scroll meny -->
+        <div class="shops">
+          <!-- Restauranger -->
+          <div class="Shop-1">
+            <a href="/Abracadabra/abra-cadabra"
+              ><button class="button-2 res_1" style="margin-bottom: 1vh">
+                Abra cadabra
+              </button></a
+            >
+            <a href="/Abracadabra/brisket-platter"
+              ><button class="button-2" style="margin-top: 1vh">
+                Brisket platter
+              </button></a
+            >
+            <a href="/Abracadabra/ribs"
+              ><button class="button-2" style="margin-top: 1vh">Ribs</button></a
+            >
+            <a href="/Abracadabra/kyckling"
+              ><button class="button-2" style="margin-top: 1vh">
+                Kyckling
+              </button></a
+            >
+          </div>
+          <div class="Shop-1">
+            <a href="/Agatas/agatas"
+              ><button class="button-2 res_1" style="margin-bottom: 1vh">
+                Agatas
+              </button></a
+            >
+            <a href="/Agatas/avocado-toast"
+              ><button class="button-2" style="margin-top: 1vh">
+                Avacado-toast
+              </button></a
+            >
+            <a href="/Agatas/choklad-pudding"
+              ><button class="button-2" style="margin-top: 1vh">
+                Chocklad pudding
+              </button></a
+            >
+            <a href="/Agatas/soppa"
+              ><button class="button-2" style="margin-top: 1vh">
+                Räk-soppa
+              </button></a
+            >
+          </div>
+          <div class="Shop-1">
+            <a href="/Pretantieuse/pretentieuse"
+              ><button class="button-2 res_1" style="margin-bottom: 1vh">
+                Prétentieuse
+              </button></a
+            >
+            <a href="/Pretantieuse/moln"
+              ><button class="button-2" style="margin-top: 1vh">
+                Di-väte-mono-oxid blandning
+              </button></a
+            >
+            <a href="/Pretantieuse/centaur"
+              ><button class="button-2" style="margin-top: 1vh">
+                Centaur
+              </button></a
+            >
+            <a href="/Pretantieuse/slag"
+              ><button class="button-2" style="margin-top: 1vh">
+                Knuckle sandwich
+              </button></a
+            >
+          </div>
         </div>
 
-        <div class="main-space" style="width: 88vw; display: flex; flex-direction: row; justify-content: space-evenly;">
+        <a
+          href="https://www.google.se/maps/search/Restauranger"
+          target="_blank"
+        >
+          <button class="button-1" style="margin-left: 1vw">Karta</button>
+        </a>
+      </div>
 
-            <!-- Vänster rad, bilder -->
-             <div style="display: flex; flex-direction: column;">
-                <img src="../../../images/brisketPlatter.jpg" alt="" class="image-1">
-                <img src="../../../images/brisketPlatter2.jpg" alt="" class="image-1">
-                <img src="../../../images/brisketPlatter3.jpg" alt="" class="image-1">
-
-             </div>
-
-             <!-- höger rad, bröd text -->
-              <div class="box-1" style="width: 33vw; text-align: center;"> 
-
-                <h3>Långrökt oxbringa med djup rökighet, serverad med grillade grönsaker, majsbröd och BBQ-sås.</h3>
-
-                <p>Vår Brisket Platter är en hyllning till äkta BBQ-hantverk. Oxbringan har tillagats långsamt, "low & slow", i upp till 14 timmar över hickory- och ekved för att uppnå en djup rökighet och smältande mörhet. Varje skiva bjuder på en perfekt balans mellan saftigt kött och karamelliserad bark. Den serveras med grillade grönsaker, saftigt majsbröd och en fyllig, husgjord BBQ-sås – en smakupplevelse för dig som gillar när det både ryker och smakar mycket.</p>
-
-                    <h3>
-                        Ingredienser:
-oxbringa, hickoryved, ekved, BBQ-sås, majsbröd, grönsaker</h3>
-              </div>
+      <div
+        class="main-space"
+        style="
+          width: 88vw;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+        "
+      >
+        <!-- Vänster rad, bilder -->
+        <div style="display: flex; flex-direction: column">
+          <img
+            src="../../../images/brisketPlatter.jpg"
+            alt=""
+            class="image-1"
+          />
+          <img
+            src="../../../images/brisketPlatter2.jpg"
+            alt=""
+            class="image-1"
+          />
+          <img
+            src="../../../images/brisketPlatter3.jpg"
+            alt=""
+            class="image-1"
+          />
         </div>
 
+        <!-- höger rad, bröd text -->
+        <div class="box-1" style="width: 33vw; text-align: center">
+          <h3>
+            Långrökt oxbringa med djup rökighet, serverad med grillade
+            grönsaker, majsbröd och BBQ-sås.
+          </h3>
+
+          <p>
+            Vår Brisket Platter är en hyllning till äkta BBQ-hantverk. Oxbringan
+            har tillagats långsamt, "low & slow", i upp till 14 timmar över
+            hickory- och ekved för att uppnå en djup rökighet och smältande
+            mörhet. Varje skiva bjuder på en perfekt balans mellan saftigt kött
+            och karamelliserad bark. Den serveras med grillade grönsaker,
+            saftigt majsbröd och en fyllig, husgjord BBQ-sås – en smakupplevelse
+            för dig som gillar när det både ryker och smakar mycket.
+          </p>
+
+          <h3>
+            Ingredienser: oxbringa, hickoryved, ekved, BBQ-sås, majsbröd,
+            grönsaker
+          </h3>
+
+          
+          <button class="button-2" onclick="
+
+                     fetch('/buy/oxbringa', {method: 'POST', }, )
+
+                     kunvagn_wiggle()
+                     
+                     
+                     " style="width: 20vw; padding-block: 0px;">
+                        <p> <pre>KÖP:  350 kr</pre></p>
+                    </button>
+        </div>
+      </div>
     </div>
 
-    <script src="../../../javascript/index.js"></script>
-</body>
-
+    <script src="/scripting.js"></script>
+  </body>
 </html>
