@@ -31,10 +31,16 @@ app.use(session({
 }));
 
 
+app.use((req, res, next) => {
+    res.locals.username = req.session.username || null; // Skicka användarnamnet om det finns, annars null
+    next();
+});
+
 app.get('/start-sida', (req, res) => {
     const successMessage = req.session.successMessage;
+    const username = req.session.username; // Hämta användarnamnet från sessionen
     delete req.session.successMessage; // Ta bort meddelandet efter att det har skickats
-    res.render('start-sida.ejs', { title: 'Start sida', successMessage });
+    res.render('start-sida.ejs', { title: 'Start sida', successMessage, username });
 });
 
 
@@ -115,11 +121,41 @@ app.get('/leverans', (req, res) => {
 
     res.render('leverans.ejs', { title: 'Kundvagn', order: order, message: message }); // Render the leverans page with the order array and message
 });
+function requireLogin(req, res, next) {
+    if (!req.session.userId) {
+        return res.redirect('/login');
+    }
+    next();
+}
 
 ///          Funktion som hanterar beställningar         ///
 ///          och lägger till dem i en array           ///
 ///          och uppdaterar totalsumman               ///
+app.get('/anvandare', requireLogin,async (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect('/login'); // Om användaren inte är inloggad, omdirigera till inloggningssidan
+    }
 
+    try {
+        // Hämta användarens information från databasen
+        const result = await db.query('SELECT username, email FROM users WHERE id = $1', [req.session.userId]);
+        const user = result.rows[0];
+
+        if (!user) {
+            return res.status(404).send('Användare hittades inte.');
+        }
+
+        // Skicka användarens information till vyn
+        res.render('användare.ejs', {
+            username: user.username,
+            email: user.email,
+            userId: req.session.userId
+        });
+    } catch (error) {
+        console.error('Fel vid hämtning av användarinformation:', error);
+        res.status(500).send('Ett fel uppstod vid hämtning av användarinformation.');
+    }
+});
 
 function shopping(req, res, name, price, addition=1,) {
 
@@ -227,8 +263,9 @@ app.post('/login', async (req, res) => {
         const user = result.rows[0];
 
         if (user && await bcrypt.compare(password, user.password)) {
-            // Spara användarens ID i sessionen
+            // Spara användarens ID och användarnamn i sessionen
             req.session.userId = user.id;
+            req.session.username = user.username;
 
             // Lägg till ett meddelande i sessionen
             req.session.successMessage = 'Inloggning lyckades!';

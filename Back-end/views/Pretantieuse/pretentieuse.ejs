@@ -35,9 +35,15 @@
             <a href="/om-oss">
                 <button class="button-1">Om oss</button>
             </a>
-            <a href="/login">
-                <button class="button-1">Konto</button>
-            </a>
+            <% if (username) { %>
+                <a href="/anvandare">
+                    <button class="button-1"><%= username %></button>
+                </a>
+            <% } else { %>
+                <a href="/login">
+                    <button class="button-1">Konto</button>
+                </a>
+            <% } %>
              
              <!-- kundvagn icon placeholder -->
              <!-- <div class="Cart" style="background-color: aquamarine; width: 10vh; height: 10vh; margin-right: 2.5vw; border-radius: 10px; border: 0px;"></div> -->
@@ -120,7 +126,7 @@
                 <div style="justify-content: space-evenly; text-align: center;">
                     <a href="/Pretantieuse/centaur"><img src="../../../images/Centaur-nedre-hälft-1.png" alt="Centaur botten" class="image-1" style="background-color: wheat;"></a>
                     <div>
-                        <div class="box-4" style="width: 20vw; height: 11vh;">
+                        <div class="box-4" style="width: 20vw; ">
                             <a class="links" href="/Pretantieuse/centaur">
                                 <p>Autre (Centaur botten): </p>
                             </a>

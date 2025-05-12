@@ -30,9 +30,15 @@
             <a href="/om-oss">
                 <button class="button-1">Om oss</button>
             </a>
-            <a href="/login">
-                <button class="button-1">Konto</button>
-            </a>
+            <% if (username) { %>
+                <a href="/anvandare">
+                    <button class="button-1"><%= username %></button>
+                </a>
+            <% } else { %>
+                <a href="/login">
+                    <button class="button-1">Konto</button>
+                </a>
+            <% } %>
              
              <!-- kundvagn icon placeholder -->
              <!-- <div class="Cart" style="background-color: aquamarine; width: 10vh; height: 10vh; margin-right: 2.5vw; border-radius: 10px; border: 0px;"></div> -->
