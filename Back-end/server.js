@@ -328,7 +328,7 @@ app.post('/logout', (req, res) => {
             console.error('Fel vid utloggning:', err);
             return res.status(500).send('Ett fel uppstod vid utloggning.');
         }
-        res.redirect('/login');
+        res.redirect('/start-sida');
     });
 });
 
