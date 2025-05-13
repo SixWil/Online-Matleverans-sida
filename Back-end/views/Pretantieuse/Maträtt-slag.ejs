@@ -43,7 +43,7 @@
              <!-- kundvagn icon placeholder -->
              <!-- <div class="Cart" style="background-color: aquamarine; width: 10vh; height: 10vh; margin-right: 2.5vw; border-radius: 10px; border: 0px;"></div> -->
              
-             <img src="../../../images/Kundvagn.png" alt="bild på kundvagn" class="kundvagn" onclick="location.href='/leverans'" style="cursor: pointer;">
+             <img src="../../../images/Kundvagn.png" alt="bild på kundvagn" class="kundvagn" id="kundvagn_id" onclick="location.href='/leverans'" style="cursor: pointer;">
         </div>
 
     </div>
@@ -108,15 +108,26 @@
 
                 <p style="width: 100%;">För när du behöver en hastig uppryckning<p>
 
-                    <h3>
+                    <h3 style="width: 100%;">
                         Ingredienser: <br>
                         n/a</h3>
+
+                        <button class="button-2" onclick="
+
+                     fetch('/buy/slag', {method: 'POST', }, )
+
+                     kunvagn_wiggle()
+                     
+                     
+                     " style="width: 20vw; padding-block: 0px;">
+                        <p> <pre>KÖP:  350 kr</pre></p>
+                    </button>
               </div>
         </div>
 
     </div>
 
-    <script src="../../../javascript/index.js"></script>
+    <script src="/scripting.js"></script>
 </body>
 
 </html>
