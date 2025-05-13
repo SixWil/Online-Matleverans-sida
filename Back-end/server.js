@@ -136,13 +136,8 @@ function requireLogin(req, res, next) {
 ///          Funktion som hanterar beställningar         ///
 ///          och lägger till dem i en array           ///
 ///          och uppdaterar totalsumman               ///
-app.get('/anvandare', requireLogin,async (req, res) => {
-    if (!req.session.userId) {
-        return res.redirect('/login'); // Om användaren inte är inloggad, omdirigera till inloggningssidan
-    }
-
+app.get('/anvandare', requireLogin, async (req, res) => {
     try {
-        // Hämta användarens information från databasen
         const result = await db.query('SELECT username, email FROM users WHERE id = $1', [req.session.userId]);
         const user = result.rows[0];
 
@@ -150,11 +145,14 @@ app.get('/anvandare', requireLogin,async (req, res) => {
             return res.status(404).send('Användare hittades inte.');
         }
 
-        // Skicka användarens information till vyn
+        const successMessage = req.session.successMessage;
+        delete req.session.successMessage; // Ta bort meddelandet efter att det har skickats
+
         res.render('användare.ejs', {
             username: user.username,
             email: user.email,
-            userId: req.session.userId
+            userId: req.session.userId,
+            successMessage
         });
     } catch (error) {
         console.error('Fel vid hämtning av användarinformation:', error);
@@ -287,8 +285,6 @@ app.post('/login', async (req, res) => {
 });
 
 
-
-// Hantera registrering
 app.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
 
@@ -331,7 +327,25 @@ app.post('/logout', (req, res) => {
         res.redirect('/start-sida');
     });
 });
+app.post('/anvandare/uppdatera-email', async (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect('/login'); // Om användaren inte är inloggad, omdirigera till inloggningssidan
+    }
 
+    const { newEmail } = req.body;
+
+    try {
+        // Uppdatera e-postadressen i databasen
+        await db.query('UPDATE users SET email = $1 WHERE id = $2', [newEmail, req.session.userId]);
+
+        // Uppdatera sessionen med den nya e-postadressen
+        req.session.successMessage = 'Din e-postadress har uppdaterats!';
+        res.redirect('/anvandare');
+    } catch (error) {
+        console.error('Fel vid uppdatering av e-postadress:', error);
+        res.status(500).send('<script>alert("Ett fel uppstod vid uppdatering av e-postadress."); window.location.href="/anvandare";</script>');
+    }
+});
 
 app.post('/buy/Oxbringa', (req, res) => {
     shopping(req, res, 'Oxbringa', 200 )

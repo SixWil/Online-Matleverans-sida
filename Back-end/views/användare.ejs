@@ -96,21 +96,35 @@
             </a>
         </div>
 
-    <div class="main-space">
-        <div class="box-1" style="width: fit-content;">
-            <h1 style="margin-block: 0px;">Välkommen, <%= username %>!</h1>
-        </div>
-
-    <div class="box-1" style="width: 50vw;">
+        <div class="down" style="display: flex; height: 76vh;">
+            <div class="main-space">
+                <div class="box-1" style="width: fit-content;">
+                    <h1 style="margin-block: 0px;">Välkommen, <%= username %>!</h1>
+                </div>
     
-    <p>E-post: <%= email %></p>
-    <p>Användar-ID: <%= userId %></p>
-
-    <form action="/logout" method="POST">
-        <button type="submit" class="button-1">Logga ut</button>
-    </form>
-</div>
-</div>
+                <div class="box-2" style="width: 50vw;">
+                    <p>E-post: <%= email %></p>
+                    <p>Användarnamn: <%= username %></p>
+                    <p>Adress</p>
+                    <p>Vill du ändra din e-postadress</p>
+                    <form action="/anvandare/uppdatera-email" method="POST">
+                        <label for="newEmail">Ny e-postadress:</label>
+                        <input type="email" id="newEmail" name="newEmail" required>
+                        <button type="submit" class="button-1">Uppdatera e-post</button>
+                    </form>
+                    <form action="/logout" method="POST">
+                        <button type="submit" class="button-1">Logga ut</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Visa en alert om successMessage finns -->
+        <script>
+            <% if (successMessage) { %>
+                alert("<%= successMessage %>");
+            <% } %>
+        </script>
     <script src="../../javascript/index.js"></script>
 </body>
 
