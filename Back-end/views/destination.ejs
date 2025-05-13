@@ -36,9 +36,9 @@
           <h3> Betalnings medel </h3>
 
 
-            <button class="button-2 swish" onclick="swish()" style="margin-bottom: 1vh; opacity: 50%;"> Swish </button>
-            <button class="button-2 swish" onclick="swish()" style="margin-bottom: 1vh; opacity: 50%;"> Swish 2 </button>
-            <button class="button-2 swish" onclick="swish()" style="margin-bottom: 1vh; opacity: 50%;"> Swish 3 </button>
+            <button class="button-2 swish" onclick="swish()" style="margin-bottom: 1vh;"> Swish </button>
+            <button class="button-2 swish" onclick="swish()" style="margin-bottom: 1vh;"> Swish 2 </button>
+            <button class="button-2 swish" onclick="swish()" style="margin-bottom: 1vh;"> Swish 3 </button>
             
           </div>
 
@@ -77,6 +77,10 @@
 
         if (krav_bekräfta){
           bekräfta_a.style.opacity = "100%"
+          
+          bekräfta_a.classList.remove('upmärksamma')
+          void bekräfta_a.offsetWidth
+          bekräfta_a.classList.add('upmärksamma')
         }
 
       }
