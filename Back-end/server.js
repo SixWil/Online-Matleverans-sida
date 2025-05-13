@@ -31,6 +31,7 @@ app.use(session({
 }));
 
 
+///     Försvan mystisk en gång oOoO    ///
 app.get('/', (req, res) => {
     res.redirect('/start-sida')
 });
@@ -199,7 +200,9 @@ function shopping(req, res, name, price, addition=1,) {
 
 }
 
-
+app.get('/destination', async (req, res) => {
+    res.render('destination.ejs')
+})
 
 var account = null; // Dummy account number
 

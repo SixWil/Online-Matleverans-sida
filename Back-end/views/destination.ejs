@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style-2.css" />
+  </head>
+
+  <body style="background-color: rgb(66, 66, 66); margin: 0px">
+    <!-- Om man vill ta bort scroll menyn kan man använda: -->
+    <!-- overflow: hidden; -->
+
+    <!-- Toppen av sidan, menyn, plus loggan -->
+    <div class="top">
+      <img
+        class="logo"
+        src="../../images/Goondora.png"
+        alt="logo goes here"
+        style="border: solid grey 0.1vw; margin-left: 0.1vw; overflow: hidden"
+      />
+
+      <!-- logo placeholder -->
+      <!-- <div class="logo" style="width: 10vw; height: 10vw; background-color: lightblue; border-radius: 100%; margin-left: 2.5vw; margin-block: 1vh;"></div> -->
+
+      <!-- logo -->
+
+      <!-- meny -->
+      <div class="meny">
+        <a href="/start-sida">
+          <button class="button-1">Hem</button>
+        </a>
+        <a href="/om-oss">
+          <button class="button-1">Om oss</button>
+        </a>
+        <% if (username) { %>
+        <a href="/anvandare">
+          <button class="button-1"><%= username %></button>
+        </a>
+        <% } else { %>
+        <a href="/login">
+          <button class="button-1">Konto</button>
+        </a>
+        <% } %>
+
+        <!-- kundvagn icon placeholder -->
+        <!-- <div class="Cart" style="background-color: aquamarine; width: 10vh; height: 10vh; margin-right: 2.5vw; border-radius: 10px; border: 0px;"></div> -->
+
+        <img
+          src="../../images/Kundvagn.png"
+          alt=""
+          style="
+            width: 10vh;
+            background-color: grey;
+            border-radius: 10px;
+            border: solid white 0.1vw;
+          "
+        />
+      </div>
+    </div>
+    <div class="down" style="display: flex; height: 76vh">
+      <!-- Sido menyn -->
+      <div class="left">
+        <a href="/beskrivningar">
+          <button class="button-1" style="margin-left: 1vw">BUTIKER:</button>
+        </a>
+        <input
+          id="searchInput"
+          placeholder="Sök butik/rätt"
+          style="width: 10vw; border-radius: 10px; margin-left: 0.666vw"
+        />
+        <div class="shops">
+          <div class="Shop-1">
+            <a href="/Abracadabra/abra-cadabra"
+              ><button class="button-2 res_1" style="margin-bottom: 1vh">
+                Abra cadabra
+              </button></a
+            >
+            <a href="/Abracadabra/brisket-platter"
+              ><button class="button-2" style="margin-top: 1vh">
+                Brisket platter
+              </button></a
+            >
+            <a href="/Abracadabra/ribs"
+              ><button class="button-2" style="margin-top: 1vh">Ribs</button></a
+            >
+            <a href="/Abracadabra/kyckling"
+              ><button class="button-2" style="margin-top: 1vh">
+                Kyckling
+              </button></a
+            >
+          </div>
+          <div class="Shop-1">
+            <a href="/Agatas/agatas"
+              ><button class="button-2 res_1" style="margin-bottom: 1vh">
+                Agatas
+              </button></a
+            >
+            <a href="/Agatas/avocado-toast"
+              ><button class="button-2" style="margin-top: 1vh">
+                Avocado-toast
+              </button></a
+            >
+            <a href="/Agatas/choklad-pudding"
+              ><button class="button-2" style="margin-top: 1vh">
+                Choklad pudding
+              </button></a
+            >
+            <a href="/Agatas/soppa"
+              ><button class="button-2" style="margin-top: 1vh">
+                Räk-soppa
+              </button></a
+            >
+          </div>
+          <div class="Shop-1">
+            <a href="/Pretantieuse/pretentieuse"
+              ><button class="button-2 res_1" style="margin-bottom: 1vh">
+                Prétentieuse
+              </button></a
+            >
+            <a href="/Pretantieuse/moln"
+              ><button class="button-2" style="margin-top: 1vh">
+                Di-väte-mono-oxid blandning
+              </button></a
+            >
+            <a href="/Pretantieuse/centaur"
+              ><button class="button-2" style="margin-top: 1vh">
+                Centaur
+              </button></a
+            >
+            <a href="/Pretantieuse/slag"
+              ><button class="button-2" style="margin-top: 1vh">
+                Knuckle sandwich
+              </button></a
+            >
+          </div>
+        </div>
+        <a
+          href="https://www.google.se/maps/search/Restauranger"
+          target="_blank"
+        >
+          <button class="button-1" style="margin-left: 1vw">Karta</button>
+        </a>
+      </div>
+
+      <div class="main-space" style="margin-top: -3vh">
+        <div class="mat-meny">
+
+          <!-- Vart maten ska -->
+          <div class="box-2">
+
+            <label for="adress" class="UserName"
+              >Vart ska maten levereras?</label
+            >
+            <input type="text" class="adresser" id="adress-input" name="adress" required style="margin-bottom: 1vh;" onclick="position()" />
+
+            <a>
+              <button class="button-2 adresser" style="margin-left: 1vw" onclick="position()">Karta</button>
+            </a>
+          </div>
+          
+          <div class="box-2">
+            <label for="adress" class="UserName"
+              >Har du några extra instruktioner?</label
+            >
+            <textarea type="text" name="extra-instruktion" style="margin-bottom: 1vh; height: 10vh;"> </textarea>
+          </div>
+
+          <div class="box-2" style="align-items: center;">
+          <h3> Betalnings medel </h3>
+
+
+            <button class="button-2 swish" onclick="swish()" style="margin-bottom: 1vh; opacity: 50%;"> Swish </button>
+            <button class="button-2 swish" onclick="swish()" style="margin-bottom: 1vh; opacity: 50%;"> Swish 2 </button>
+            <button class="button-2 swish" onclick="swish()" style="margin-bottom: 1vh; opacity: 50%;"> Swish 3 </button>
+            
+          </div>
+
+
+          <!-- <button class="button-2" onclick="confirm-b()" id="bekräfta-b" style="opacity: 50%;">Bekräfta</button> -->
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      
+      var krav_swish = false
+      var krav_adress = false
+      
+      var swish_knapp = document.getElementsByClassName('swish')
+      
+      var adresser = document.getElementsByClassName('adresser')
+      
+      var bekräfta_b = document.getElementById('bekräfta-b')
+
+      var adress_input = document.getElementById('adress-input')
+      
+      function krav(){
+        
+        if (krav_adress && krav_swish){
+          bekräfta_b.style.opacity = "100%"
+        }
+        
+      }
+
+      function position(){
+        alert("låtsas som att du nu skrivit in adress [kanske ta bort]")
+  
+        krav_adress = true
+  
+        for (i = 0; i < swish_knapp.length; i++ ){
+          swish_knapp[i].style.opacity = "100%"
+        }
+  
+        for (i = 0; i < adresser.length; i++ ){
+          adresser[i].style.opacity = "66.666%"
+        }
+
+        adress_input.value = "gata-gatan 123"
+  
+        // krav()
+      }
+
+      function swish(){
+        alert("låtsas som att du nu skrivit in swish [kanske ta bort]")
+
+        krav_swish = true
+
+        // krav()
+
+        if (krav_adress){
+
+          
+          alert("Dina varor är påväg!")
+          
+          fetch('/confirm-b', {method: 'POST', }, )
+
+        } else{
+          alert("vart ska vi skicka maten???")
+        }
+      }
+
+
+    </script>
+  </body>
+</html>
