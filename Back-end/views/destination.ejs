@@ -17,52 +17,60 @@
 
     </style>
 
-        <div class="mat-meny">
+        <div class="mat-meny" style="height: 100%; padding-bottom: 0vh; margin-top: 1vh;">
 
           <!-- Vart maten ska -->
-          <div class="box-2">
-
+          <h3 style="margin-block: 0vh; margin-top: 2vh;"> Leverans </h3>
+          <div class="box-2" style="width: 16.666vw; margin-block: 1vh;">
+            
             <label for="adress" class="UserName"
-              >Vart ska maten levereras?</label
+            >Vart ska maten levereras?</label
             >
-            <input placeholder="adress" type="text" class="adresser" id="adress-input" name="adress" required style="margin-bottom: 1vh;" onclick="position()" />
-
-            <a>
-              <button class="button-2 adresser" style="margin-left: 1vw" onclick="position()">Karta</button>
-            </a>
+            <div style="display: flex;">
+              <input placeholder="adress" type="text" class="adresser" id="adress-input" name="adress" required style="margin-top: 1vh; width: 10vw; height: 3vh" onclick="position()" />
+              
+              <a>
+                <button class="button-2 adresser" style="margin-left: 1vw; width: 4vw; margin-top: .5vh;" onclick="position()">Karta</button>
+              </a>
+            </div>
 
           </div>
           
-          <div class="box-2">
+          <div class="box-2" style="width: 16.666vw;">
             <label for="adress" class="UserName"
               >Har du några extra instruktioner?</label
             >
-            <textarea type="text" id="id_extra-instructions" placeholder="tex: portkod,          sovande bebis,          argsint husdjur." name="extra-instruktion" style="margin-bottom: 1vh; height: 10vh;"></textarea>
+            <textarea type="text" id="id_extra-instructions" placeholder="tex: portkod,          sovande bebis,          argsint husdjur." name="extra-instruktion" style="margin-bottom: 1vh; height: 8vh;"></textarea>
           </div>
 
-          <h3 style="margin-block: 0px;"> Betalnings medel </h3>
+          <h3 style="margin-block: 0vh; margin-top: 2vh;"> Betalning</h3>
 
-          <div class="box-2" style="align-items: center; width: 20vw;">
+          <div class="box-2" style="align-items: center; width: 17.5vw; background-color: transparent; border: none">
 
-          <label for="kort"
+          <div class="box-2" style="width: 16.666vw; align-items: center">
+
+            
+            <!-- <label for="kort"
               >Bankkort</label
-            >
-            <input class="swish" onclick="krav_kort_nummer = true; krav()" placeholder="kortnummer" type="text" id="kort-nummer" name="kort" required style="margin-bottom: 1vh;" />
+            > -->
+            <input class="swish" onclick="krav_kort_nummer = true; krav()" placeholder="kortnummer" type="text" id="kort-nummer" name="kort" required style="margin-block: 1vh" />
             <div style="display: flex;">
-
+              
               <input class="swish" onclick="krav_kort_datum = true; krav()" placeholder="Mån/År" type="text" id="kort-datum" name="kort" required style="margin-bottom: 1vh; width: 5vw; margin-inline: .5vw;" />
               <input class="swish" onclick="krav_kort_cvc = true; krav()" placeholder="cvc" type="text" id="kort-cvc" name="kort" required style="margin-bottom: 1vh; width: 5vw; margin-inline: .5vw;" />
               
             </div>
+            
+            <button class="button-2 swish" id="bankkort" onclick="if (krav_bank_kort){swish('kort')} else {alert('Kort info saknas')}" style="margin-bottom: 1vh;"> Bekräfta bankkort</button>
+            
+          </div>
 
-            <button class="button-2 swish" id="bankkort" onclick="if (krav_bank_kort){swish('kort')} else {alert('inga kort detaljer')}" style="margin-bottom: 1vh; width: 6.666vw;"> Bankkort</button>
-
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; width: 100%;">
-
-              <button class="button-2 swish" onclick="swish('swish')" style="margin-top: 1vh; width: 6.666vw;"> Swish </button>
-              <button class="button-2 swish" onclick="swish('klarna')" style="margin-top: 1vh; width: 6.666vw;"> Klarna </button>
-              <button class="button-2 swish" onclick="swish('mobile pay')" style="margin-top: 1vh; width: 6.666vw;"> Mobile pay </button>
-              <button class="button-2 swish" onclick="swish('paypal')" style="margin-top: 1vh; width: 6.666vw;"> Paypal </button>
+            <div class="box-1" style="display: flex; flex-wrap: wrap; justify-content: center; width: 16.666vw; padding-bottom: 2vh; ">
+              <p style="width: 100%; margin: 0px;">Andra</p>
+              <button class="button-2 swish" onclick="swish('swish')" style="margin-top: 1vh; width: 6.666vw; margin-inline: .666vw;"> Swish </button>
+              <button class="button-2 swish" onclick="swish('klarna')" style="margin-top: 1vh; width: 6.666vw; margin-inline: .666vw;"> Klarna </button>
+              <button class="button-2 swish" onclick="swish('mobile pay')" style="margin-top: 1vh; width: 6.666vw; margin-inline: .666vw;"> Mobile pay </button>
+              <button class="button-2 swish" onclick="swish('paypal')" style="margin-top: 1vh; width: 6.666vw; margin-inline: .666vw;"> Paypal </button>
             
             </div>
             
@@ -135,6 +143,8 @@
   
         krav_adress = true
 
+        alert('Adress registrerad')
+
         
         // for (i = 0; i < swish_knapp.length; i++ ){
         //   swish_knapp[i].style.opacity = "100%"
@@ -156,6 +166,8 @@
       function swish( type=null){
         
         krav_swish = true
+
+        alert('Betalsätt registrerat')
 
         krav_kort_cvc = false
         krav_kort_datum = false
