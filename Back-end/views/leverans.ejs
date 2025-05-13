@@ -259,16 +259,28 @@
           document.getElementById("att_betala").innerHTML = `Att betala: ${order_b[0].payment} kr`
         }
         
-        var krav_bekräfta = false; // Define the global variable
+        var krav_bekräfta = false; // Define the global variable        
 
+        var payment_type;
+
+        var gata;
+
+        
+        
         function confirm(){
           
           if (krav_bekräfta){
 
+            var exter = document.getElementById('id_extra-instructions').value
+            
+            var extra_instructions = document.getElementById('id_extra-instructions')
+            
+            data_transport = {order_b: order_b, gata: gata, betalning: payment_type, exter: exter }
+
             fetch('/confirm', {
               method: 'POST',
               headers: {'Content-Type': 'application/json',},
-              body: JSON.stringify(order_b), // Send the `order_b` array as JSON
+              body: JSON.stringify(data_transport), // Send the `order_b` array as JSON
             })
             
             alert("Beställning bekräftad ")

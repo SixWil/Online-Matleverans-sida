@@ -8,7 +8,14 @@
   </head>
 
   <body style="background-color: rgb(66, 66, 66); margin: 0px; width: fit-content; display: flex;"> -->
-    
+    <style>
+
+      .swish{
+        margin-inline: 1vw;
+
+      }
+
+    </style>
 
         <div class="mat-meny">
 
@@ -18,27 +25,46 @@
             <label for="adress" class="UserName"
               >Vart ska maten levereras?</label
             >
-            <input type="text" class="adresser" id="adress-input" name="adress" required style="margin-bottom: 1vh;" onclick="position()" />
+            <input placeholder="adress" type="text" class="adresser" id="adress-input" name="adress" required style="margin-bottom: 1vh;" onclick="position()" />
 
             <a>
               <button class="button-2 adresser" style="margin-left: 1vw" onclick="position()">Karta</button>
             </a>
+
           </div>
           
           <div class="box-2">
             <label for="adress" class="UserName"
               >Har du några extra instruktioner?</label
             >
-            <textarea type="text" name="extra-instruktion" style="margin-bottom: 1vh; height: 10vh;"> </textarea>
+            <textarea type="text" id="id_extra-instructions" placeholder="tex: portkod,          sovande bebis,          argsint husdjur." name="extra-instruktion" style="margin-bottom: 1vh; height: 10vh;"></textarea>
           </div>
 
-          <div class="box-2" style="align-items: center;">
-          <h3> Betalnings medel </h3>
+          <h3 style="margin-block: 0px;"> Betalnings medel </h3>
 
+          <div class="box-2" style="align-items: center; width: 20vw;">
 
-            <button class="button-2 swish" onclick="swish()" style="margin-bottom: 1vh;"> Swish </button>
-            <button class="button-2 swish" onclick="swish()" style="margin-bottom: 1vh;"> Swish 2 </button>
-            <button class="button-2 swish" onclick="swish()" style="margin-bottom: 1vh;"> Swish 3 </button>
+          <label for="kort"
+              >Bankkort</label
+            >
+            <input class="swish" onclick="krav_kort_nummer = true; krav()" placeholder="kortnummer" type="text" id="kort-nummer" name="kort" required style="margin-bottom: 1vh;" />
+            <div style="display: flex;">
+
+              <input class="swish" onclick="krav_kort_datum = true; krav()" placeholder="Mån/År" type="text" id="kort-datum" name="kort" required style="margin-bottom: 1vh; width: 5vw; margin-inline: .5vw;" />
+              <input class="swish" onclick="krav_kort_cvc = true; krav()" placeholder="cvc" type="text" id="kort-cvc" name="kort" required style="margin-bottom: 1vh; width: 5vw; margin-inline: .5vw;" />
+              
+            </div>
+
+            <button class="button-2 swish" id="bankkort" onclick="if (krav_bank_kort){swish('kort')} else {alert('inga kort detaljer')}" style="margin-bottom: 1vh; width: 6.666vw;"> Bankkort</button>
+
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; width: 100%;">
+
+              <button class="button-2 swish" onclick="swish('swish')" style="margin-top: 1vh; width: 6.666vw;"> Swish </button>
+              <button class="button-2 swish" onclick="swish('klarna')" style="margin-top: 1vh; width: 6.666vw;"> Klarna </button>
+              <button class="button-2 swish" onclick="swish('mobile pay')" style="margin-top: 1vh; width: 6.666vw;"> Mobile pay </button>
+              <button class="button-2 swish" onclick="swish('paypal')" style="margin-top: 1vh; width: 6.666vw;"> Paypal </button>
+            
+            </div>
             
           </div>
 
@@ -53,8 +79,14 @@
       
       var krav_swish = false
       var krav_adress = false
+      var krav_kort_cvc = false
+      var krav_kort_datum = false
+      var krav_kort_nummer = false
+      var krav_bank_kort = false;
+
       
-      
+      var bankkort = document.getElementById('bankkort')
+
       var swish_knapp = document.getElementsByClassName('swish')
       
       var adresser = document.getElementsByClassName('adresser')
@@ -64,8 +96,13 @@
       var adress_input = document.getElementById('adress-input')
       
       var bekräfta_a = document.getElementById('Bekräfta-a')
+
+
+      // var adress_input = document.getElementById('adress-input')
       
       bekräfta_a.style.opacity = "50%"
+
+      bankkort.style.opacity = "50%"
       
       krav_bekräfa = false
 
@@ -77,40 +114,70 @@
 
         if (krav_bekräfta){
           bekräfta_a.style.opacity = "100%"
-          
+
           bekräfta_a.classList.remove('upmärksamma')
           void bekräfta_a.offsetWidth
           bekräfta_a.classList.add('upmärksamma')
         }
 
+
+        if (krav_kort_nummer && krav_kort_datum && krav_kort_cvc){
+          krav_bank_kort = true
+        }
+
+        if (krav_bank_kort){
+          bankkort.style.opacity = "100%"
+        }
+
       }
 
       function position(){
-        alert("låtsas som att du nu skrivit in adress [kanske ta bort]")
   
         krav_adress = true
-  
-        for (i = 0; i < swish_knapp.length; i++ ){
-          swish_knapp[i].style.opacity = "100%"
-        }
+
+        
+        // for (i = 0; i < swish_knapp.length; i++ ){
+        //   swish_knapp[i].style.opacity = "100%"
+        // }
   
         for (i = 0; i < adresser.length; i++ ){
           adresser[i].style.opacity = "66.666%"
         }
-
+        
         adress_input.value = "gata-gatan 123"
+
+        gata = document.getElementById('adress-input').value
+
+        // alert(gata)
   
         krav()
       }
 
-      function swish(){
-        alert("låtsas som att du nu skrivit in swish [kanske ta bort]")
-
+      function swish( type=null){
+        
         krav_swish = true
+
+        krav_kort_cvc = false
+        krav_kort_datum = false
+        krav_kort_nummer = false
+
+        if (type){
+          payment_type = type
+        }
+
+        // if (type == 'kort'){
+        //   kort_nummer = document.getElementById('kort-nummer')
+        //   kort_datum = document.getElementById('kort-datum')
+        //   kort_cvc = document.getElementById('kort-cvc')
+        //   kort_data = {}
+        // }
+
+        krav_bank_kort = false
 
         for (i = 0; i < swish_knapp.length; i++ ){
           swish_knapp[i].style.opacity = "66.666%"
         }
+
         
         // if (krav_adress){
           
