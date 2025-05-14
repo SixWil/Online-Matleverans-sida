@@ -1,6 +1,5 @@
-function kunvagn_wiggle(){
+function kunvagn_wiggle(kundvagn = document.getElementById('kundvagn_id') ){
     
-    kundvagn = document.getElementById('kundvagn_id')
                             
     kundvagn.classList.remove('upmärksamma')
     void kundvagn.offsetWidth

@@ -143,8 +143,8 @@
         </a>
       </div>
 
-      <div class="main-space" style="margin-top: -3vh">
-        <div class="mat-meny">
+      <div class="main-space" style="margin-top: -3vh; display: flex; flex-direction: row; justify-content: space-evenly;">
+        <div class="mat-meny" style="height: 100%;">
           <!-- <div class="box-2" style="margin-top: 3vh">
           <p>Beställning</p>
         </div> -->
@@ -209,10 +209,11 @@
             Skatt: <%= order[1].tax %>
           </h3>
 
-            <button class="button-2" onclick="confirm()">
+            <button class="button-2" onclick="confirm()" id="Bekräfta-a">
               Bekräfta
             </button>
         </div>
+        <%- include('destination') %>
       </div>
     </div>
     
@@ -221,52 +222,71 @@
   
       <% if (message){ %>
         alert("<%= message %>");
-      <% } %>
+      <% } %>;
 
-        var order_b = <%- JSON.stringify(order) %>; // Embed the server-side `order` array
+      
+      
+      var order_b = <%- JSON.stringify(order) %>; // Embed the server-side `order` array
+      
+      function antal(i, förändring){
+        
+        order_b[i].amount += förändring; // Update the amount in the order array
+        
+        if ( order_b[i].amount < 0 ) { order_b[i].amount = 0 }
 
-        function antal(i, förändring){
-
-          order_b[i].amount += förändring; // Update the amount in the order array
-
-          if ( order_b[i].amount < 0 ) { order_b[i].amount = 0 }
-
-          order_b[i].total = order_b[i].amount * order_b[i].price; // Update the total price for the item
-
+        order_b[i].total = order_b[i].amount * order_b[i].price; // Update the total price for the item
+        
           enhet = document.getElementById('mat_'+i);
-
+          
           enhet.innerHTML = `${ order_b[i].amount } st ${ order_b[i].name } <br> pris per: ${ order_b[i].price } kr <br> pris alla: ${ order_b[i].total } kr `;
 
-
-
+          
+          
           order_b[1].cost = 0
           for (let i = 2; i < order_b.length; i++) {
-              order_b[1].cost += order_b[i].total; // Calculate the total payment
+            order_b[1].cost += order_b[i].total; // Calculate the total payment
           };
-
+          
           order_b[1].tax = (order_b[1].cost + order_b[1].delivery) * 0.1
-
+          
           document.getElementById("betala_detaljer").innerHTML =`
-            Pris: ${order_b[1].cost} <br>
-            Leverans kostnad: ${order_b[1].delivery} <br>
-            Skatt: ${order_b[1].tax}`
-
+          Pris: ${order_b[1].cost} <br>
+          Leverans kostnad: ${order_b[1].delivery} <br>
+          Skatt: ${order_b[1].tax}`
+          
           order_b[0].payment = order_b[1].cost + order_b[1].delivery + order_b[1].tax
-    
+          
           document.getElementById("att_betala").innerHTML = `Att betala: ${order_b[0].payment} kr`
         }
+        
+        var krav_bekräfta = false; // Define the global variable        
 
+        var payment_type;
+
+        var gata;
+
+        
+        
         function confirm(){
-
           
-          fetch('/confirm', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json',},
-            body: JSON.stringify(order_b), // Send the `order_b` array as JSON
-          })
+          if (krav_bekräfta){
 
-          alert("Beställning bekräftad ")
-          window.location.reload()
+            var exter = document.getElementById('id_extra-instructions').value
+            
+            var extra_instructions = document.getElementById('id_extra-instructions')
+            
+            data_transport = {order_b: order_b, gata: gata, betalning: payment_type, exter: exter }
+
+            fetch('/confirm', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json',},
+              body: JSON.stringify(data_transport), // Send the `order_b` array as JSON
+            })
+            
+            alert("Beställning bekräftad ")
+            window.location.reload()
+
+          } else {alert('Adress eller betalsätt saknas')}
           
         // .then((response) => {
         //   if (response.ok) {

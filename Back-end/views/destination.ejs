@@ -1,0 +1,213 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style-2.css" />
+  </head>
+
+  <body style="background-color: rgb(66, 66, 66); margin: 0px; width: fit-content; display: flex;"> -->
+    <style>
+
+      .swish{
+        margin-inline: 1vw;
+
+      }
+
+    </style>
+
+        <div class="mat-meny" style="height: 100%; padding-bottom: 0vh; margin-top: 1vh;">
+
+          <!-- Vart maten ska -->
+          <h3 style="margin-block: 0vh; margin-top: 2vh;"> Leverans </h3>
+          <div class="box-2" style="width: 16.666vw; margin-block: 1vh;">
+            
+            <label for="adress" class="UserName"
+            >Vart ska maten levereras?</label
+            >
+            <div style="display: flex;">
+              <input placeholder="adress" type="text" class="adresser" id="adress-input" name="adress" required style="margin-top: 1vh; width: 10vw; height: 3vh" onclick="position()" />
+              
+              <a>
+                <button class="button-2 adresser" style="margin-left: 1vw; width: 4vw; margin-top: .5vh;" onclick="position()">Karta</button>
+              </a>
+            </div>
+
+          </div>
+          
+          <div class="box-2" style="width: 16.666vw;">
+            <label for="adress" class="UserName"
+              >Har du några extra instruktioner?</label
+            >
+            <textarea type="text" id="id_extra-instructions" placeholder="tex: portkod,          sovande bebis,          argsint husdjur." name="extra-instruktion" style="margin-bottom: 1vh; height: 8vh;"></textarea>
+          </div>
+
+          <h3 style="margin-block: 0vh; margin-top: 2vh;"> Betalning</h3>
+
+          <div class="box-2" style="align-items: center; width: 17.5vw; background-color: transparent; border: none">
+
+          <div class="box-2" style="width: 16.666vw; align-items: center">
+
+            
+            <!-- <label for="kort"
+              >Bankkort</label
+            > -->
+            <input class="swish" onclick="krav_kort_nummer = true; krav()" placeholder="kortnummer" type="text" id="kort-nummer" name="kort" required style="margin-block: 1vh" />
+            <div style="display: flex;">
+              
+              <input class="swish" onclick="krav_kort_datum = true; krav()" placeholder="Mån/År" type="text" id="kort-datum" name="kort" required style="margin-bottom: 1vh; width: 5vw; margin-inline: .5vw;" />
+              <input class="swish" onclick="krav_kort_cvc = true; krav()" placeholder="cvc" type="text" id="kort-cvc" name="kort" required style="margin-bottom: 1vh; width: 5vw; margin-inline: .5vw;" />
+              
+            </div>
+            
+            <button class="button-2 swish" id="bankkort" onclick="if (krav_bank_kort){swish('kort')} else {alert('Kort info saknas')}" style="margin-bottom: 1vh;"> Bekräfta bankkort</button>
+            
+          </div>
+
+            <div class="box-1" style="display: flex; flex-wrap: wrap; justify-content: center; width: 16.666vw; padding-bottom: 2vh; ">
+              <p style="width: 100%; margin: 0px;">Andra</p>
+              <button class="button-2 swish" onclick="swish('swish')" style="margin-top: 1vh; width: 6.666vw; margin-inline: .666vw;"> Swish </button>
+              <button class="button-2 swish" onclick="swish('klarna')" style="margin-top: 1vh; width: 6.666vw; margin-inline: .666vw;"> Klarna </button>
+              <button class="button-2 swish" onclick="swish('mobile pay')" style="margin-top: 1vh; width: 6.666vw; margin-inline: .666vw;"> Mobile pay </button>
+              <button class="button-2 swish" onclick="swish('paypal')" style="margin-top: 1vh; width: 6.666vw; margin-inline: .666vw;"> Paypal </button>
+            
+            </div>
+            
+          </div>
+
+
+          <!-- <button class="button-2" onclick="confirm-b()" id="bekräfta-b" style="opacity: 50%;">Bekräfta</button> -->
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      
+      
+      var krav_swish = false
+      var krav_adress = false
+      var krav_kort_cvc = false
+      var krav_kort_datum = false
+      var krav_kort_nummer = false
+      var krav_bank_kort = false;
+
+      
+      var bankkort = document.getElementById('bankkort')
+
+      var swish_knapp = document.getElementsByClassName('swish')
+      
+      var adresser = document.getElementsByClassName('adresser')
+      
+      var bekräfta_b = document.getElementById('bekräfta-b')
+      
+      var adress_input = document.getElementById('adress-input')
+      
+      var bekräfta_a = document.getElementById('Bekräfta-a')
+
+
+      // var adress_input = document.getElementById('adress-input')
+      
+      bekräfta_a.style.opacity = "50%"
+
+      bankkort.style.opacity = "50%"
+      
+      krav_bekräfa = false
+
+      function krav(){
+        
+        if (krav_adress && krav_swish){
+          krav_bekräfta = true
+        }
+
+        if (krav_bekräfta){
+          bekräfta_a.style.opacity = "100%"
+
+          bekräfta_a.classList.remove('upmärksamma')
+          void bekräfta_a.offsetWidth
+          bekräfta_a.classList.add('upmärksamma')
+        }
+
+
+        if (krav_kort_nummer && krav_kort_datum && krav_kort_cvc){
+          krav_bank_kort = true
+        }
+
+        if (krav_bank_kort){
+          bankkort.style.opacity = "100%"
+        }
+
+      }
+
+      function position(){
+  
+        krav_adress = true
+
+        alert('Adress registrerad')
+
+        
+        // for (i = 0; i < swish_knapp.length; i++ ){
+        //   swish_knapp[i].style.opacity = "100%"
+        // }
+  
+        for (i = 0; i < adresser.length; i++ ){
+          adresser[i].style.opacity = "66.666%"
+        }
+        
+        adress_input.value = "gata-gatan 123"
+
+        gata = document.getElementById('adress-input').value
+
+        // alert(gata)
+  
+        krav()
+      }
+
+      function swish( type=null){
+        
+        krav_swish = true
+
+        alert('Betalsätt registrerat')
+
+        krav_kort_cvc = false
+        krav_kort_datum = false
+        krav_kort_nummer = false
+
+        if (type){
+          payment_type = type
+        }
+
+        // if (type == 'kort'){
+        //   kort_nummer = document.getElementById('kort-nummer')
+        //   kort_datum = document.getElementById('kort-datum')
+        //   kort_cvc = document.getElementById('kort-cvc')
+        //   kort_data = {}
+        // }
+
+        krav_bank_kort = false
+
+        for (i = 0; i < swish_knapp.length; i++ ){
+          swish_knapp[i].style.opacity = "66.666%"
+        }
+
+        
+        // if (krav_adress){
+          
+          
+        //   alert("Dina varor är påväg!")
+          
+        //   fetch('/confirm-b', {method: 'POST', }, )
+
+          krav()
+
+        // } else{
+        //   alert("vart ska vi skicka maten???")
+        // }
+      }
+
+      
+
+
+    </script>
+  <!-- </body>
+</html> -->
