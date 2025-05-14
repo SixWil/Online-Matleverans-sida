@@ -139,7 +139,7 @@ function requireLogin(req, res, next) {
 ///          och uppdaterar totalsumman               ///
 app.get('/anvandare', requireLogin, async (req, res) => {
     try {
-        const result = await db.query('SELECT username, email FROM users WHERE id = $1', [req.session.userId]);
+        const result = await db.query('SELECT username, email, phone FROM users WHERE id = $1', [req.session.userId]);
         const user = result.rows[0];
 
         if (!user) {
@@ -152,6 +152,7 @@ app.get('/anvandare', requireLogin, async (req, res) => {
         res.render('användare.ejs', {
             username: user.username,
             email: user.email,
+            phone: user.phone, // Skicka telefonnumret till vyn
             userId: req.session.userId,
             successMessage
         });
@@ -160,7 +161,6 @@ app.get('/anvandare', requireLogin, async (req, res) => {
         res.status(500).send('Ett fel uppstod vid hämtning av användarinformation.');
     }
 });
-
 function shopping(req, res, name, price, addition=1,) {
 
     const existingItem = order.find( (item) => item.name === name); // Find the item in the array
@@ -303,25 +303,26 @@ app.post('/login', async (req, res) => {
 
 
 app.post('/register', async (req, res) => {
-    const { username, email, password } = req.body;
-
+    const { username, email, password, phone } = req.body;
     try {
-        if (!username || !email || !password) {
+        if (!username || !email || !password || !phone) {
             return res.status(400).send('<script>alert("Alla fält måste fyllas i."); window.location.href="/registrera";</script>');
         }
 
         // Hasha lösenordet
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Spara användaren i databasen
+        // Spara användaren i databasen och hämta det nyss skapade användarens ID
         const result = await db.query(
-            'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id',
-            [username, email, hashedPassword]
+            'INSERT INTO users (username, email, password, phone) VALUES ($1, $2, $3, $4) RETURNING id, username',
+            [username, email, hashedPassword, phone]
         );
 
-        // Spara användarens ID i sessionen
+        // Spara användarens ID och användarnamn i sessionen
         const userId = result.rows[0].id;
+        const savedUsername = result.rows[0].username;
         req.session.userId = userId;
+        req.session.username = savedUsername;
 
         // Lägg till ett meddelande i sessionen
         req.session.successMessage = 'Registrering lyckades!';
@@ -344,6 +345,9 @@ app.post('/logout', (req, res) => {
         res.redirect('/start-sida');
     });
 });
+
+
+
 app.post('/anvandare/uppdatera-email', async (req, res) => {
     if (!req.session.userId) {
         return res.redirect('/login'); // Om användaren inte är inloggad, omdirigera till inloggningssidan
