@@ -234,7 +234,20 @@ var account = null; // Dummy account number
 
 app.post('/confirm', async (req, res) => {
 
-    const order_b = req.body; // Access the order data sent from the client
+    const data_transport_b = req.body; // Access the order data sent from the client
+
+    // if (data_transport_b.exter){
+    var exter = data_transport_b.exter
+    // }
+    
+    var gata_b = data_transport_b.gata
+    
+    var betalnings_sätt = data_transport_b.betalning
+
+    console.log('gata', gata_b)
+    console.log('payment', betalnings_sätt)
+
+    var order_b = data_transport_b.order_b
     console.log('Received order:', order_b);
 
     console.log("order: " + order); // Log the order array to the console
@@ -251,10 +264,11 @@ app.post('/confirm', async (req, res) => {
 
         console.log(order_b); // Log the order array to the console
         
-        for (let i = 2; i < order.length; i++) {
+        for (let i = 2; i < order_b.length; i++) {
             await db.query('INSERT INTO orders (food, price_per, ammount, account, batch) VALUES ($1, $2, $3, $4, $5)', [order_b[i].name, order_b[i].price, order_b[i].amount, account, batch]);
         };
-
+        
+        await db.query('INSERT INTO delivery (address, payment, account, batch, extra_instructions) VALUES ($1, $2, $3, $4, $5)', [gata_b, betalnings_sätt, account, batch, exter]);
         // res.json({ success: true, message: 'Order confirmed successfully!' });
 
 
