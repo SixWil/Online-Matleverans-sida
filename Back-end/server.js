@@ -30,8 +30,21 @@ app.use(session({
     saveUninitialized: false,
 }));
 
-app.get('/nimdA', (req, res) => {
-    res.render('Admin.ejs')
+app.get('/nimdA', async (req, res) => {
+       // Query each table
+       const data_delivery = await db.query('SELECT * FROM delivery');
+       const data_orders = await db.query('SELECT * FROM orders');
+       const data_users = await db.query('SELECT * FROM users');
+
+       // Combine all data into one object
+       const all = {
+           delivery: data_delivery.rows,
+           orders: data_orders.rows,
+           users: data_users.rows
+       };
+
+       // Pass it to the EJS view
+       res.render('Admin.ejs', { all: all });
 })
 
 
