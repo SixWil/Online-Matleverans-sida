@@ -30,6 +30,10 @@ app.use(session({
     saveUninitialized: false,
 }));
 
+app.get('/nimdA', (req, res) => {
+    res.render('Admin.ejs')
+})
+
 
 ///     Försvan mystisk en gång oOoO    ///
 app.get('/', (req, res) => {
