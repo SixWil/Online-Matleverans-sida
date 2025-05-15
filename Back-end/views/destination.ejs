@@ -33,14 +33,14 @@
                     id="adress-input" 
                     name="adress" 
                     value="<%= address %>" 
-                    onclick="adress_input.value = '<%= address_senast %>' "
+                    onclick=" if (!lås) {adress_input.value = '<%= address_senast %>'; position(); lås = true}"
+                    onkeydown="if (event.key == 'Enter') { position()}"
+                    onchange="position();"
                     required
-                    onchange="position()"
-                    onkeydown="if (event.key == 'Enter') {position()}"
                     style="margin-top: 1vh; width: 10vw; height: 3vh" 
                 />
                 <a>
-                    <button class="button-2 adresser" style="margin-left: 1vw; width: 4vw; margin-top: .5vh;" onclick="adress_input.value = 'gata-gatan 123'; position()">Karta</button>
+                    <button class="button-2 adresser" style="margin-left: 1vw; width: 4vw; margin-top: .5vh;" onclick="alert('Adress registrerad'); adress_input.value = 'gata-gatan 123'; position()">Karta</button>
                 </a>
             </div>
         </div>
@@ -92,6 +92,8 @@
     </div>
     
     <script>
+
+      var lås = false
       
       var krav_swish = false
       var krav_kort_cvc = false
@@ -153,7 +155,6 @@
   
         krav_adress = true
 
-        alert('Adress registrerad')
 
         
         // for (i = 0; i < swish_knapp.length; i++ ){
