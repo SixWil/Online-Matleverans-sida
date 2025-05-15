@@ -31,7 +31,6 @@ app.use(session({
 }));
 
 
-///     Försvan mystisk en gång oOoO    ///
 app.get('/', (req, res) => {
     res.redirect('/start-sida')
 });
@@ -120,12 +119,23 @@ order.push({payment: 0}); // Initialize the order array with a payment object
 order.push({cost: 0, delivery: 0, tax: 0}); // Initialize the order array with a payment object
 
 
-app.get('/leverans', (req, res) => {
-    var message = req.query.message || null; // Get the message from the query string
+app.get('/leverans', requireLogin, async (req, res) => {
+    try {
+        // Hämta adress från databasen
+        const result = await db.query('SELECT address FROM users WHERE id = $1', [req.session.userId]);
+        const address = result.rows[0]?.address || ''; // Om ingen adress finns, använd en tom sträng
 
-    console.log(message); // Log the message to the console
-
-    res.render('leverans.ejs', { title: 'Kundvagn', order: order, message: message }); // Render the leverans page with the order array and message
+        // Skicka adressen till vyn
+        res.render('leverans.ejs', { 
+            title: 'Kundvagn', 
+            order: order, 
+            message: req.query.message || null, 
+            address: address // Skicka adressen till leverans.ejs
+        });
+    } catch (error) {
+        console.error('Fel vid hämtning av adress:', error);
+        res.status(500).send('Ett fel uppstod vid hämtning av adress.');
+    }
 });
 function requireLogin(req, res, next) {
     if (!req.session.userId) {
@@ -139,7 +149,7 @@ function requireLogin(req, res, next) {
 ///          och uppdaterar totalsumman               ///
 app.get('/anvandare', requireLogin, async (req, res) => {
     try {
-        const result = await db.query('SELECT username, email, phone FROM users WHERE id = $1', [req.session.userId]);
+        const result = await db.query('SELECT username, email, phone, address FROM users WHERE id = $1', [req.session.userId]);
         const user = result.rows[0];
 
         if (!user) {
@@ -153,12 +163,28 @@ app.get('/anvandare', requireLogin, async (req, res) => {
             username: user.username,
             email: user.email,
             phone: user.phone, // Skicka telefonnumret till vyn
+            address: user.address || 'Ingen adress angiven', // Skicka adressen till vyn
             userId: req.session.userId,
             successMessage
         });
     } catch (error) {
         console.error('Fel vid hämtning av användarinformation:', error);
         res.status(500).send('Ett fel uppstod vid hämtning av användarinformation.');
+    }
+});
+app.get('/destination', requireLogin, async (req, res) => {
+    try {
+        // Hämta adress från databasen
+        const result = await db.query('SELECT address FROM users WHERE id = $1', [req.session.userId]);
+        const address = result.rows[0]?.address || ''; // Om ingen adress finns, använd en tom sträng
+
+        // Skicka adressen till vyn
+        res.render('destination.ejs', {
+            address: address
+        });
+    } catch (error) {
+        console.error('Fel vid hämtning av adress:', error);
+        res.status(500).send('Ett fel uppstod vid hämtning av adress.');
     }
 });
 function shopping(req, res, name, price, addition=1,) {
@@ -198,28 +224,13 @@ function shopping(req, res, name, price, addition=1,) {
 
 }
 
-app.get('/destination', async (req, res) => {
-    res.render('destination.ejs')
-})
+
 
 var account = null; // Dummy account number
 
 app.post('/confirm', async (req, res) => {
 
-    const data_transport_b = req.body; // Access the order data sent from the client
-
-    // if (data_transport_b.exter){
-    var exter = data_transport_b.exter
-    // }
-    
-    var gata_b = data_transport_b.gata
-    
-    var betalnings_sätt = data_transport_b.betalning
-
-    console.log('gata', gata_b)
-    console.log('payment', betalnings_sätt)
-
-    var order_b = data_transport_b.order_b
+    const order_b = req.body; // Access the order data sent from the client
     console.log('Received order:', order_b);
 
     console.log("order: " + order); // Log the order array to the console
@@ -236,11 +247,10 @@ app.post('/confirm', async (req, res) => {
 
         console.log(order_b); // Log the order array to the console
         
-        for (let i = 2; i < order_b.length; i++) {
+        for (let i = 2; i < order.length; i++) {
             await db.query('INSERT INTO orders (food, price_per, ammount, account, batch) VALUES ($1, $2, $3, $4, $5)', [order_b[i].name, order_b[i].price, order_b[i].amount, account, batch]);
         };
-        
-        await db.query('INSERT INTO delivery (address, payment, account, batch, extra_instructions) VALUES ($1, $2, $3, $4, $5)', [gata_b, betalnings_sätt, account, batch, exter]);
+
         // res.json({ success: true, message: 'Order confirmed successfully!' });
 
 
@@ -303,29 +313,29 @@ app.post('/login', async (req, res) => {
 
 
 app.post('/register', async (req, res) => {
-    const { username, email, password, phone } = req.body;
+    const { username, email, phone, password } = req.body;
+
     try {
-        if (!username || !email || !password || !phone) {
+        if (!username || !email || !phone || !password) {
             return res.status(400).send('<script>alert("Alla fält måste fyllas i."); window.location.href="/registrera";</script>');
         }
 
         // Hasha lösenordet
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Spara användaren i databasen och hämta det nyss skapade användarens ID
+        // Spara användaren i databasen
         const result = await db.query(
-            'INSERT INTO users (username, email, password, phone) VALUES ($1, $2, $3, $4) RETURNING id, username',
-            [username, email, hashedPassword, phone]
+            'INSERT INTO users (username, email, phone, password) VALUES ($1, $2, $3, $4) RETURNING id',
+            [username, email, phone, hashedPassword]
         );
 
         // Spara användarens ID och användarnamn i sessionen
         const userId = result.rows[0].id;
-        const savedUsername = result.rows[0].username;
         req.session.userId = userId;
-        req.session.username = savedUsername;
+        req.session.username = username;
 
         // Lägg till ett meddelande i sessionen
-        req.session.successMessage = 'Registrering lyckades!';
+        req.session.successMessage = 'Registrering lyckades! Du är nu inloggad.';
 
         // Omdirigera till start-sida
         res.redirect('/start-sida');
@@ -345,9 +355,6 @@ app.post('/logout', (req, res) => {
         res.redirect('/start-sida');
     });
 });
-
-
-
 app.post('/anvandare/uppdatera-email', async (req, res) => {
     if (!req.session.userId) {
         return res.redirect('/login'); // Om användaren inte är inloggad, omdirigera till inloggningssidan
@@ -365,6 +372,25 @@ app.post('/anvandare/uppdatera-email', async (req, res) => {
     } catch (error) {
         console.error('Fel vid uppdatering av e-postadress:', error);
         res.status(500).send('<script>alert("Ett fel uppstod vid uppdatering av e-postadress."); window.location.href="/anvandare";</script>');
+    }
+});
+app.post('/anvandare/uppdatera-adress', async (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect('/login'); // Om användaren inte är inloggad, omdirigera till inloggningssidan
+    }
+
+    const { newAddress } = req.body;
+
+    try {
+        // Uppdatera adressen i databasen
+        await db.query('UPDATE users SET address = $1 WHERE id = $2', [newAddress, req.session.userId]);
+
+        // Lägg till ett meddelande i sessionen
+        req.session.successMessage = 'Din adress har uppdaterats!';
+        res.redirect('/anvandare');
+    } catch (error) {
+        console.error('Fel vid uppdatering av adress:', error);
+        res.status(500).send('<script>alert("Ett fel uppstod vid uppdatering av adress."); window.location.href="/anvandare";</script>');
     }
 });
 

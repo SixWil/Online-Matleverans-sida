@@ -106,8 +106,13 @@
                     <p>E-post: <%= email %></p>
                     <p>Användarnamn: <%= username %></p>
                     <p>Telefonnummer: <%= phone %></p>
-                    <p>Adress</p>
-                    <p>Vill du ändra din e-postadress</p>
+                    <p>Adress: <%= address || 'Ingen adress angiven' %></p>
+                    
+                    <form action="/anvandare/uppdatera-adress" method="POST">
+                        <label for="newAddress">Ny adress:</label>
+                        <input type="text" id="newAddress" name="newAddress" placeholder="Ange ny adress" required>
+                        <button type="submit" class="button-1">Uppdatera Adress</button>
+                    </form>
                     <form action="/anvandare/uppdatera-email" method="POST">
                         <label for="newEmail">Ny e-postadress:</label>
                         <input type="email" id="newEmail" name="newEmail" required>

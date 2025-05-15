@@ -22,19 +22,24 @@
           <!-- Vart maten ska -->
           <h3 style="margin-block: 0vh; margin-top: 2vh;"> Leverans </h3>
           <div class="box-2" style="width: 16.666vw; margin-block: 1vh;">
-            
-            <label for="adress" class="UserName"
-            >Vart ska maten levereras?</label
-            >
+            <label for="adress" class="UserName">Vart ska maten levereras?</label>
             <div style="display: flex;">
-              <input placeholder="adress" type="text" class="adresser" id="adress-input" name="adress" required style="margin-top: 1vh; width: 10vw; height: 3vh" onclick="position()" />
-              
-              <a>
-                <button class="button-2 adresser" style="margin-left: 1vw; width: 4vw; margin-top: .5vh;" onclick="position()">Karta</button>
-              </a>
+                <!-- Fyll i adressfältet med värdet från servern -->
+                <input 
+                    placeholder="adress" 
+                    type="text" 
+                    class="adresser" 
+                    id="adress-input" 
+                    name="adress" 
+                    value="<%= address %>" 
+                    required 
+                    style="margin-top: 1vh; width: 10vw; height: 3vh" 
+                />
+                <a>
+                    <button class="button-2 adresser" style="margin-left: 1vw; width: 4vw; margin-top: .5vh;" onclick="position()">Karta</button>
+                </a>
             </div>
-
-          </div>
+        </div>
           
           <div class="box-2" style="width: 16.666vw;">
             <label for="adress" class="UserName"
