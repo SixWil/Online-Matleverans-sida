@@ -129,12 +129,20 @@ app.get('/leverans', requireLogin, async (req, res) => {
         const result = await db.query('SELECT address FROM users WHERE id = $1', [req.session.userId]);
         const address = result.rows[0]?.address || ''; // Om ingen adress finns, använd en tom sträng
 
+        // try{
+            const result_b = await db.query('SELECT address FROM delivery WHERE account = $1 ORDER BY batch DESC LIMIT 1', [req.session.userId]); // Get the last batch number from the database
+            const address_senast = result_b.rows[0]?.address; // Get the last batch number from the database
+        // } catch(err) {console.log('/leverans error:', err)}
+
+        // var address_senast = 123
+        
         // Skicka adressen till vyn
         res.render('leverans.ejs', { 
             title: 'Kundvagn', 
             order: order, 
             message: req.query.message || null, 
-            address: address // Skicka adressen till leverans.ejs
+            address: address, // Skicka adressen till leverans.ejs
+            address_senast: address_senast
         });
     } catch (error) {
         console.error('Fel vid hämtning av adress:', error);
@@ -180,11 +188,17 @@ app.get('/destination', requireLogin, async (req, res) => {
     try {
         // Hämta adress från databasen
         const result = await db.query('SELECT address FROM users WHERE id = $1', [req.session.userId]);
-        const address = result.rows[0]?.address || ''; // Om ingen adress finns, använd en tom sträng
+        const address = result.rows[0]?.address || ''; // Om ingen adress finns, använd en tom sträng        
+
+        // try{
+        //     const address_senast = await db.query('SELECT address FROM delivery WHERE account = $1 ORDER BY batch DESC LIMIT 1', [req.session.userId] ).rows[0]?.address; // Get the last batch number from the database
+        //     console.log('/destination address_senast:', address_senast)
+        // } catch(err) {console.log('/destination error:', err)}
 
         // Skicka adressen till vyn
         res.render('destination.ejs', {
-            address: address
+            address: address,
+            // address_senast: address_senast,
         });
     } catch (error) {
         console.error('Fel vid hämtning av adress:', error);
@@ -333,10 +347,10 @@ app.post('/login', async (req, res) => {
 
 
 app.post('/register', async (req, res) => {
-    const { username, email, phone, password } = req.body;
+    const { username, email, phone, password, address } = req.body;
 
     try {
-        if (!username || !email || !phone || !password) {
+        if (!username || !email || !phone || !password || !address) {
             return res.status(400).send('<script>alert("Alla fält måste fyllas i."); window.location.href="/registrera";</script>');
         }
 
@@ -345,8 +359,8 @@ app.post('/register', async (req, res) => {
 
         // Spara användaren i databasen
         const result = await db.query(
-            'INSERT INTO users (username, email, phone, password) VALUES ($1, $2, $3, $4) RETURNING id',
-            [username, email, phone, hashedPassword]
+            'INSERT INTO users (username, email, phone, password, address) VALUES ($1, $2, $3, $4, $5) RETURNING id',
+            [username, email, phone, hashedPassword, address]
         );
 
         // Spara användarens ID och användarnamn i sessionen

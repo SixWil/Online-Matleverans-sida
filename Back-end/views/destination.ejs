@@ -17,7 +17,8 @@
 
     </style>
 
-        <div class="mat-meny" style="height: 100%; padding-bottom: 0vh; margin-top: 1vh;">
+<div class="mat-meny" style="height: 100%; padding-bottom: 0vh; margin-top: 1vh;">
+          <!-- <h1><%= address_senast %></h1> -->
 
           <!-- Vart maten ska -->
           <h3 style="margin-block: 0vh; margin-top: 2vh;"> Leverans </h3>
@@ -32,11 +33,14 @@
                     id="adress-input" 
                     name="adress" 
                     value="<%= address %>" 
-                    required 
+                    onclick="adress_input.value = '<%= address_senast %>' "
+                    required
+                    onchange="position()"
+                    onkeydown="if (event.key == 'Enter') {position()}"
                     style="margin-top: 1vh; width: 10vw; height: 3vh" 
                 />
                 <a>
-                    <button class="button-2 adresser" style="margin-left: 1vw; width: 4vw; margin-top: .5vh;" onclick="position()">Karta</button>
+                    <button class="button-2 adresser" style="margin-left: 1vw; width: 4vw; margin-top: .5vh;" onclick="adress_input.value = 'gata-gatan 123'; position()">Karta</button>
                 </a>
             </div>
         </div>
@@ -89,14 +93,13 @@
     
     <script>
       
-      
       var krav_swish = false
-      var krav_adress = false
       var krav_kort_cvc = false
       var krav_kort_datum = false
       var krav_kort_nummer = false
       var krav_bank_kort = false;
-
+      
+      var krav_adress = true
       
       var bankkort = document.getElementById('bankkort')
 
@@ -144,6 +147,8 @@
 
       }
 
+      gata = adress_input.value
+
       function position(){
   
         krav_adress = true
@@ -159,9 +164,7 @@
           adresser[i].style.opacity = "66.666%"
         }
         
-        adress_input.value = "gata-gatan 123"
-
-        gata = document.getElementById('adress-input').value
+        gata = adress_input.value
 
         // alert(gata)
   
