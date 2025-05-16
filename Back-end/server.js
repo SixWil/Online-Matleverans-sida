@@ -65,7 +65,7 @@ app.get('/start-sida', (req, res) => {
 
 
 app.get('/om-oss', (req, res) => {
-    res.render('om-oss.ejs', { title: 'Start sida' });
+    res.render('Om-oss.ejs', { title: 'Start sida' });
 });
 
 app.get('/login', (req, res) => {
