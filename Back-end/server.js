@@ -27,7 +27,7 @@ app.use(session({
     saveUninitialized: false,
 }));
 
-app.get('/nimdA', async (req, res) => {
+app.get('/Matleverans-Sida/nimdA', async (req, res) => {
        // Query each table
        const data_delivery = await db.query('SELECT * FROM delivery');
        const data_orders = await db.query('SELECT * FROM orders');
@@ -45,8 +45,8 @@ app.get('/nimdA', async (req, res) => {
 })
 
 
-app.get('/', (req, res) => {
-    res.redirect('/start-sida')
+app.get('/Matleverans-Sida/', (req, res) => {
+    res.redirect('/Matleverans-Sida/start-sida')
 });
 
 
@@ -55,7 +55,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/start-sida', (req, res) => {
+app.get('/Matleverans-Sida/start-sida', (req, res) => {
     const successMessage = req.session.successMessage;
     const username = req.session.username; // Hämta användarnamnet från sessionen
     delete req.session.successMessage; // Ta bort meddelandet efter att det har skickats
@@ -64,67 +64,67 @@ app.get('/start-sida', (req, res) => {
 
 
 
-app.get('/om-oss', (req, res) => {
+app.get('/Matleverans-Sida/om-oss', (req, res) => {
     res.render('om-oss.ejs', { title: 'Start sida' });
 });
 
-app.get('/login', (req, res) => {
+app.get('/Matleverans-Sida/login', (req, res) => {
     res.render('konto.ejs', { title: 'Konto sida' });
 });
 
-app.get('/beskrivningar', (req, res) => {
+app.get('/Matleverans-Sida/beskrivningar', (req, res) => {
     res.render('beskrivningar.ejs', { title: 'Menyerna' });
 });
 
-app.get('/registrera', (req, res) => {
+app.get('/Matleverans-Sida/registrera', (req, res) => {
     res.render('registrera.ejs', { title: 'Registrera' });
 });
 
-app.get('/Abracadabra/abra-cadabra', (req, res) => {
+app.get('/Matleverans-Sida/Abracadabra/abra-cadabra', (req, res) => {
     res.render('Abracadabra/abra-cadabra.ejs');
 });
 
-app.get('/Abracadabra/brisket-platter', (req, res) => {
+app.get('/Matleverans-Sida/Abracadabra/brisket-platter', (req, res) => {
     res.render('Abracadabra/Maträtt-brisket-platter.ejs');
 });
 
-app.get('/Abracadabra/kyckling', (req, res) => {
+app.get('/Matleverans-Sida/Abracadabra/kyckling', (req, res) => {
     res.render('Abracadabra/Maträtt-kyckling.ejs');
 });
 
-app.get('/Abracadabra/ribs', (req, res) => {
+app.get('/Matleverans-Sida/Abracadabra/ribs', (req, res) => {
     res.render('Abracadabra/Maträtt-ribs.ejs');
 });
 
-app.get('/Agatas/agatas', (req, res) => {
+app.get('/Matleverans-Sida/Agatas/agatas', (req, res) => {
     res.render('Agatas/agatas.ejs');
 });
 
-app.get('/Agatas/avocado-toast', (req, res) => {
+app.get('/Matleverans-Sida/Agatas/avocado-toast', (req, res) => {
     res.render('Agatas/Maträtt-avocado-toast.ejs');
 });
 
-app.get('/Agatas/choklad-pudding', (req, res) => {
+app.get('/Matleverans-Sida/Agatas/choklad-pudding', (req, res) => {
     res.render('Agatas/Maträtt-choklad-pudding.ejs');
 });
 
-app.get('/Agatas/soppa', (req, res) => {
+app.get('/Matleverans-Sida/Agatas/soppa', (req, res) => {
     res.render('Agatas/Maträtt-räk-soppa.ejs');
 });
 
-app.get('/Pretantieuse/pretentieuse', (req, res) => {
+app.get('/Matleverans-Sida/Pretantieuse/pretentieuse', (req, res) => {
     res.render('Pretantieuse/pretentieuse.ejs');
 });
 
-app.get('/Pretantieuse/moln', (req, res) => {
+app.get('/Matleverans-Sida/Pretantieuse/moln', (req, res) => {
     res.render('Pretantieuse/Maträtt-moln.ejs');
 });
 
-app.get('/Pretantieuse/centaur', (req, res) => {
+app.get('/Matleverans-Sida/Pretantieuse/centaur', (req, res) => {
     res.render('Pretantieuse/Maträtt-centaur.ejs');
 });
 
-app.get('/Pretantieuse/slag', (req, res) => {
+app.get('/Matleverans-Sida/Pretantieuse/slag', (req, res) => {
     res.render('Pretantieuse/Maträtt-slag.ejs');
 });
 
@@ -133,7 +133,7 @@ order.push({payment: 0}); // Initialize the order array with a payment object
 order.push({cost: 0, delivery: 0, tax: 0}); // Initialize the order array with a payment object
 
 
-app.get('/leverans', requireLogin, async (req, res) => {
+app.get('/Matleverans-Sida/leverans', requireLogin, async (req, res) => {
     try {
         // Hämta adress från databasen
         const result = await db.query('SELECT address FROM users WHERE id = $1', [req.session.userId]);
@@ -142,7 +142,7 @@ app.get('/leverans', requireLogin, async (req, res) => {
         // try{
             const result_b = await db.query('SELECT address FROM delivery WHERE account = $1 ORDER BY batch DESC LIMIT 1', [req.session.userId]); // Get the last batch number from the database
             const address_senast = result_b.rows[0]?.address; // Get the last batch number from the database
-        // } catch(err) {console.log('/leverans error:', err)}
+        // } catch(err) {console.log('/Matleverans-Sida/leverans error:', err)}
 
         // var address_senast = 123
         
@@ -161,7 +161,7 @@ app.get('/leverans', requireLogin, async (req, res) => {
 });
 function requireLogin(req, res, next) {
     if (!req.session.userId) {
-        return res.redirect('/login');
+        return res.redirect('/Matleverans-Sida/login');
     }
     next();
 }
@@ -169,7 +169,7 @@ function requireLogin(req, res, next) {
 ///          Funktion som hanterar beställningar         ///
 ///          och lägger till dem i en array           ///
 ///          och uppdaterar totalsumman               ///
-app.get('/anvandare', requireLogin, async (req, res) => {
+app.get('/Matleverans-Sida/anvandare', requireLogin, async (req, res) => {
     try {
         const result = await db.query('SELECT username, email, phone, address FROM users WHERE id = $1', [req.session.userId]);
         const user = result.rows[0];
@@ -194,7 +194,7 @@ app.get('/anvandare', requireLogin, async (req, res) => {
         res.status(500).send('Ett fel uppstod vid hämtning av användarinformation.');
     }
 });
-app.get('/destination', requireLogin, async (req, res) => {
+app.get('/Matleverans-Sida/destination', requireLogin, async (req, res) => {
     try {
         // Hämta adress från databasen
         const result = await db.query('SELECT address FROM users WHERE id = $1', [req.session.userId]);
@@ -202,8 +202,8 @@ app.get('/destination', requireLogin, async (req, res) => {
 
         // try{
         //     const address_senast = await db.query('SELECT address FROM delivery WHERE account = $1 ORDER BY batch DESC LIMIT 1', [req.session.userId] ).rows[0]?.address; // Get the last batch number from the database
-        //     console.log('/destination address_senast:', address_senast)
-        // } catch(err) {console.log('/destination error:', err)}
+        //     console.log('/Matleverans-Sida/destination address_senast:', address_senast)
+        // } catch(err) {console.log('/Matleverans-Sida/destination error:', err)}
 
         // Skicka adressen till vyn
         res.render('destination.ejs', {
@@ -256,7 +256,7 @@ function shopping(req, res, name, price, addition=1,) {
 
 var account = null; // Dummy account number
 
-app.post('/confirm', async (req, res) => {
+app.post('/Matleverans-Sida/confirm', async (req, res) => {
 
     const data_transport_b = req.body; // Access the order data sent from the client
 
@@ -305,7 +305,7 @@ app.post('/confirm', async (req, res) => {
         
         // console.log(batch); // Log the batch number to the console
         
-        // res.redirect('/leverans?message=Beställning+bekräftad'); // Redirect to the delivery page with a success message
+        // res.redirect('/Matleverans-Sida/leverans?message=Beställning+bekräftad'); // Redirect to the delivery page with a success message
 
     }
     // else {
@@ -314,7 +314,7 @@ app.post('/confirm', async (req, res) => {
 
     //     console.error('Ingen mat att beställa'); // Log any errors to the console
 
-    //     res.redirect('/leverans?message=Ingen+mat+IDIOT'); // Redirect to the delivery page with an error message
+    //     res.redirect('/Matleverans-Sida/leverans?message=Ingen+mat+IDIOT'); // Redirect to the delivery page with an error message
     // }
 
 });
@@ -323,9 +323,8 @@ app.post('/confirm', async (req, res) => {
 
 
 
-
 // Hantera login
-app.post('/login', async (req, res) => {
+app.post('/Matleverans-Sida/login', async (req, res) => {
     const { username, password } = req.body;
 
     try {
@@ -345,23 +344,23 @@ app.post('/login', async (req, res) => {
             req.session.successMessage = 'Inloggning lyckades!';
 
             // Omdirigera till start-sida
-            res.redirect('/start-sida');
+            res.redirect('/Matleverans-Sida/start-sida');
         } else {
-            res.status(401).send('<script>alert("Felaktigt användarnamn eller lösenord."); window.location.href="/login";</script>');
+            res.status(401).send('<script>alert("Felaktigt användarnamn eller lösenord."); window.location.href="Matleverans-Sida/login";</script>');
         }
     } catch (error) {
         console.error('Fel vid inloggning:', error);
-        res.status(500).send('<script>alert("Ett fel uppstod vid inloggning."); window.location.href="/login";</script>');
+        res.status(500).send('<script>alert("Ett fel uppstod vid inloggning."); window.location.href="Matleverans-Sida/login";</script>');
     }
 });
 
 
-app.post('/register', async (req, res) => {
+app.post('/Matleverans-Sida/register', async (req, res) => {
     const { username, email, phone, password, address } = req.body;
 
     try {
         if (!username || !email || !phone || !password || !address) {
-            return res.status(400).send('<script>alert("Alla fält måste fyllas i."); window.location.href="/registrera";</script>');
+            return res.status(400).send('<script>alert("Alla fält måste fyllas i."); window.location.href="Matleverans-Sida/registrera";</script>');
         }
 
         // Hasha lösenordet
@@ -382,26 +381,26 @@ app.post('/register', async (req, res) => {
         req.session.successMessage = 'Registrering lyckades! Du är nu inloggad.';
 
         // Omdirigera till start-sida
-        res.redirect('/start-sida');
+        res.redirect('/Matleverans-Sida/start-sida');
     } catch (error) {
         console.error('Fel vid registrering:', error);
-        res.status(500).send('<script>alert("Ett fel uppstod vid registrering."); window.location.href="/registrera";</script>');
+        res.status(500).send('<script>alert("Ett fel uppstod vid registrering."); window.location.href="Matleverans-Sida/registrera";</script>');
     }
 });
 
 // Logga ut användaren
-app.post('/logout', (req, res) => {
+app.post('/Matleverans-Sida/logout', (req, res) => {
     req.session.destroy((err) => {
         if (err) {
             console.error('Fel vid utloggning:', err);
             return res.status(500).send('Ett fel uppstod vid utloggning.');
         }
-        res.redirect('/start-sida');
+        res.redirect('/Matleverans-Sida/start-sida');
     });
 });
-app.post('/anvandare/uppdatera-email', async (req, res) => {
+app.post('/Matleverans-Sida/anvandare/uppdatera-email', async (req, res) => {
     if (!req.session.userId) {
-        return res.redirect('/login'); // Om användaren inte är inloggad, omdirigera till inloggningssidan
+        return res.redirect('/Matleverans-Sida/login'); // Om användaren inte är inloggad, omdirigera till inloggningssidan
     }
 
     const { newEmail } = req.body;
@@ -412,15 +411,15 @@ app.post('/anvandare/uppdatera-email', async (req, res) => {
 
         // Uppdatera sessionen med den nya e-postadressen
         req.session.successMessage = 'Din e-postadress har uppdaterats!';
-        res.redirect('/anvandare');
+        res.redirect('/Matleverans-Sida/anvandare');
     } catch (error) {
         console.error('Fel vid uppdatering av e-postadress:', error);
-        res.status(500).send('<script>alert("Ett fel uppstod vid uppdatering av e-postadress."); window.location.href="/anvandare";</script>');
+        res.status(500).send('<script>alert("Ett fel uppstod vid uppdatering av e-postadress."); window.location.href="Matleverans-Sida/anvandare";</script>');
     }
 });
-app.post('/anvandare/uppdatera-adress', async (req, res) => {
+app.post('/Matleverans-Sida/anvandare/uppdatera-adress', async (req, res) => {
     if (!req.session.userId) {
-        return res.redirect('/login'); // Om användaren inte är inloggad, omdirigera till inloggningssidan
+        return res.redirect('/Matleverans-Sida/login'); // Om användaren inte är inloggad, omdirigera till inloggningssidan
     }
 
     const { newAddress } = req.body;
@@ -431,46 +430,46 @@ app.post('/anvandare/uppdatera-adress', async (req, res) => {
 
         // Lägg till ett meddelande i sessionen
         req.session.successMessage = 'Din adress har uppdaterats!';
-        res.redirect('/anvandare');
+        res.redirect('/Matleverans-Sida/anvandare');
     } catch (error) {
         console.error('Fel vid uppdatering av adress:', error);
-        res.status(500).send('<script>alert("Ett fel uppstod vid uppdatering av adress."); window.location.href="/anvandare";</script>');
+        res.status(500).send('<script>alert("Ett fel uppstod vid uppdatering av adress."); window.location.href="Matleverans-Sida/anvandare";</script>');
     }
 });
 
-app.post('/buy/Oxbringa', (req, res) => {
+app.post('/Matleverans-Sida/buy/Oxbringa', (req, res) => {
     shopping(req, res, 'Oxbringa', 200 )
 });
 
-app.post('/buy/Revben', (req, res) => { 
+app.post('/Matleverans-Sida/buy/Revben', (req, res) => { 
     shopping(req, res, 'Revben', 350 )
 });
 
-app.post('/buy/Kyckling', (req, res) => { 
+app.post('/Matleverans-Sida/buy/Kyckling', (req, res) => { 
     shopping(req, res, 'Kyckling', 150 )
 });
 
-app.post('/buy/AvacadoToast', (req, res) => { 
+app.post('/Matleverans-Sida/buy/AvacadoToast', (req, res) => { 
     shopping(req, res, 'AvacadoToast', 50 )
 });
 
-app.post('/buy/ChockladPudding', (req, res) => { 
+app.post('/Matleverans-Sida/buy/ChockladPudding', (req, res) => { 
     shopping(req, res, 'ChocladPudding', 35 )
 });
 
-app.post('/buy/Soppa', (req, res) => { 
+app.post('/Matleverans-Sida/buy/Soppa', (req, res) => { 
     shopping(req, res, 'RäkSoppa', 60 )
 });
 
-app.post('/buy/Moln', (req, res) => { 
+app.post('/Matleverans-Sida/buy/Moln', (req, res) => { 
     shopping(req, res, 'Moln', 2000 )
 });
 
-app.post('/buy/Centaur', (req, res) => { 
+app.post('/Matleverans-Sida/buy/Centaur', (req, res) => { 
     shopping(req, res, 'Centaur', 35000 )
 });
 
-app.post('/buy/Slag', (req, res) => { 
+app.post('/Matleverans-Sida/buy/Slag', (req, res) => { 
     shopping(req, res, 'Slag', 450 )
 });
 
