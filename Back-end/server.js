@@ -41,7 +41,7 @@ app.get('/nimdA', async (req, res) => {
        };
 
        // Pass it to the EJS view
-       res.render('Admin.ejs', { all: all });
+       res.render('admin.ejs', { all: all });
 })
 
 
@@ -65,7 +65,7 @@ app.get('/start-sida', (req, res) => {
 
 
 app.get('/om-oss', (req, res) => {
-    res.render('Om-oss.ejs', { title: 'Start sida' });
+    res.render('om-oss.ejs', { title: 'Start sida' });
 });
 
 app.get('/login', (req, res) => {
