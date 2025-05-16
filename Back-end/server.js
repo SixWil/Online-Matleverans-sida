@@ -45,7 +45,7 @@ app.get('/Matleverans-Sida/nimdA', async (req, res) => {
 })
 
 
-app.get('/Matleverans-Sida/', (req, res) => {
+app.get('/', (req, res) => {
     res.redirect('/Matleverans-Sida/start-sida')
 });
 
