@@ -4,12 +4,20 @@ import pg from 'pg';
 import bcrypt from 'bcryptjs';
 import session from 'express-session';
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 const app = express();
 const port = 3000;
 
 const db = new pg.Client({
    connectionString: process.env.DATABASE_URL,
    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+    // user: process.env.DB_USER,
+    // host: process.env.DB_HOST,
+    // database: process.env.DB_NAME,
+    // port: process.env.DB_PORT,
+    // password: process.env.DB_PASSWORD,
 });
 
 db.connect()
