@@ -12,12 +12,16 @@
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
         crossorigin="anonymous"></script>
 
-        <style>
-            div{
-                overflow-wrap: anywhere;
-                margin-inline: 1vw;
-            }
-        </style>
+    <style>
+        div {
+            overflow-wrap: anywhere;
+            margin-inline: 1vw;
+        }
+
+        p {
+            margin-top: -1vw;
+        }
+    </style>
 
 </head>
 
@@ -26,121 +30,207 @@
     <!-- <div style="background-color: rgb(255, 100, 0);"><br></div>
     <div style="background-color: rgb(255, 133, 0);"><br></div>
     <div style="background-color: rgb(255, 166, 0);"><br></div> -->
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
     <!-- <div> -->
-        <!-- data-bs-ride="carousel" -->
-        <div id="carouselExample" class="carousel slide">
-            
-            <div class="carousel-inner" style="text-align: center;">
+    <!-- data-bs-ride="carousel" -->
+    <div id="carouselExample" class="carousel slide">
 
-                <div style="background-color: aqua; display: flex; height: fit-content; width: fit-content;">
-                    <% for (let i = 0; i < all.delivery.length; i++) { %>
-                        <div style="background-color: blue; width: 10vw; height: 30vh; text-align: center; border-radius: 10%; margin-block: 1vh; margin-left: 40vw;" class="carousel-item active">
-                            <p> <%= all.delivery[i].id %> </p>
-                            <p> <%= all.delivery[i].address %> </p>
-                            <p> <%= all.delivery[i].payment %> </p>
-                            <p> <%= all.delivery[i].account %> </p>
-                            <p> <%= all.delivery[i].batch %> </p>
-                            <!-- <p> <%= all.delivery[i].extra_instructions %> </p> -->
-                        </div>
-                        <% } %>
+        <div class="carousel-inner" style="text-align: center;">
+
+            <div style="background-color: aqua; display: flex; height: fit-content; width: fit-content;">
+                <% for (let i=0; i < all.delivery.length; i++) { %>
+                    <div onclick="del_items('delivery', <%= i %>)" style="cursor: pointer; background-color: blue; width: 10vw; height: 30vh; text-align: center; border-radius: 10%; margin-block: 1vh; margin-left: 40vw;"
+                        class="carousel-item active"
+                        id="delivery_<%= i %>">
+                        <br>
+                        <p>
+                            <%= all.delivery[i].id %>
+                        </p>
+                        <p>
+                            <%= all.delivery[i].address %>
+                        </p>
+                        <p>
+                            <%= all.delivery[i].payment %>
+                        </p>
+                        <p>
+                            <%= all.delivery[i].account %>
+                        </p>
+                        <p>
+                            <%= all.delivery[i].batch %>
+                        </p>
+                        <!-- <p> <%= all.delivery[i].extra_instructions %> </p> -->
                     </div>
-                
-
+                    <% } %>
             </div>
 
-            <button style="background-color: black;" class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </button>
-
-            <button style="background-color: black;" class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </button>
 
         </div>
 
+        <button style="background-color: black;" class="carousel-control-prev" type="button"
+            data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
 
-        <div id="carouselExample_2" class="carousel slide">
-            
-            <div class="carousel-inner" style="text-align: center;">
+        <button style="background-color: black;" class="carousel-control-next" type="button"
+            data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
 
-                <div style="background-color: red; display: flex; width: fit-content;">
-                    <% for (let i = 0; i < all.orders.length; i++) { %>
-                        <div style="background-color: orange; width: 10vw; height: 30vh; text-align: center; border-radius: 10%; margin-block: 1vh; margin-left: 40vw;" class="carousel-item active">
-                            <p> <%= all.orders[i].id %> </p>
-                            <p> <%= all.orders[i].food %> </p>
-                            <p> <%= all.orders[i].price_per %> </p>
-                            <p> <%= all.orders[i].ammount %> </p>
-                            <p> <%= all.orders[i].account %> </p>
-                            <p> <%= all.orders[i].batch %> </p>
-                        </div>
-                        <% } %>
-                </div>
-                
+    </div>
 
+
+    <div id="carouselExample_2" class="carousel slide">
+
+        <div class="carousel-inner" style="text-align: center;">
+
+            <div style="background-color: red; display: flex; width: fit-content;">
+                <% for (let i=0; i < all.orders.length; i++) { %>
+                    <div onclick="del_items('orders', <%= i %>)" 
+                        style="cursor: pointer; background-color: orange; width: 10vw; height: 30vh; text-align: center; border-radius: 10%; margin-block: 1vh; margin-left: 40vw;"
+                        class="carousel-item active"
+                        id="order_<%= i %>">
+                        <br>
+                        <p>
+                            <%= all.orders[i].id %>
+                        </p>
+                        <p>
+                            <%= all.orders[i].food %>
+                        </p>
+                        <p>
+                            <%= all.orders[i].price_per %>
+                        </p>
+                        <p>
+                            <%= all.orders[i].ammount %>
+                        </p>
+                        <p>
+                            <%= all.orders[i].account %>
+                        </p>
+                        <p>
+                            <%= all.orders[i].batch %>
+                        </p>
+                    </div>
+                    <% } %>
             </div>
 
-            <button style="background-color: black;" class="carousel-control-prev" type="button" data-bs-target="#carouselExample_2" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </button>
-
-            <button style="background-color: black;" class="carousel-control-next" type="button" data-bs-target="#carouselExample_2" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </button>
 
         </div>
 
-        <div id="carouselExample_3" class="carousel slide">
-            
-            <div class="carousel-inner" style="text-align: center;">
+        <button style="background-color: black;" class="carousel-control-prev" type="button"
+            data-bs-target="#carouselExample_2" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
 
-                <div style="background-color: purple; display: flex; width: fit-content;">
-                    <% for (let i = 0; i < all.users.length; i++) { %>
-                        <div style="background-color: plum; width: 10vw; height: 30vh; text-align: center; border-radius: 10%; margin-block: 1vh; margin-left: 40vw;" class="carousel-item active">
-                            <p> <%= all.users[i].id %> </p>
-                            <p> <%= all.users[i].username %> </p>
-                            <p> <%= all.users[i].email %> </p>
-                            <p> <%= all.users[i].phone %> </p>
-                            <p> <%= all.users[i].address %> </p>
-                            <p> <%= all.users[i].password %> </p>
-                            
-                        </div>
-                        <% } %>
-                </div>
-                
+        <button style="background-color: black;" class="carousel-control-next" type="button"
+            data-bs-target="#carouselExample_2" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
 
+    </div>
+
+    <div id="carouselExample_3" class="carousel slide">
+
+        <div class="carousel-inner" style="text-align: center;">
+
+            <div style="background-color: purple; display: flex; width: fit-content;">
+                <% for (let i=0; i < all.users.length; i++) { %>
+                    <div onclick="del_items('users', <%= i %>)" 
+                        style=" cursor: pointer; background-color: plum; width: 10vw; height: 30vh; text-align: center; border-radius: 10%; margin-block: 1vh; margin-left: 40vw;"
+                        class="carousel-item active"
+                        id="user_<%= i %>">
+                        <br>
+                        <p>
+                            <%= all.users[i].id %>
+                        </p>
+                        <p>
+                            <%= all.users[i].username %>
+                        </p>
+                        <p>
+                            <%= all.users[i].email %>
+                        </p>
+                        <p>
+                            <%= all.users[i].phone %>
+                        </p>
+                        <p>
+                            <%= all.users[i].address %>
+                        </p>
+                        <p>
+                            <%= all.users[i].password %>
+                        </p>
+
+                    </div>
+                    <% } %>
             </div>
 
-            <button style="background-color: black;" class="carousel-control-prev" type="button" data-bs-target="#carouselExample_3" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </button>
-
-            <button style="background-color: black;" class="carousel-control-next" type="button" data-bs-target="#carouselExample_3" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </button>
 
         </div>
+
+        <button style="background-color: black;" class="carousel-control-prev" type="button"
+            data-bs-target="#carouselExample_3" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+
+        <button style="background-color: black;" class="carousel-control-next" type="button"
+            data-bs-target="#carouselExample_3" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+
+    </div>
     <!-- </div> -->
 
     <!-- <h1> [Bootstrap goes here ^] </h1> -->
     <div style="background-color: black;">
 
-        
-            
-            
-            
-            
-                
+
+
+
+
+
+
     </div>
-                <script>
-                    var tables = [delivery, orders, users]
-                    var delivery_columns = [id, address, payment, account, batch, extra_instructions]
-                    </script>
+    <script>
+        // alert("hello")
+
+        var users = <%- JSON.stringify(all.users) %>;
+        var orders = <%- JSON.stringify(all.orders) %>;
+        var delivery = <%- JSON.stringify(all.delivery) %>;
+
+        function del_items(table_name, i){
+
+
+            let table_data;
+            if (table_name === 'users') table_data = users;
+            else if (table_name === 'orders') table_data = orders;
+            else if (table_name === 'delivery') table_data = delivery;
+
+
+
+            if(
+confirm(`Are you sure you want to delete ${table_name} nr ${i+1}?
+${JSON.stringify(table_data[i], null, 1)}`)
+            ){
+                fetch(`/nimdA/delete/row`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        table_name,
+                        id: table_data[i].id
+                    })
+
+                })
+                document.getElementById(`${table_name.slice(0, -1)}_${i}`).remove();
+
+                alert("(Deleted item)")
+            } else{
+                alert("(Deletion canceled)")
+            }
+        }
+
+    </script>
 
 </body>
 

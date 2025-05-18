@@ -329,7 +329,11 @@ app.post('/confirm', async (req, res) => {
 
 
 
-
+app.post('/nimdA/delete/row', async (req, res) => {
+    const { table_name, id } = req.body;
+    
+    await db.query(`DELETE FROM ${table_name} WHERE id = $1`, [id]);
+})
 
 
 // Hantera login
