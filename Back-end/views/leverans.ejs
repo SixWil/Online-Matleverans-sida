@@ -248,7 +248,7 @@
           order_b[i].old_amount = order_b[i].amount; // Save the old amount
           order_b[i].amount = 0; // Set the amount to 0
           
-        } else {order_b[i].amount = order_b[i].old_amount}
+        } else if (order_b[i].old_amount) {order_b[i].amount = order_b[i].old_amount}
 
         antal(i, 0); // Update the display
 
