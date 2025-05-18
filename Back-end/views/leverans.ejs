@@ -175,6 +175,7 @@
             <% for (let i = 2; i < order.length; i++){ %>
 
             <div style="display: flex; align-items: center">
+
               <button
                 style="height: 5vh"
                 class="minus"
@@ -184,7 +185,8 @@
                 -
               </button>
 
-              <div class="sign" style="width: 90%">
+              <div class="sign" style="width: 90%; cursor: pointer;" title="Ta bort?" onclick="ta_bort(<%=i%>)">
+
                 <pre
                   id="mat_<%=i%>"
                 > <%= order[i].amount %>st <%= order[i].name %> <br> pris per: <%= order[i].price %> kr <br> pris alla: <%= order[i].total %> kr </pre>
@@ -227,24 +229,58 @@
       
       
       var order_b = <%- JSON.stringify(order) %>; // Embed the server-side `order` array
+
+
+      function ta_bort(i){
+        // Remove the item from the order array
+        // alert(i);
+        // order_b.splice(i, 1); // Remove the item from the order array
+        // alert(order_b);
+
+        // order_b[i].amount = 0; // Set the amount to 0 instead of removing the item
+
+        // for (let j = 2; j < order_b.length; j++){
+
+        // order_b[i].old_amount = 0;
+
+        if (order_b[i].amount > 0) {
+
+          order_b[i].old_amount = order_b[i].amount; // Save the old amount
+          order_b[i].amount = 0; // Set the amount to 0
+          
+        } else {order_b[i].amount = order_b[i].old_amount}
+
+        antal(i, 0); // Update the display
+
+      }
+        
       
       function antal(i, förändring){
         
         order_b[i].amount += förändring; // Update the amount in the order array
+
+        enhet = document.getElementById('mat_'+i);
         
-        if ( order_b[i].amount < 0 ) { order_b[i].amount = 0 }
+        if ( order_b[i].amount <= 0 ) {
+
+          order_b[i].amount = 0;
+          enhet.style.opacity = 0.5; // Set opacity to 0.5 if amount is 0
+
+        }
+        else {
+          enhet.style.opacity = 1; // Set opacity to 1 if amount is greater than 0
+        }
 
         order_b[i].total = order_b[i].amount * order_b[i].price; // Update the total price for the item
         
-          enhet = document.getElementById('mat_'+i);
           
           enhet.innerHTML = `${ order_b[i].amount } st ${ order_b[i].name } <br> pris per: ${ order_b[i].price } kr <br> pris alla: ${ order_b[i].total } kr `;
 
           
           
           order_b[1].cost = 0
-          for (let i = 2; i < order_b.length; i++) {
-            order_b[1].cost += order_b[i].total; // Calculate the total payment
+          for (let j = 2; j < order_b.length; j++) {
+            order_b[1].cost += order_b[j].total; // Calculate the total payment
           };
           
           order_b[1].tax = (order_b[1].cost + order_b[1].delivery) * 0.1
