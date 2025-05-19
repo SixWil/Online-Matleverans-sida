@@ -230,18 +230,10 @@
       
       var order_b = <%- JSON.stringify(order) %>; // Embed the server-side `order` array
 
+        /// nollar / återhämtar antalet av en vara ///
 
       function ta_bort(i){
-        // Remove the item from the order array
-        // alert(i);
-        // order_b.splice(i, 1); // Remove the item from the order array
-        // alert(order_b);
-
-        // order_b[i].amount = 0; // Set the amount to 0 instead of removing the item
-
-        // for (let j = 2; j < order_b.length; j++){
-
-        // order_b[i].old_amount = 0;
+        
 
         if (order_b[i].amount > 0) {
 
@@ -254,13 +246,15 @@
 
       }
         
-      
+      /// updaterar antalet av varorna ///
       function antal(i, förändring){
-        
+        /// förändring är värdet av hur mycket ska läggas till, tas bort, eller vara samma ///
         order_b[i].amount += förändring; // Update the amount in the order array
 
         enhet = document.getElementById('mat_'+i);
-        
+
+        /// du kan inte beställa mindre än 0 ///
+
         if ( order_b[i].amount <= 0 ) {
 
           order_b[i].amount = 0;
@@ -270,6 +264,9 @@
         else {
           enhet.style.opacity = 1; // Set opacity to 1 if amount is greater than 0
         }
+
+
+        /// räkna ut och aplicera alla värden ///
 
         order_b[i].total = order_b[i].amount * order_b[i].price; // Update the total price for the item
         
@@ -304,12 +301,16 @@
         
         
         function confirm(){
-          
+            /// (om du kan bekräfta) ///
           if (krav_bekräfta){
+
+            /// samla alla värden ///
 
             var exter = document.getElementById('id_extra-instructions').value
             
             var extra_instructions = document.getElementById('id_extra-instructions')
+
+            /// skicka alla värden ///
             
             data_transport = {order_b: order_b, gata: gata, betalning: payment_type, exter: exter }
 
@@ -318,10 +319,13 @@
               headers: {'Content-Type': 'application/json',},
               body: JSON.stringify(data_transport), // Send the `order_b` array as JSON
             })
+
+            /// notera, och starta om sidan ///
             
             alert("Beställning bekräftad ")
             window.location.reload()
 
+            /// klaga då du försöker bekräfta innan du kan ///
           } else {alert('Adress eller betalsätt saknas')}
           
         // .then((response) => {
