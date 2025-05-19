@@ -10,6 +10,8 @@ dotenv.config();
 const app = express();
 const port = 3000;
 
+
+/// kopplar upp till databasen ///
 const db = new pg.Client({
    connectionString: process.env.DATABASE_URL,
    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
@@ -52,7 +54,7 @@ app.get('/nimdA', async (req, res) => {
        res.render('admin.ejs', { all: all });
 })
 
-
+/// Skickar till start sidan från root ///
 app.get('/', (req, res) => {
     res.redirect('/start-sida')
 });
@@ -136,7 +138,10 @@ app.get('/Pretantieuse/slag', (req, res) => {
     res.render('Pretantieuse/Maträtt-slag.ejs');
 });
 
+
+/// Skapar en tom array för att lagra beställningar ///
 var order = [];
+/// lägger till en tom betalning och kostnad i arrayen ///
 order.push({payment: 0}); // Initialize the order array with a payment object
 order.push({cost: 0, delivery: 0, tax: 0}); // Initialize the order array with a payment object
 
@@ -223,6 +228,9 @@ app.get('/destination', requireLogin, async (req, res) => {
         res.status(500).send('Ett fel uppstod vid hämtning av adress.');
     }
 });
+
+/// funktion som hanterar beställningar ///
+/// och lägger till dem i en array ///
 function shopping(req, res, name, price, addition=1,) {
 
     const existingItem = order.find( (item) => item.name === name); // Find the item in the array
@@ -234,15 +242,21 @@ function shopping(req, res, name, price, addition=1,) {
     else {
         order.push({ name: name, price: price, amount: 1, total: price }); // Add a new item if it doesn't exist
     }
+
+    /// nolla ///
     
     var cost = 0;
 
     order[0].payment = 0;
 
+    /// lägg in värder från alla objekt i arrayen ///
+    /// och räkna ut totalsumman ///
     for (let i = 2; i < order.length; i++) {
         cost += order[i].total; // Calculate the total payment
     };
 
+
+    /// uppdatera totalsumman ///
     order[1].cost = cost; // Update the payment in the first item of the array
     order[1].delivery = 100; // delivery fee
     order[1].tax = (order[1].cost + order[1].delivery) * 0.1; // Calculate the tax
@@ -262,18 +276,23 @@ function shopping(req, res, name, price, addition=1,) {
 
 
 
-var account = null; // Dummy account number
+var account = null;
 
 app.post('/confirm', async (req, res) => {
 
+
+    /// ta imot data transporterat från front-end ///
+    /// och spara det i en variabel ///
     const data_transport_b = req.body; // Access the order data sent from the client
 
     // if (data_transport_b.exter){
+
+    /// extra instyruktioner: ///
     var exter = data_transport_b.exter
     // }
-    
+    /// adress: ///
     var gata_b = data_transport_b.gata
-    
+    /// betalning: ///
     var betalnings_sätt = data_transport_b.betalning
 
     console.log('gata', gata_b)
@@ -286,15 +305,23 @@ app.post('/confirm', async (req, res) => {
 
     account = req.session.userId
 
+    /// om det finns någon mat i order_b arrayen ///
+
     if (order_b[2]) { 
- 
+        
+        /// kolla viket värde tidigare såkallad batch hade ///
         var batch = (await db.query('SELECT batch FROM orders ORDER BY batch DESC LIMIT 1')).rows[0]?.batch || 0; // Get the last batch number from the database
 
+        /// lägg till 1 till batch ///
         batch++; // Increment the batch number
+
+        /// (batch är vilket "paket" beställningen är i) ///
 
         console.log(batch); // Log the batch number to the console
 
         console.log(order_b); // Log the order array to the console
+
+        /// lägg till beställningen i databasen ///
         
         for (let i = 2; i < order_b.length; i++) {
             await db.query('INSERT INTO orders (food, price_per, ammount, account, batch) VALUES ($1, $2, $3, $4, $5)', [order_b[i].name, order_b[i].price, order_b[i].amount, account, batch]);
@@ -306,7 +333,7 @@ app.post('/confirm', async (req, res) => {
 
 
 
-    
+        /// nolla order arrayen ///
         order = []; // Clear the order array after inserting into the database
         order.push({payment: 0}); // Initialize the order array with a payment object
         order.push({cost: 0, delivery: 0, tax: 0}); // Initialize the order array with a payment object
@@ -330,6 +357,9 @@ app.post('/confirm', async (req, res) => {
 
 
 app.post('/nimdA/delete/row', async (req, res) => {
+
+    /// ta bort en rad i databasen ///
+
     const { table_name, id } = req.body;
     
     await db.query(`DELETE FROM ${table_name} WHERE id = $1`, [id]);
@@ -450,6 +480,8 @@ app.post('/anvandare/uppdatera-adress', async (req, res) => {
     }
 });
 
+/// aktiveras när du klickar på köp knappen ///
+
 app.post('/buy/Oxbringa', (req, res) => {
     shopping(req, res, 'Oxbringa', 200 )
 });
@@ -485,6 +517,8 @@ app.post('/buy/Centaur', (req, res) => {
 app.post('/buy/Slag', (req, res) => { 
     shopping(req, res, 'Slag', 450 )
 });
+
+/// kolla att det funkar: ///
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
