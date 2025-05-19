@@ -117,6 +117,9 @@
 
 
       // var adress_input = document.getElementById('adress-input')
+
+
+      /// saker som inte är aktiverade är på 50 opacitet ///
       
       bekräfta_a.style.opacity = "50%"
 
@@ -124,11 +127,15 @@
       
       krav_bekräfa = false
 
+      /// kolla vilka krav som är uppfyllda ///
+
       function krav(){
         
         if (krav_adress && krav_swish){
           krav_bekräfta = true
         }
+
+        /// om du kan bekräfta, sätt knappen till 100%, och kör en animation ///
 
         if (krav_bekräfta){
           bekräfta_a.style.opacity = "100%"
@@ -138,10 +145,13 @@
           bekräfta_a.classList.add('upmärksamma')
         }
 
+        /// bekräftar om du skrivit in värden för bankkort ///
 
         if (krav_kort_nummer && krav_kort_datum && krav_kort_cvc){
           krav_bank_kort = true
         }
+
+        /// om du gjort det, sätt knappen till 100% ///
 
         if (krav_bank_kort){
           bankkort.style.opacity = "100%"
@@ -160,6 +170,8 @@
         // for (i = 0; i < swish_knapp.length; i++ ){
         //   swish_knapp[i].style.opacity = "100%"
         // }
+
+        /// sätt det du redan skrivit in till 66% opacitet ///
   
         for (i = 0; i < adresser.length; i++ ){
           adresser[i].style.opacity = "66.666%"
@@ -168,9 +180,14 @@
         gata = adress_input.value
 
         // alert(gata)
+
+        /// kollar/ uppdaterar vilka krav som är uppfyllda ///
   
         krav()
       }
+
+
+      /// generell betalnings funktion ///
 
       function swish( type=null){
         
@@ -181,6 +198,8 @@
         krav_kort_cvc = false
         krav_kort_datum = false
         krav_kort_nummer = false
+
+        /// säger vilken sort av betalning ///
 
         if (type){
           payment_type = type
@@ -195,6 +214,8 @@
 
         krav_bank_kort = false
 
+        /// sätter det som redan valts till 66% opacitet ///
+
         for (i = 0; i < swish_knapp.length; i++ ){
           swish_knapp[i].style.opacity = "66.666%"
         }
@@ -206,6 +227,8 @@
         //   alert("Dina varor är påväg!")
           
         //   fetch('/confirm-b', {method: 'POST', }, )
+
+        /// kollar / uppdaterar vilka krav som är uppfyllda ///
 
           krav()
 
