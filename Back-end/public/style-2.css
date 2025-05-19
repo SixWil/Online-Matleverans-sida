@@ -8,6 +8,8 @@
 
 
 
+
+/* Skapar en animation som roterar på saken */
 @keyframes jiggle {
 
   from {transform: rotate(0deg);}
@@ -22,6 +24,7 @@
 
 }
 
+/* aktiverar animationen  */
 .upmärksamma{
   animation: jiggle .3s;
 }
