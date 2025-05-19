@@ -31,7 +31,9 @@
 /*                      SAKER SOM ÄR SAMMA FÖR BÅDA VERSIONER (tror jag -sixt)                     */
 
 
-
+button{
+  cursor: pointer;
+}
 
 .button-1 {
   width: 10vw;
