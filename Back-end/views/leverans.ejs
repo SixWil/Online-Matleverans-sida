@@ -149,11 +149,8 @@
           <p>Beställning</p>
         </div> -->
 
-          <h2 style="width: fit-content; padding-inline: 1vw" class="box-2" id="att_betala">
-            Att betala: <%= order[0].payment %> kr <br />
-          </h2>
-
-          <!-- 
+        
+        <!-- 
           function id_ning(klass){
             grupp = querySelectorAll(klass);
             for (let j = 0; j < grupp.length; j++){
@@ -161,8 +158,8 @@
               };
             }
             -->
-
-          <h3
+            
+            <h3
             style="
               overflow-y: scroll;
               height: 50%;
@@ -177,45 +174,50 @@
             <div style="display: flex; align-items: center">
 
               <button
-                style="height: 5vh"
-                class="minus"
-                id="minus_<%=i%>"
-                onclick="antal(<%=i%>, -1)"
+              style="height: 5vh"
+              class="minus"
+              id="minus_<%=i%>"
+              onclick="antal(<%=i%>, -1)"
               >
-                -
-              </button>
-
-              <div class="sign" style="width: 90%; cursor: pointer;" title="Ta bort?" onclick="ta_bort(<%=i%>)">
-
-                <pre
-                  id="mat_<%=i%>"
-                > <%= order[i].amount %>st <%= order[i].name %> <br> pris per: <%= order[i].price %> kr <br> pris alla: <%= order[i].total %> kr </pre>
-              </div>
-
-              <button
-                style="height: 5vh"
-                class="pluss"
-                id="pluss_<%=i%>"
-                onclick="antal('<%=i%>', +1)"
-              >
-                +
-              </button>
+              -
+            </button>
+            
+            <div class="sign" style="width: 90%; cursor: pointer;" title="Ta bort?" onclick="ta_bort(<%=i%>)">
+              
+              <pre
+              id="mat_<%=i%>"
+              > <%= order[i].amount %>st <%= order[i].name %> <br> pris per: <%= order[i].price %> kr <br> pris alla: <%= order[i].total %> kr </pre>
             </div>
-
-            <% }%>
-          </h3>
-
-          <h3 class="box_2" style="width: fit-content; padding-inline: 1vw" id="betala_detaljer">
-            Pris: <%= order[1].cost %> <br />
-            Leverans kostnad: <%= order[1].delivery %> <br />
-            Skatt: <%= order[1].tax %>
+            
+            <button
+            style="height: 5vh"
+            class="pluss"
+            id="pluss_<%=i%>"
+            onclick="antal('<%=i%>', +1)"
+            >
+            +
+          </button>
+        </div>
+        
+        <% }%>
+      </h3>
+      
+      <h2 style="width: fit-content; padding-inline: 1vw" class="box-2" id="att_betala">
+        Att betala: <%= order[0].payment %> kr <br />
+      </h2>
+      <h3 class="box_2" style="width: fit-content; padding-inline: 1vw" id="betala_detaljer">
+        Pris: <%= order[1].cost %> <br />
+        Leverans kostnad: <%= order[1].delivery %> <br />
+        Moms: <%= order[1].tax %>
           </h3>
 
             <button class="button-2" onclick="confirm()" id="Bekräfta-a">
               Bekräfta
             </button>
         </div>
-        <%- include('destination') %>
+        <!-- <div class="destination-container" style="margin-left:2vw; background-color: blueviolet; border-radius: 10px; opacity: 0%;"> -->
+          <%- include('destination') %>
+        <!-- </div> -->
       </div>
     </div>
     
@@ -301,6 +303,8 @@
         
         
         function confirm(){
+          // document.querySelector('.destination-container').style.opacity = 1;
+
             /// (om du kan bekräfta) ///
           if (krav_bekräfta){
 
@@ -326,7 +330,8 @@
             window.location.reload()
 
             /// klaga då du försöker bekräfta innan du kan ///
-          } else {alert('Adress eller betalsätt saknas')}
+          }
+          else {alert('Adress eller betalsätt saknas')}
           
         // .then((response) => {
         //   if (response.ok) {
