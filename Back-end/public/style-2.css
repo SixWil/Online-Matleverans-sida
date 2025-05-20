@@ -4,10 +4,16 @@
 
 
 
+/*                    IMPORT                     */
+
+@import url('https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100..900;1,100..900&family=David+Libre:wght@400;500;700&display=swap');
+
 /*                    SAKER SOM ÄR UNIKA FÖR DENNA VERSIONEN (rör ej)                     */
 
 
 
+
+/* Skapar en animation som roterar på saken */
 @keyframes jiggle {
 
   from {transform: rotate(0deg);}
@@ -22,6 +28,7 @@
 
 }
 
+/* aktiverar animationen  */
 .upmärksamma{
   animation: jiggle .3s;
 }
@@ -31,7 +38,17 @@
 /*                      SAKER SOM ÄR SAMMA FÖR BÅDA VERSIONER (tror jag -sixt)                     */
 
 
+h1,h2,h3,h4,h5,h6{
+  font-family: 'David Libre', sans-serif;
+}
 
+p, button, label{
+  font-family: 'Chivo', sans-serif;
+}
+
+button{
+  cursor: pointer;
+}
 
 .button-1 {
   width: 10vw;
@@ -218,7 +235,7 @@
   padding-inline: 0.5vw;
   width: 10vw;
   background-color: lightgrey;
-  margin-block: 1vh;
+  /* margin-block: 1vh; */
   border-radius: 10px;
   border: solid white 0.1vw;
   display: flex;
@@ -285,7 +302,7 @@
 .Rea {
   position: absolute;
   text-align: center;
-  margin-top: 16.666vh;
+  margin-top: 17.5vh;
 }
 
 a {

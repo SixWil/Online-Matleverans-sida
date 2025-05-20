@@ -70,7 +70,7 @@
           style="width: 10vw; border-radius: 10px; margin-left: 0.666vw"
         />
         <div class="shops">
-          <div class="Shop-1">
+          <div class="Shop-1" style="height: 5vh; overflow-y: hidden" onmouseover="this.style.height = 'fit-content'" onmouseout="this.style.height = '5vh'">
             <a href="/Abracadabra/abra-cadabra"
               ><button class="button-2 res_1" style="margin-bottom: 1vh">
                 Abra cadabra
@@ -90,7 +90,7 @@
               </button></a
             >
           </div>
-          <div class="Shop-1">
+          <div class="Shop-1" style="height: 5vh; overflow-y: hidden" onmouseover="this.style.height = 'fit-content'" onmouseout="this.style.height = '5vh'">
             <a href="/Agatas/agatas"
               ><button class="button-2 res_1" style="margin-bottom: 1vh">
                 Agatas
@@ -112,7 +112,7 @@
               </button></a
             >
           </div>
-          <div class="Shop-1">
+          <div class="Shop-1" style="height: 5vh; overflow-y: hidden" onmouseover="this.style.height = 'fit-content'" onmouseout="this.style.height = '5vh'">
             <a href="/Pretantieuse/pretentieuse"
               ><button class="button-2 res_1" style="margin-bottom: 1vh">
                 Prétentieuse
@@ -149,11 +149,8 @@
           <p>Beställning</p>
         </div> -->
 
-          <h2 style="width: fit-content; padding-inline: 1vw" class="box-2" id="att_betala">
-            Att betala: <%= order[0].payment %> kr <br />
-          </h2>
-
-          <!-- 
+        
+        <!-- 
           function id_ning(klass){
             grupp = querySelectorAll(klass);
             for (let j = 0; j < grupp.length; j++){
@@ -161,8 +158,8 @@
               };
             }
             -->
-
-          <h3
+            
+            <h3
             style="
               overflow-y: scroll;
               height: 50%;
@@ -177,45 +174,50 @@
             <div style="display: flex; align-items: center">
 
               <button
-                style="height: 5vh"
-                class="minus"
-                id="minus_<%=i%>"
-                onclick="antal(<%=i%>, -1)"
+              style="height: 5vh"
+              class="minus"
+              id="minus_<%=i%>"
+              onclick="antal(<%=i%>, -1)"
               >
-                -
-              </button>
-
-              <div class="sign" style="width: 90%; cursor: pointer;" title="Ta bort?" onclick="ta_bort(<%=i%>)">
-
-                <pre
-                  id="mat_<%=i%>"
-                > <%= order[i].amount %>st <%= order[i].name %> <br> pris per: <%= order[i].price %> kr <br> pris alla: <%= order[i].total %> kr </pre>
-              </div>
-
-              <button
-                style="height: 5vh"
-                class="pluss"
-                id="pluss_<%=i%>"
-                onclick="antal('<%=i%>', +1)"
-              >
-                +
-              </button>
+              -
+            </button>
+            
+            <div class="sign" style="width: 90%; cursor: pointer;" title="Ta bort?" onclick="ta_bort(<%=i%>)">
+              
+              <pre
+              id="mat_<%=i%>"
+              > <%= order[i].amount %>st <%= order[i].name %> <br> pris per: <%= order[i].price %> kr <br> pris alla: <%= order[i].total %> kr </pre>
             </div>
-
-            <% }%>
-          </h3>
-
-          <h3 class="box_2" style="width: fit-content; padding-inline: 1vw" id="betala_detaljer">
-            Pris: <%= order[1].cost %> <br />
-            Leverans kostnad: <%= order[1].delivery %> <br />
-            Skatt: <%= order[1].tax %>
+            
+            <button
+            style="height: 5vh"
+            class="pluss"
+            id="pluss_<%=i%>"
+            onclick="antal('<%=i%>', +1)"
+            >
+            +
+          </button>
+        </div>
+        
+        <% }%>
+      </h3>
+      
+      <h2 style="width: fit-content; padding-inline: 1vw" class="box-2" id="att_betala">
+        Att betala: <%= order[0].payment %> kr <br />
+      </h2>
+      <h3 class="box_2" style="width: fit-content; padding-inline: 1vw" id="betala_detaljer">
+        Pris: <%= order[1].cost %> kr <br />
+        Leverans kostnad: <%= order[1].delivery %> kr <br />
+        Moms: <%= order[1].tax %> kr
           </h3>
 
             <button class="button-2" onclick="confirm()" id="Bekräfta-a">
               Bekräfta
             </button>
         </div>
-        <%- include('destination') %>
+        <!-- <div class="destination-container" style="margin-left:2vw; background-color: blueviolet; border-radius: 10px; opacity: 0%;"> -->
+          <%- include('destination') %>
+        <!-- </div> -->
       </div>
     </div>
     
@@ -230,18 +232,10 @@
       
       var order_b = <%- JSON.stringify(order) %>; // Embed the server-side `order` array
 
+        /// nollar / återhämtar antalet av en vara ///
 
       function ta_bort(i){
-        // Remove the item from the order array
-        // alert(i);
-        // order_b.splice(i, 1); // Remove the item from the order array
-        // alert(order_b);
-
-        // order_b[i].amount = 0; // Set the amount to 0 instead of removing the item
-
-        // for (let j = 2; j < order_b.length; j++){
-
-        // order_b[i].old_amount = 0;
+        
 
         if (order_b[i].amount > 0) {
 
@@ -254,13 +248,15 @@
 
       }
         
-      
+      /// updaterar antalet av varorna ///
       function antal(i, förändring){
-        
+        /// förändring är värdet av hur mycket ska läggas till, tas bort, eller vara samma ///
         order_b[i].amount += förändring; // Update the amount in the order array
 
         enhet = document.getElementById('mat_'+i);
-        
+
+        /// du kan inte beställa mindre än 0 ///
+
         if ( order_b[i].amount <= 0 ) {
 
           order_b[i].amount = 0;
@@ -270,6 +266,9 @@
         else {
           enhet.style.opacity = 1; // Set opacity to 1 if amount is greater than 0
         }
+
+
+        /// räkna ut och aplicera alla värden ///
 
         order_b[i].total = order_b[i].amount * order_b[i].price; // Update the total price for the item
         
@@ -304,12 +303,18 @@
         
         
         function confirm(){
-          
+          // document.querySelector('.destination-container').style.opacity = 1;
+
+            /// (om du kan bekräfta) ///
           if (krav_bekräfta){
+
+            /// samla alla värden ///
 
             var exter = document.getElementById('id_extra-instructions').value
             
             var extra_instructions = document.getElementById('id_extra-instructions')
+
+            /// skicka alla värden ///
             
             data_transport = {order_b: order_b, gata: gata, betalning: payment_type, exter: exter }
 
@@ -318,11 +323,15 @@
               headers: {'Content-Type': 'application/json',},
               body: JSON.stringify(data_transport), // Send the `order_b` array as JSON
             })
+
+            /// notera, och starta om sidan ///
             
             alert("Beställning bekräftad ")
             window.location.reload()
 
-          } else {alert('Adress eller betalsätt saknas')}
+            /// klaga då du försöker bekräfta innan du kan ///
+          }
+          else {alert('Adress eller betalsätt saknas')}
           
         // .then((response) => {
         //   if (response.ok) {
