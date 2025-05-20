@@ -6,6 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style-2.css">
+    <style>
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+      }
+       input {
+  width: 80%; 
+  padding: 0.5rem; 
+  margin-bottom: 1rem; 
+  border: 1px solid #ccc; 
+  border-radius: 5px; 
+  font-size: 1rem; 
+} 
+.form {
+  margin-top: 1rem; 
+} 
+      </style>
+
 </head>
 
 <body style="background-color: rgb(66, 66, 66); margin: 0px; overflow: hidden;">
@@ -57,7 +76,7 @@
         <div class="left">
 
             <!-- Meny -->
-            <a href="../../html/dator/Beskrivningar.html">
+            <a href="/beskrivningar">
                 <button class="button-1" style="margin-left: 1vw;"> BUTIKER: </button>
             </a>
 
@@ -102,23 +121,34 @@
                     <h1 style="margin-block: 0px;">Välkommen, <%= username %>!</h1>
                 </div>
     
-                <div class="box-2" style="width: 50vw;">
-                    <p>E-post: <%= email %></p>
-                    <p>Användarnamn: <%= username %></p>
-                    <p>Telefonnummer: <%= phone %></p>
-                    <p>Adress: <%= address || 'Ingen adress angiven' %></p>
-                    
-                    <form action="/anvandare/uppdatera-adress" method="POST">
+                <div class="box-3"; style="overflow-y: auto;" >
+                    <div class="row2">
+                        <div class="column2">
+                            <p><strong>E-post:</strong> <%= email %></p>
+                        </div>
+                        <div class="column2">
+                            <p><strong>Användarnamn:</strong> <%= username %></p>
+                        </div>
+                    </div>
+                    <div class="row2">
+                        <div class="column2">
+                            <p><strong>Telefonnummer:</strong> <%= phone %></p>
+                        </div>
+                        <div class="column2">
+                            <p><strong>Adress:</strong> <%= address || 'Ingen adress angiven' %></p>
+                        </div>
+                    </div>
+                    <form action="/anvandare/uppdatera-adress" method="POST" class="form">
                         <label for="newAddress">Ny adress:</label>
                         <input type="text" id="newAddress" name="newAddress" placeholder="Ange ny adress" required>
                         <button type="submit" class="button-1">Uppdatera Adress</button>
                     </form>
-                    <form action="/anvandare/uppdatera-email" method="POST">
+                    <form action="/anvandare/uppdatera-email" method="POST" class="form">
                         <label for="newEmail">Ny e-postadress:</label>
-                        <input type="email" id="newEmail" name="newEmail" required>
+                        <input type="email" id="newEmail" name="newEmail" placeholder="Ange nytt Telefonnummer" required>
                         <button type="submit" class="button-1">Uppdatera e-post</button>
                     </form>
-                    <form action="/logout" method="POST">
+                    <form action="/logout" method="POST" class="form">
                         <button type="submit" class="button-1">Logga ut</button>
                     </form>
                 </div>
