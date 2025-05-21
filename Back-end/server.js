@@ -39,9 +39,9 @@ app.use(session({
 
 app.get('/nimdA', async (req, res) => {
        // Query each table
-       const data_delivery = await db.query('SELECT * FROM delivery');
-       const data_orders = await db.query('SELECT * FROM orders');
-       const data_users = await db.query('SELECT * FROM users');
+       const data_delivery = await db.query('SELECT * FROM delivery ORDER BY id');
+       const data_orders = await db.query('SELECT * FROM orders ORDER BY id');
+       const data_users = await db.query('SELECT * FROM users ORDER BY id');
 
        // Combine all data into one object
        const all = {
