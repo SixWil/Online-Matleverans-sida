@@ -57,8 +57,9 @@
                     <div style=" background-color: skyblue; min-width: 100%; width: fit-content; height: fit-content; text-align: center; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh; align-items: center;"
                         class="card" id="delivery_<%= i %>">
 
-                        <div style="display: flex;">
-                            <button style="margin-inline: .1vw;">Edit</button>
+                        <div style="display: flex;" id="delivery_buttons_<%= i %>">
+                            <button style="margin-inline: .1vw;"
+                                onclick="edit_items('delivery', <%= i %>)">Edit</button>
                             <button style="margin-inline: .1vw;"
                                 onclick="del_items('delivery', <%= i %>)">Delete</button>
                         </div>
@@ -121,8 +122,9 @@
                                 <div style=" background-color: orange; min-width: 100%; width: fit-content; height: fit-content; text-align: center; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh; align-items: center;"
                                     class="card" id="orders_<%= i %>">
 
-                                    <div style="display: flex;">
-                                        <button style="margin-inline: .1vw;">Edit</button>
+                                    <div style="display: flex;" id="orders_buttons_<%= i %>">
+                                        <button style="margin-inline: .1vw;"
+                                            onclick="edit_items('orders', <%= i %>)">Edit</button>
                                         <button style="margin-inline: .1vw;"
                                             onclick="del_items('orders', <%= i %>)">Delete</button>
                                     </div>
@@ -190,8 +192,9 @@
                                             <div style="white-space: nowrap; background-color: greenyellow; min-width: 100%; width: fit-content; height: fit-content; text-align: center; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh; align-items: center;"
                                                 class="card" id="users_<%= i %>">
 
-                                                <div style="display: flex;">
-                                                    <button style="margin-inline: .1vw;">Edit</button>
+                                                <div style="display: flex;" id="users_buttons_<%= i %>">
+                                                    <button style="margin-inline: .1vw;"
+                                                    onclick="edit_items('users', <%= i %>)">Edit</button>
                                                     <button style="margin-inline: .1vw;"
                                                         onclick="del_items('users', <%= i %>)">Delete</button>
                                                 </div>
@@ -222,8 +225,7 @@
 
                                                     <div style="display: flex;">
                                                         <button style="margin-inline: .1vw;">Edit</button>
-                                                        <button style="margin-inline: .1vw;"
-                                                            onclick="del_items('users', <%= i %>)">Delete</button>
+                                                        <button style="margin-inline: .1vw;">Delete</button>
                                                     </div>
 
                                                     <b>
@@ -258,6 +260,78 @@
         var users = <%- JSON.stringify(all.users) %>;
         var orders = <%- JSON.stringify(all.orders) %>;
         var delivery = <%- JSON.stringify(all.delivery) %>;
+
+        function edit_items(table_name, i) {
+            alert("Editing " + table_name + " nr " + (i + 1));
+            let table_data;
+            if (table_name === 'users') table_data = users;
+            else if (table_name === 'orders') table_data = orders;
+            else if (table_name === 'delivery') table_data = delivery;
+
+            // Find the object with id === i
+            const obj = table_data.find(obj => obj && obj.id === i);
+
+            // document.getElementById(`${table_name}_buttons_${i}`).style.backgroundColor = "red";
+
+            card = document.getElementById(`${table_name}_${i}`)
+            save = document.getElementById(`${table_name}_buttons_${i}`)
+            buttons_old = save.innerHTML;
+            save.innerHTML = "<button>Save</button>";
+            
+            all_items = document.querySelectorAll(`.card`);
+            all_items.forEach((item) => {
+                item.style.opacity = "50%";
+            });
+            card.style.opacity = "100%";
+
+            const ps = card.querySelectorAll('p');
+
+            ps.forEach((p) => {
+                p.innerHTML = `<input type="text" value="${p.innerText.split(" ")[1]}" placeholder="${p.innerText.split(" ")[0]}">`;
+            });
+
+            
+            // save.onclick = function() {
+            //     save.innerHTML = buttons_old;
+            //     all_items.forEach((item) => {
+            //         item.style.opacity = "100%";
+            //     });
+            //     // alert(p);
+            //     ps.forEach((p) => {
+            //         p.innerHTML = `<p value="${p.innerText}">`;
+            //     });
+            //     // Save logic here
+            //     // You can use the obj variable to access the current object
+            //     // and update its properties as needed
+            // }
+//             if (obj) {
+//                 alert(`Editing ${table_name} nr ${i + 1}:
+// ${JSON.stringify(obj, null, 1)}`);
+
+//                 const newObj = { obj };
+//                 // Prompt for each property
+//                 for (const key in newObj) {
+//                     if (key !== 'id') {
+//                         const newValue = prompt(`Enter new value for ${key} (${newObj[key]}):`, newObj[key]);
+//                         if (newValue !== null) {
+//                             newObj[key] = newValue;
+//                         }
+//                     }
+//                 }
+
+//                 fetch(`/nimdA/edit/row`, {
+//                     method: 'POST',
+//                     headers: { 'Content-Type': 'application/json' },
+//                     body: JSON.stringify({
+//                         table_name,
+//                         id: obj.id,
+//                         data: newObj
+//                     })
+//                 })
+//             } else {
+//                 alert("Item not found");
+//             }
+        }
 
         function del_items(table_name, i) {
             let table_data;
