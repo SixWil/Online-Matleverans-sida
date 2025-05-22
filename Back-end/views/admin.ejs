@@ -474,51 +474,94 @@ ${JSON.stringify(obj, null, 1)}`)
                 if (table_name === 'delivery') {
                     blankHtml = `
                         <div style="opacity: 50%; background-color: skyblue; min-width: 100%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
-                            class="active_card" id="delivery_${i}">
+                            class="empty_card card delivery_cards" id="delivery_${i}">
                             <div style="display: flex;">
                                 <button style="margin-inline: .1vw;">Edit</button>
                                 <button style="margin-inline: .1vw;">Delete</button>
                             </div>
-                            <b>Leverans:</b>
-                            <p>id: ${i}</p>
-                            <p>plats:</p>
-                            <p>betalning:</p>
-                            <p>konto:</p>
-                            <p>paket:</p>
-                            <p>extra:</p>
+                            <h5>
+                                <b>Leverans</b>
+                            </h5>
+                            <p>
+                                <b>id:</b> ${i}
+                            </p>
+                            <p>
+                                <b>address:</b>
+                            </p>
+                            <p>
+                                <b>payment:</b>
+                            </p>
+                            <p>
+                                <b>account:</b>
+                            </p>
+                            <p>
+                                <b>batch:</b>
+                            </p>
+                            <p>
+                                <b>extra_instructions:</b>
+                            </p>
                         </div>
                     `;
                 } else if (table_name === 'orders') {
                     blankHtml = `
                         <div style="background-color: orange; min-width: 100%; opacity: 50%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
-                            class="active_card" id="orders_${i}">
+                            class="empty_card card order_card" id="orders_${i}">
                             <div style="display: flex;">
                                 <button style="margin-inline: .1vw;">Edit</button>
                                 <button style="margin-inline: .1vw;">Delete</button>
                             </div>
-                            <b>Beställning:</b>
-                            <p>id: ${i}</p>
-                            <p>rätt:</p>
-                            <p>pris:</p>
-                            <p>antal:</p>
-                            <p>konto:</p>
-                            <p>paket:</p>
+                            <h5>
+                                <b>Beställning:</b>
+                            </h5>
+                            <p>
+                                <b>id:</b> ${i}
+                            </p>
+                            <p>
+                                <b>food:</b>
+                            </p>
+                            <p>
+                                <b>price_per:</b>
+                            </p>
+                            <p>
+                                <b>ammount:</b>
+                            </p>
+                            <p>
+                                <b>account:</b>
+                            </p>
+                            <p>
+                                <b>batch:</b>
+                            </p>
                         </div>
                     `;
                 } else if (table_name === 'users') {
                     blankHtml = `
                         <div style="white-space: nowrap; opacity: 50%; background-color: greenyellow; min-width: 100%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
-                            class="active_card" id="users_${i}">
+                            class="empty_card card user_card" id="users_${i}">
                             <div style="display: flex;">
-                                <button>Edit</button>
-                                <button>Delete</button>
+                                <button style="margin-inline: .1vw;">Edit</button>
+                                <button style="margin-inline: .1vw;">Delete</button>
                             </div>
-                            <b>Användare:</b>
-                            <p>id: ${i}</p>
-                            <p>namn:</p>
-                            <p>mail:</p>
-                            <p>tel:</p>
-                            <p>address:</p>
+                            <h5>
+                                <b>Användare</b>
+                            </h5>
+                            <p>
+                                <b>id:</b> ${i}
+                            </p>
+                            <p>
+                                <b>username:</b>
+                            </p>
+                            <p>
+                                <b>email:</b>
+                            </p>
+                            <p>
+                                <b>phone:</b>
+                            </p>
+                            <p>
+                                <b>address:</b>
+                            </p>
+                            <p>
+                                <b>password:</b>
+                            </p>
                         </div>
                     `;
                 }
