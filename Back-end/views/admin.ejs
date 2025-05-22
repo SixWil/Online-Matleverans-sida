@@ -28,7 +28,8 @@
 
         p {
             margin-block: 0vh;
-            input{ 
+            input{
+                margin-block: .1vh;
                 height: 4vh;
                 /* margin-block: -1vh; */
             }
@@ -60,7 +61,7 @@
 
                 <% found_order_id=all.orders.find(obj=> obj && obj.id == i)
                     if (found_order_id) { %>
-                    <div style=" background-color: orange; min-width: 100%; width: fit-content; height: fit-content; text-align: center; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh; align-items: center;"
+                    <div style=" background-color: orange; min-width: 100%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
                         class="active_card card order_card" id="orders_<%= i %>">
 
                         <div style="display: flex;" id="orders_buttons_<%= i %>">
@@ -93,7 +94,7 @@
                         </div>
                     </div>
                     <% } else { %>
-                        <div style="opacity: 50%; background-color: orange; min-width: 100%; width: fit-content; height: fit-content; text-align: center; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh; align-items: center;"
+                        <div style="opacity: 50%; background-color: orange; min-width: 100%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
                             class="empty_card card order_card" id="orders_<%= i %>">
 
                             <div style="display: flex;">
@@ -128,7 +129,7 @@
                         <% } %>
                         <% found_user_id=all.users.find(obj=> obj && obj.id == i)
                             if (found_user_id) { %>
-                            <div style="white-space: nowrap; background-color: greenyellow; min-width: 100%; width: fit-content; height: fit-content; text-align: center; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh; align-items: center;"
+                            <div style="white-space: nowrap; background-color: greenyellow; min-width: 100%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
                                 class="active_card card user_card" id="users_<%= i %>">
 
                                 <div style="display: flex;" id="users_buttons_<%= i %>">
@@ -162,7 +163,7 @@
                                 </p>
                             </div>
                             <% } else {%>
-                                <div style="white-space: nowrap; opacity: 50%; background-color: greenyellow; min-width: 100%; width: fit-content; height: fit-content; text-align: center; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh; align-items: center;"
+                                <div style="white-space: nowrap; opacity: 50%; background-color: greenyellow; min-width: 100%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
                                     class="empty_card card user_card" id="users_<%= i %>">
 
                                     <div style="display: flex;">
@@ -196,7 +197,7 @@
                                 <% } %>
                         <% found_delivery_id=all.delivery.find(obj=> obj && obj.id == i)
                                 if (found_delivery_id) { %>
-                                <div style=" background-color: skyblue; min-width: 100%; width: fit-content; height: fit-content; text-align: center; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh; align-items: center;"
+                                <div style=" background-color: skyblue; min-width: 100%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
                                     class="active_card card delivery_cards" id="delivery_<%= i %>">
 
                                     <div style="display: flex;" id="delivery_buttons_<%= i %>">
@@ -226,7 +227,7 @@
                                     <p style="white-space: pre-wrap; width: 15vw;"><b>extra_instructions:</b> <%=found_delivery_id.extra_instructions %></p>
                                 </div>
                                 <% } else { %>
-                                    <div style="opacity: 50%; background-color: skyblue; min-width: 100%; width: fit-content; height: fit-content; text-align: center; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh; align-items: center;"
+                                    <div style="opacity: 50%; background-color: skyblue; min-width: 100%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
                                         class="empty_card card delivery_cards" id="delivery_<%= i %>">
 
                                         <div style="display: flex;">
@@ -334,6 +335,7 @@
                     p.innerHTML = `<input style="width: 100%" type="text" value="${p.innerText.split(": ")[1]}" placeholder="${p.innerText.split(": ")[0]}">`;
                 }
                 else {
+                    // <label>${p.innerText.split(": ")[0]}</label>
                     p.innerHTML = `<input type="text" value="${p.innerText.split(": ")[1]}" placeholder="${p.innerText.split(": ")[0]}">`;
                 }
             });
@@ -353,8 +355,14 @@
                 onclick="del_items('${table_name}', ${i})">Delete</button>
                 `;
 
+                // const labeling = active_card.querySelectorAll('label');
+                // labeling.forEach((label) => {
+                //     label.remove();
+                // });
+
                 // Markerar alla input fält i cardet
                 // Gör så att de blir p-element i stället
+
                 ps.forEach((p) => {
                     p.innerHTML = `${p.old}`;
                 });
@@ -462,7 +470,7 @@ ${JSON.stringify(obj, null, 1)}`)
                 let blankHtml = '';
                 if (table_name === 'delivery') {
                     blankHtml = `
-                        <div style="opacity: 50%; background-color: skyblue; min-width: 100%; width: fit-content; height: fit-content; text-align: center; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh; align-items: center;"
+                        <div style="opacity: 50%; background-color: skyblue; min-width: 100%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
                             class="active_card" id="delivery_${i}">
                             <div style="display: flex;">
                                 <button style="margin-inline: .1vw;">Edit</button>
@@ -479,7 +487,7 @@ ${JSON.stringify(obj, null, 1)}`)
                     `;
                 } else if (table_name === 'orders') {
                     blankHtml = `
-                        <div style="background-color: orange; min-width: 100%; opacity: 50%; width: fit-content; height: fit-content; text-align: center; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh; align-items: center;"
+                        <div style="background-color: orange; min-width: 100%; opacity: 50%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
                             class="active_card" id="orders_${i}">
                             <div style="display: flex;">
                                 <button style="margin-inline: .1vw;">Edit</button>
@@ -496,7 +504,7 @@ ${JSON.stringify(obj, null, 1)}`)
                     `;
                 } else if (table_name === 'users') {
                     blankHtml = `
-                        <div style="white-space: nowrap; opacity: 50%; background-color: greenyellow; min-width: 100%; width: fit-content; height: fit-content; text-align: center; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh; align-items: center;"
+                        <div style="white-space: nowrap; opacity: 50%; background-color: greenyellow; min-width: 100%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
                             class="active_card" id="users_${i}">
                             <div style="display: flex;">
                                 <button>Edit</button>
