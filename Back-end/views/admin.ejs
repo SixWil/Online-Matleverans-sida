@@ -58,8 +58,12 @@
             
     <div style="height: fit-content; width: fit-content; display: flex;" id="deliveries"
         class="raderna">
-        <% const maxLen=Math.max(all.delivery[all.delivery.length - 1].id, all.orders[all.orders.length - 1].id,
-            all.users[all.users.length - 1].id) -1; for (let i=0; i < maxLen; i++) { %>
+        <% const maxLen=Math.max(
+            all.delivery[all.delivery.length - 1].id,
+            all.orders[all.orders.length - 1].id,
+            all.users[all.users.length - 1].id
+        ) + 1;
+            for (let i=0; i < maxLen; i++) { %>
             <div class="collection"
                 style="width: fit-content; padding-top: 1vh; padding-inline: 1vw; white-space: nowrap;">
 
