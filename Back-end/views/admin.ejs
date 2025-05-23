@@ -384,12 +384,12 @@
                     }
                 });
 
-                if (confirm(
-                    `Nya:
-${JSON.stringify(obj_b, null, 1)}
-Orginal:
-${JSON.stringify(obj, null, 1)}
-`)){
+//                 if (confirm(
+//                     `Nya:
+// ${JSON.stringify(obj_b, null, 1)}
+// Orginal:
+// ${JSON.stringify(obj, null, 1)}
+// `)){
                 // Gör så att alla andra ("aktiva") kort blir 100% opacity
                 all_active_cards.forEach((item) => {
                     item.style.opacity = "100%";
@@ -423,7 +423,7 @@ ${JSON.stringify(obj, null, 1)}
                 })
 
                 location.reload();
-            } 
+            // } 
             // else {
             //     // Gör så att alla andra ("aktiva") kort blir 100% opacity
             //     all_active_cards.forEach((item) => {
@@ -457,8 +457,7 @@ ${JSON.stringify(obj, null, 1)}
             const obj = table_data.find(obj => obj && obj.id === i);
 
             if (
-                obj && confirm(`Are you sure you want to delete ${table_name} nr ${i + 1}?
-${JSON.stringify(obj, null, 1)}`)
+                obj && confirm(`Are you sure you want to delete ${table_name} nr ${i + 1}?`)
             ) {
                 fetch(`/nimdA/delete/row`, {
                     method: 'POST',
@@ -572,6 +571,12 @@ ${JSON.stringify(obj, null, 1)}`)
                 if (idx !== -1) table_data[idx] = null;
 
                 alert("(Deleted item)")
+
+                same_card_height('.delivery_cards');
+                same_card_height('.order_card');
+                same_card_height('.user_card');
+
+                
             } else {
                 alert("(Deletion canceled)")
             }
