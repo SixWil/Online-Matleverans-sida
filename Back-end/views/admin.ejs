@@ -39,7 +39,7 @@
 
 </head>
 
-<body>
+<body style="background-color: black">
 
     <!-- <div style="background-color: rgb(255, 100, 0);"></div>
     <div style="background-color: rgb(255, 133, 0);"></div>
@@ -51,8 +51,12 @@
     <!-- <div id="carouselExample" class="carousel slide">
 
         <div class="carousel-inner" style="text-align: center;"> -->
-
-    <div style="background-color: black; height: fit-content; width: fit-content; display: flex;" id="deliveries"
+        <div style="background-color: magenta; position: fixed; z-index: 1;">
+            <button id="order_cards_exist_button">ORDER</button> <button id="user_cards_exist_button">USER</button> <button id="delivery_cards_exist_button">DELIVERY</button>
+        </div>
+        <br>
+            
+    <div style="height: fit-content; width: fit-content; display: flex;" id="deliveries"
         class="raderna">
         <% const maxLen=Math.max(all.delivery[all.delivery.length - 1].id, all.orders[all.orders.length - 1].id,
             all.users[all.users.length - 1].id) -1; for (let i=0; i < maxLen; i++) { %>
@@ -264,6 +268,49 @@
 
 
     <script>
+        
+
+        function show_cards(card_type, state) {
+           
+            document.querySelectorAll(card_type).forEach(e => {
+
+                if (state < 0){
+                    e.style.height = 'fit-content';
+
+                    
+                    e.querySelectorAll('*').forEach(ee => {
+                        ee.style.visibility = 'visible'
+                        ee.style.height = 'fit-content'
+                    });
+                }
+                else {
+                    e.style.height = '0px';
+
+
+                    e.querySelectorAll('*').forEach(ee => {
+                        ee.style.visibility = 'hidden'
+                        ee.style.height = '0px'
+                    });
+                }
+                
+                
+                
+            });
+            same_card_height(card_type);
+        }
+
+        show_cards('.order_card', 1);
+        order_cards_state = -1
+
+        show_cards('.user_card', 1);
+        user_cards_state = -1
+
+        show_cards('.delivery_cards', 1);
+        delivery_cards_state = -1
+
+        document.getElementById('order_cards_exist_button').onclick = function () {show_cards('.order_card', order_cards_state, order_cards_state *= -1);}
+        document.getElementById('user_cards_exist_button').onclick = function () {show_cards('.user_card', user_cards_state, user_cards_state *= -1);}
+        document.getElementById('delivery_cards_exist_button').onclick = function () {show_cards('.delivery_cards', delivery_cards_state, delivery_cards_state *= -1);}
 
         var users = <%- JSON.stringify(all.users) %>;
         var orders = <%- JSON.stringify(all.orders) %>;
@@ -422,7 +469,7 @@
                         })
                 })
 
-                location.reload();
+                // location.reload();
             // } 
             // else {
             //     // Gör så att alla andra ("aktiva") kort blir 100% opacity
