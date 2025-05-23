@@ -37,22 +37,7 @@ app.use(session({
     saveUninitialized: false,
 }));
 
-app.get('/nimdA', async (req, res) => {
-       // Query each table
-       const data_delivery = await db.query('SELECT * FROM delivery');
-       const data_orders = await db.query('SELECT * FROM orders');
-       const data_users = await db.query('SELECT * FROM users');
 
-       // Combine all data into one object
-       const all = {
-           delivery: data_delivery.rows,
-           orders: data_orders.rows,
-           users: data_users.rows
-       };
-
-       // Pass it to the EJS view
-       res.render('admin.ejs', { all: all });
-})
 
 /// Skickar till start sidan från root ///
 app.get('/', (req, res) => {
@@ -178,6 +163,39 @@ function requireLogin(req, res, next) {
     }
     next();
 }
+
+
+// Middleware för att kontrollera adminåtkomst
+function requireAdmin(req, res, next) {
+    if (req.session.role === 'admin') {
+        next(); // Fortsätt om användaren är admin
+    } else {
+        res.status(403).send('<script>alert("Åtkomst nekad: Endast administratörer har åtkomst."); window.location.href="/";</script>');
+    }
+}
+
+// Skydda adminsidan med requireAdmin
+app.get('/nimdA', requireAdmin, async (req, res) => {
+    try {
+        // Hämta data från databasen
+        const data_delivery = await db.query('SELECT * FROM delivery');
+        const data_orders = await db.query('SELECT * FROM orders');
+        const data_users = await db.query('SELECT * FROM users');
+
+        // Kombinera all data i ett objekt
+        const all = {
+            delivery: data_delivery.rows,
+            orders: data_orders.rows,
+            users: data_users.rows
+        };
+
+        // Skicka datan till admin.ejs
+        res.render('admin.ejs', { all: all });
+    } catch (error) {
+        console.error('Fel vid hämtning av admininformation:', error);
+        res.status(500).send('Ett fel uppstod vid hämtning av admininformation.');
+    }
+});
 
 ///          Funktion som hanterar beställningar         ///
 ///          och lägger till dem i en array           ///
@@ -371,7 +389,6 @@ app.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
     try {
-        // Kontrollera om användaren finns i databasen
         const result = await db.query(
             'SELECT * FROM users WHERE username = $1 OR email = $1',
             [username]
@@ -379,15 +396,15 @@ app.post('/login', async (req, res) => {
         const user = result.rows[0];
 
         if (user && await bcrypt.compare(password, user.password)) {
-            // Spara användarens ID och användarnamn i sessionen
             req.session.userId = user.id;
             req.session.username = user.username;
+            req.session.role = user.role; // Spara rollen i sessionen
 
-            // Lägg till ett meddelande i sessionen
-            req.session.successMessage = 'Inloggning lyckades!';
-
-            // Omdirigera till start-sida
-            res.redirect('/start-sida');
+            if (user.role === 'admin') {
+                res.redirect('/nimdA'); // Omdirigera till adminsidan
+            } else {
+                res.redirect('/start-sida'); // Omdirigera till användarsidan
+            }
         } else {
             res.status(401).send('<script>alert("Felaktigt användarnamn eller lösenord."); window.location.href="/login";</script>');
         }
@@ -397,9 +414,8 @@ app.post('/login', async (req, res) => {
     }
 });
 
-
 app.post('/register', async (req, res) => {
-    const { username, email, phone, password, address } = req.body;
+    const { username, email, phone, password, address, role } = req.body;
 
     try {
         if (!username || !email || !phone || !password || !address) {
@@ -409,16 +425,20 @@ app.post('/register', async (req, res) => {
         // Hasha lösenordet
         const hashedPassword = await bcrypt.hash(password, 10);
 
+        // Sätt rollen till 'user' som standard om ingen roll anges
+        const userRole = role || 'user';
+
         // Spara användaren i databasen
         const result = await db.query(
-            'INSERT INTO users (username, email, phone, password, address) VALUES ($1, $2, $3, $4, $5) RETURNING id',
-            [username, email, phone, hashedPassword, address]
+            'INSERT INTO users (username, email, phone, password, address, role) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id',
+            [username, email, phone, hashedPassword, address, userRole]
         );
 
         // Spara användarens ID och användarnamn i sessionen
         const userId = result.rows[0].id;
         req.session.userId = userId;
         req.session.username = username;
+        req.session.role = userRole; // Spara rollen i sessionen
 
         // Lägg till ett meddelande i sessionen
         req.session.successMessage = 'Registrering lyckades! Du är nu inloggad.';
