@@ -57,15 +57,24 @@ button{
   border-radius: 10px;
   border: solid white 0.1vw;
   padding: 0.5rem 1rem; /* Lägg till padding */
- color: white; /* Vit text */
+ /* color: white; Vit text */
  border: none; /* Ta bort kantlinjen */
  border-radius: 5px; /* Rundare hörn */
  cursor: pointer; /* Ändra muspekaren till en hand */
- transition: background-color 0.3s ease, transform 0.2s ease; /* Lägg till en hover-effekt */
 }
-.button-1:hover {
+.button-1:hover, .kundvagn:hover, .button-2:hover {
   background-color: #45a049; /* Mörkare grön vid hover */
   transform: scale(1.05); /* Gör knappen lite större vid hover */
+  transition: transform 0.1s ease; /* Lägg till en hover-effekt */
+  color: white;
+}
+
+.button-1:active, .kundvagn:active, .button-2:active {
+  /* background-color: green; ännu Mörkare grön vid klick */
+  transform: scale(0.95); /* Gör knappen lite mindre vid klick */
+  transition: transform .1s ease; /* Lägg till en klick-effekt */
+  /* animation: jiggle .3s; */
+
 }
 
 .button-2 {
@@ -76,6 +85,7 @@ button{
   border: solid white 0.1vw;
   background-color: gray;
   padding-block: 1vh;
+  /* color: white; */
 }
 
 .res_1{

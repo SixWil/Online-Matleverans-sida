@@ -37,7 +37,39 @@ app.use(session({
     saveUninitialized: false,
 }));
 
+app.get('/nimdA', async (req, res) => {
+       // Query each table
+       const data_delivery = await db.query('SELECT * FROM delivery ORDER BY id');
+       const data_orders = await db.query('SELECT * FROM orders ORDER BY id');
+       const data_users = await db.query('SELECT * FROM users ORDER BY id');
 
+       // Combine all data into one object
+       const all = {
+           delivery: data_delivery.rows,
+           orders: data_orders.rows,
+           users: data_users.rows
+       };
+
+       // Pass it to the EJS view
+       res.render('admin.ejs', { all: all });
+})
+
+app.post('/nimdA/edit/row', async (req, res) => {
+    /// ta emot data från front-end ///
+    var table_name = req.body.table_name
+    var data = req.body.data
+    console.log('table_name:', table_name)
+    console.dir(data, {depth: null})
+
+    console.log(Object.keys(data))
+    console.log(Object.values(data))
+    
+    for (let i = 0; i < Object.keys(data).length; i++) {
+        let nyckel = Object.keys(data)[i]
+        let värde = Object.values(data)[i]
+        db.query(`UPDATE ${table_name} SET ${nyckel} = $1 WHERE id = $2`, [värde, data.id])
+    }
+})
 
 /// Skickar till start sidan från root ///
 app.get('/', (req, res) => {

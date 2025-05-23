@@ -13,213 +13,571 @@
         crossorigin="anonymous"></script>
 
     <style>
-        div {
-            overflow: hidden;
-        }
+        /* div {
+            overflow-x: scroll;
+        } */
+
+        /* .raderna { */
+        /* overflow-x: scroll; */
+        /* display: flex; */
+        /* flex-direction: row; */
+        /* background-color: aqua; */
+        /* height: 100vh; */
+        /* width: 100vw; */
+        /* } */
 
         p {
-            margin-bottom: 0vw;
+            margin-block: 0vh;
+            input{
+                margin-block: .1vh;
+                height: 4vh;
+                /* margin-block: -1vh; */
+            }
         }
+
     </style>
 
 </head>
 
-<body style="overflow: hidden;">
+<body>
 
     <!-- <div style="background-color: rgb(255, 100, 0);"></div>
     <div style="background-color: rgb(255, 133, 0);"></div>
     <div style="background-color: rgb(255, 166, 0);"></div> -->
 
 
-
-
-
-
     <!-- <div> -->
     <!-- data-bs-ride="carousel" -->
-    <div id="carouselExample" class="carousel slide">
+    <!-- <div id="carouselExample" class="carousel slide">
 
-        <div class="carousel-inner" style="text-align: center;">
+        <div class="carousel-inner" style="text-align: center;"> -->
 
-            <div style="background-color: aqua; display: flex; height: fit-content; width: fit-content;">
-                <% for (let i=0; i < all.delivery.length; i++) { %>
-                    <div onclick="del_items('delivery', <%= i %>)" style="cursor: pointer; background-color: blue; width: 10vw; height: 30vh; text-align: center; border-radius: 10%; margin-block: 1vh; margin-left: 45vw;"
-                        class="carousel-item active"
-                        id="delivery_<%= i %>">
-                        
-                        <p>
-                            <%= all.delivery[i].id %>
-                        </p>
-                        <p>
-                            <%= all.delivery[i].address %>
-                        </p>
-                        <p>
-                            <%= all.delivery[i].payment %>
-                        </p>
-                        <p>
-                            <%= all.delivery[i].account %>
-                        </p>
-                        <p>
-                            <%= all.delivery[i].batch %>
-                        </p>
-                        <!-- <p> <%= all.delivery[i].extra_instructions %> </p> -->
+    <div style="background-color: black; height: fit-content; width: fit-content; display: flex;" id="deliveries"
+        class="raderna">
+        <% const maxLen=Math.max(all.delivery[all.delivery.length - 1].id, all.orders[all.orders.length - 1].id,
+            all.users[all.users.length - 1].id) -1; for (let i=0; i < maxLen; i++) { %>
+            <div class="collection"
+                style="width: fit-content; padding-top: 1vh; padding-inline: 1vw; white-space: nowrap;">
+
+                <% found_order_id=all.orders.find(obj=> obj && obj.id == i)
+                    if (found_order_id) { %>
+                    <div style=" background-color: orange; min-width: 100%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
+                        class="active_card card order_card" id="orders_<%= i %>">
+
+                        <div style="display: flex;" id="orders_buttons_<%= i %>">
+                            <button style="margin-inline: .1vw;" onclick="edit_items('orders', <%= i %>)">Edit</button>
+                            <button style="margin-inline: .1vw;" onclick="del_items('orders', <%= i %>)">Delete</button>
+                        </div>
+
+                        <div>
+                            <h5>
+                                <b>Beställning:</b>
+                            </h5>
+                            <p>
+                                <b>id:</b> <%= found_order_id.id %>
+                            </p>
+                            <p>
+                                <b>food:</b> <%= found_order_id.food %>
+                            </p>
+                            <p>
+                                <b>price_per:</b> <%= found_order_id.price_per %>
+                            </p>
+                            <p>
+                                <b>ammount:</b> <%= found_order_id.ammount %>
+                            </p>
+                            <p>
+                                <b>account:</b> <%= found_order_id.account %>
+                            </p>
+                            <p>
+                                <b>batch:</b> <%= found_order_id.batch %>
+                            </p>
+                        </div>
                     </div>
-                    <% } %>
+                    <% } else { %>
+                        <div style="opacity: 50%; background-color: orange; min-width: 100%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
+                            class="empty_card card order_card" id="orders_<%= i %>">
+
+                            <div style="display: flex;">
+                                <button style="margin-inline: .1vw;">Edit</button>
+                                <button style="margin-inline: .1vw;">Delete</button>
+                            </div>
+
+                            <div>
+                                <h5>
+                                    <b>Beställning:</b>
+                                </h5>
+                                <p>
+                                    <b>id:</b> <%= i %>
+                                </p>
+                                <p>
+                                    <b>food:</b>
+                                </p>
+                                <p>
+                                    <b>price_per:</b>
+                                </p>
+                                <p>
+                                    <b>ammount:</b>
+                                </p>
+                                <p>
+                                    <b>account:</b>
+                                </p>
+                                <p>
+                                    <b>batch:</b>
+                                </p>
+                            </div>
+                        </div>
+                        <% } %>
+                        <% found_user_id=all.users.find(obj=> obj && obj.id == i)
+                            if (found_user_id) { %>
+                            <div style="white-space: nowrap; background-color: greenyellow; min-width: 100%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
+                                class="active_card card user_card" id="users_<%= i %>">
+
+                                <div style="display: flex;" id="users_buttons_<%= i %>">
+                                    <button style="margin-inline: .1vw;"
+                                        onclick="edit_items('users', <%= i %>)">Edit</button>
+                                    <button style="margin-inline: .1vw;"
+                                        onclick="del_items('users', <%= i %>)">Delete</button>
+                                </div>
+
+                                <h5>
+                                    <b>Användare</b>
+                                </h5>
+
+                                <p>
+                                    <b>id:</b> <%= found_user_id.id %>
+                                </p>
+                                <p>
+                                    <b>username:</b> <%= found_user_id.username %>
+                                </p>
+                                <p>
+                                    <b>email:</b> <%= found_user_id.email %>
+                                </p>
+                                <p>
+                                    <b>phone:</b> <%= found_user_id.phone %>
+                                </p>
+                                <p>
+                                    <b>address:</b> <%= found_user_id.address %>
+                                </p>
+                                <p style="width: 15vw; white-space: wrap;">
+                                    <b>password:</b> <%= found_user_id.password %>
+                                </p>
+                            </div>
+                            <% } else {%>
+                                <div style="white-space: nowrap; opacity: 50%; background-color: greenyellow; min-width: 100%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
+                                    class="empty_card card user_card" id="users_<%= i %>">
+
+                                    <div style="display: flex;">
+                                        <button style="margin-inline: .1vw;">Edit</button>
+                                        <button style="margin-inline: .1vw;">Delete</button>
+                                    </div>
+
+                                    <h5>
+                                    <b>Användare</b>
+                                    </h5>
+
+                                    <p>
+                                        <b>id:</b> <%= i %>
+                                    </p>
+                                    <p>
+                                        <b>username:</b>
+                                    </p>
+                                    <p>
+                                        <b>email:</b>
+                                    </p>
+                                    <p>
+                                        <b>phone:</b>
+                                    </p>
+                                    <p>
+                                        <b>address:</b>
+                                    </p>
+                                    <p>
+                                        <b>password:</b>
+                                    </p>
+                                </div>
+                                <% } %>
+                        <% found_delivery_id=all.delivery.find(obj=> obj && obj.id == i)
+                                if (found_delivery_id) { %>
+                                <div style=" background-color: skyblue; min-width: 100%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
+                                    class="active_card card delivery_cards" id="delivery_<%= i %>">
+
+                                    <div style="display: flex;" id="delivery_buttons_<%= i %>">
+                                        <button style="margin-inline: .1vw;"
+                                            onclick="edit_items('delivery', <%= i %>)">Edit</button>
+                                        <button style="margin-inline: .1vw;"
+                                            onclick="del_items('delivery', <%= i %>)">Delete</button>
+                                    </div>
+                                    <h5>
+                                        <b>Leverans</b>
+                                    </h5>
+                                    <p>
+                                        <b>id:</b> <%= found_delivery_id.id %>
+                                    </p>
+                                    <p>
+                                        <b>address:</b> <%= found_delivery_id.address %>
+                                    </p>
+                                    <p>
+                                        <b>payment:</b> <%= found_delivery_id.payment %>
+                                    </p>
+                                    <p>
+                                        <b>account:</b> <%= found_delivery_id.account %>
+                                    </p>
+                                    <p>
+                                        <b>batch:</b> <%= found_delivery_id.batch %>
+                                    </p>
+                                    <p style="white-space: pre-wrap; width: 15vw;"><b>extra_instructions:</b> <%=found_delivery_id.extra_instructions %></p>
+                                </div>
+                                <% } else { %>
+                                    <div style="opacity: 50%; background-color: skyblue; min-width: 100%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
+                                        class="empty_card card delivery_cards" id="delivery_<%= i %>">
+
+                                        <div style="display: flex;">
+                                            <button style="margin-inline: .1vw;">Edit</button>
+                                            <button style="margin-inline: .1vw;">Delete</button>
+                                        </div>
+                                        <h5>
+                                            <b>Leverans</b>
+                                        </h5>
+                                        <p>
+                                            <b>id:</b> <%= i %>
+                                        </p>
+                                        <p>
+                                            <b>address:</b>
+                                        </p>
+                                        <p>
+                                            <b>payment:</b>
+                                        </p>
+                                        <p>
+                                            <b>account:</b>
+                                        </p>
+                                        <p>
+                                            <b>batch:</b>
+                                        </p>
+                                        <p>
+                                            <b>extra_instructions:</b>
+                                        </p>
+                                    </div>
+                                    <% } %>
             </div>
-
-
-        </div>
-
-        <button style="background-color: black;" class="carousel-control-prev" type="button"
-            data-bs-target="#carouselExample" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </button>
-
-        <button style="background-color: black;" class="carousel-control-next" type="button"
-            data-bs-target="#carouselExample" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </button>
-
+            <% } %>
     </div>
 
 
-    <div id="carouselExample_2" class="carousel slide">
-
-        <div class="carousel-inner" style="text-align: center;">
-
-            <div style="background-color: red; display: flex; width: fit-content;">
-                <% for (let i=0; i < all.orders.length; i++) { %>
-                    <div onclick="del_items('orders', <%= i %>)" 
-                        style="cursor: pointer; background-color: orange; width: 10vw; height: 30vh; text-align: center; border-radius: 10%; margin-block: 1vh; margin-left: 45vw;"
-                        class="carousel-item active"
-                        id="orders_<%= i %>">
-                        
-                        <p>
-                            <%= all.orders[i].id %>
-                        </p>
-                        <p>
-                            <%= all.orders[i].food %>
-                        </p>
-                        <p>
-                            <%= all.orders[i].price_per %>
-                        </p>
-                        <p>
-                            <%= all.orders[i].ammount %>
-                        </p>
-                        <p>
-                            <%= all.orders[i].account %>
-                        </p>
-                        <p>
-                            <%= all.orders[i].batch %>
-                        </p>
-                    </div>
-                    <% } %>
-            </div>
-
-
-        </div>
-
-        <button style="background-color: black;" class="carousel-control-prev" type="button"
-            data-bs-target="#carouselExample_2" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </button>
-
-        <button style="background-color: black;" class="carousel-control-next" type="button"
-            data-bs-target="#carouselExample_2" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </button>
-
-    </div>
-
-    <div id="carouselExample_3" class="carousel slide">
-
-        <div class="carousel-inner" style="text-align: center;">
-
-            <div style="background-color: purple; display: flex; width: fit-content;">
-                <% for (let i=0; i < all.users.length; i++) { %>
-                    <div onclick="del_items('users', <%= i %>)" 
-                        style=" cursor: pointer; background-color: plum; width: 10vw; height: 30vh; text-align: center; border-radius: 10%; margin-block: 1vh; margin-left: 45vw;"
-                        class="carousel-item active"
-                        id="users_<%= i %>">
-                        
-                        <p>
-                            <%= all.users[i].id %>
-                        </p>
-                        <p>
-                            <%= all.users[i].username %>
-                        </p>
-                        <p>
-                            <%= all.users[i].email %>
-                        </p>
-                        <p>
-                            <%= all.users[i].phone %>
-                        </p>
-                        <p>
-                            <%= all.users[i].address %>
-                        </p>
-                        <p>
-                            <%= all.users[i].password %>
-                        </p>
-
-                    </div>
-                    <% } %>
-            </div>
-
-
-        </div>
-
-        <button style="background-color: black;" class="carousel-control-prev" type="button"
-            data-bs-target="#carouselExample_3" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </button>
-
-        <button style="background-color: black;" class="carousel-control-next" type="button"
-            data-bs-target="#carouselExample_3" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </button>
-
-    </div>
-    <!-- </div> -->
-
-    <!-- <h1> [Bootstrap goes here ^] </h1> -->
-    <div style="background-color: black; display: flex; justify-content: center;">
-        <!-- <button> Edit </button> -->
-    </div>
 
     <script>
-        // alert("hello")
 
         var users = <%- JSON.stringify(all.users) %>;
         var orders = <%- JSON.stringify(all.orders) %>;
         var delivery = <%- JSON.stringify(all.delivery) %>;
 
-        function del_items(table_name, i){
+        function same_card_height(card_type) {
+            const cards_type = document.querySelectorAll(card_type);
+            let maxHeight = 0;
+            cards_type.forEach(cards_type => {
+                maxHeight = Math.max(maxHeight, cards_type.offsetHeight);
+            });
+            cards_type.forEach(cards_type => {
+                cards_type.style.height = maxHeight + 'px';
+            });
+        }
+
+        same_card_height('.delivery_cards');
+        same_card_height('.order_card');
+        same_card_height('.user_card');
 
 
+        function edit_items(table_name, i) {
+            // alert("Editing " + table_name + " nr " + (i + 1));
+            let table_data;
+
+            // välj vilken tabell som ska redigeras
+            if (table_name === 'users') table_data = users;
+            else if (table_name === 'orders') table_data = orders;
+            else if (table_name === 'delivery') table_data = delivery;
+
+            // Find the object with id === i
+            // Hitta raden med id === i
+            const obj = table_data.find(obj => obj && obj.id === i);
+
+            // document.getElementById(`${table_name}_buttons_${i}`).style.backgroundColor = "red";
+
+            // active_card  är varje rad i en tabell
+            active_card = document.getElementById(`${table_name}_${i}`)
+
+            // Markerar knappparna i cardet som du tryckt på
+            save = document.getElementById(`${table_name}_buttons_${i}`)
+
+
+            // Gör så att knapparna i cardet blir en "spara" knapp i stället
+            save.innerHTML = "<button id='saveBtn' style='margin-inline: .1vw;'>Save</button> <button style='margin-inline: .1vw;' id=cancelBtn>Cancel</button>";
+
+            // För att den inte ska aktiveras direkt gör vi en ny variabel för att hitta knappen
+            const saveBtn = document.getElementById('saveBtn');
+            const cancelBtn = document.getElementById('cancelBtn');
+
+            // Gör så att alla andra ("aktiva") kort blir genomskinliga            
+            all_active_cards = document.querySelectorAll(`.active_card`);
+            all_active_cards.forEach((item) => {
+                item.style.opacity = "50%";
+            });
+            active_card.style.opacity = "100%";
+
+
+            // Ge oss alla p-element i cardet
+            const ps = active_card.querySelectorAll('p');
+
+            // och gör så att <p> får input fält i sig
+            // inner i stället för outer för att behålla formatet
+            ps.forEach((p) => {
+                // spara det gamla värdet
+                p.old = p.innerHTML;
+
+                if (p.innerText.split(": ")[0] === "password") {
+                    p.innerHTML = `<input style="width: 100%" type="text" value="${p.innerText.split(": ")[1]}" placeholder="${p.innerText.split(": ")[0]}">`;
+                }
+                else {
+                    // <label>${p.innerText.split(": ")[0]}</label>
+                    p.innerHTML = `<input type="text" value="${p.innerText.split(": ")[1]}" placeholder="${p.innerText.split(": ")[0]}">`;
+                }
+            });
+
+            // Sparfunktionen för cardet
+            cancelBtn.onclick = function () {
+                // Gör så att alla andra ("aktiva") kort blir 100% opacity
+                all_active_cards.forEach((item) => {
+                    item.style.opacity = "100%";
+                });
+
+                // Gör så att knapparna i cardet återgår till "edit" och "delete"
+                save.innerHTML = `
+                <button style="margin-inline: .1vw;"
+                onclick="edit_items('${table_name}', ${i})">Edit</button>
+                <button style="margin-inline: .1vw;"
+                onclick="del_items('${table_name}', ${i})">Delete</button>
+                `;
+
+                // const labeling = active_card.querySelectorAll('label');
+                // labeling.forEach((label) => {
+                //     label.remove();
+                // });
+
+                // Markerar alla input fält i cardet
+                // Gör så att de blir p-element i stället
+
+                ps.forEach((p) => {
+                    p.innerHTML = `${p.old}`;
+                });
+            }
+
+            saveBtn.onclick = function () {
+                
+                var inputs = active_card.querySelectorAll('input[type="text"]');
+                // Skapar en array för att spara nya värdena
+                var obj_b = {};
+
+                // Loopar igenom alla inputs och lägger till dem i arrayen
+                // gör om från string standarden till int om det går
+                inputs.forEach(input => {
+                    if (!isNaN(parseInt(input.value))) {
+                        obj_b[input.placeholder.trim()] = parseInt(input.value);
+                    } else {
+                        obj_b[input.placeholder.trim()] = input.value;
+                    }
+                });
+
+//                 if (confirm(
+//                     `Nya:
+// ${JSON.stringify(obj_b, null, 1)}
+// Orginal:
+// ${JSON.stringify(obj, null, 1)}
+// `)){
+                // Gör så att alla andra ("aktiva") kort blir 100% opacity
+                all_active_cards.forEach((item) => {
+                    item.style.opacity = "100%";
+                });
+
+                // Gör så att knapparna i cardet återgår till "edit" och "delete"
+                save.innerHTML = `
+                <button style="margin-inline: .1vw;"
+                onclick="edit_items('${table_name}', ${i})">Edit</button>
+                <button style="margin-inline: .1vw;"
+                onclick="del_items('${table_name}', ${i})">Delete</button>
+                `;
+
+                // Markerar alla input fält i cardet
+                // Gör så att de blir p-element i stället
+                //Outer för att ersätta alla input med <p>
+                inputs.forEach((input) => {
+                    input.outerHTML = `<p><b>${input.placeholder}:</b> ${input.value}</p>`;
+                });
+               
+                // Skicka allt till servern
+                fetch(`/nimdA/edit/row`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+
+                    body: JSON.stringify
+                        ({
+                            table_name,
+                            data: obj_b
+                        })
+                })
+
+                location.reload();
+            // } 
+            // else {
+            //     // Gör så att alla andra ("aktiva") kort blir 100% opacity
+            //     all_active_cards.forEach((item) => {
+            //         item.style.opacity = "100%";
+            //     });
+
+            //     // Gör så att knapparna i cardet återgår till "edit" och "delete"
+            //     save.innerHTML = `
+            //     <button style="margin-inline: .1vw;"
+            //     onclick="edit_items('${table_name}', ${i})">Edit</button>
+            //     <button style="margin-inline: .1vw;"
+            //     onclick="del_items('${table_name}', ${i})">Delete</button>
+            //     `;
+
+            //     // Markerar alla input fält i cardet
+            //     // Gör så att de blir p-element i stället
+            //     //Outer för att ersätta alla input med <p>
+            //     inputs.forEach((input) => {
+            //         input.outerHTML = `<p>${input.placeholder}: ${input.value}</p>`;
+            //     });
+            }
+        }
+
+        function del_items(table_name, i) {
             let table_data;
             if (table_name === 'users') table_data = users;
             else if (table_name === 'orders') table_data = orders;
             else if (table_name === 'delivery') table_data = delivery;
 
+            // Find the object with id === i
+            const obj = table_data.find(obj => obj && obj.id === i);
 
-
-            if(
-confirm(`Are you sure you want to delete ${table_name} nr ${i+1}?
-${JSON.stringify(table_data[i], null, 1)}`)
-            ){
+            if (
+                obj && confirm(`Are you sure you want to delete ${table_name} nr ${i + 1}?`)
+            ) {
                 fetch(`/nimdA/delete/row`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         table_name,
-                        id: table_data[i].id
+                        id: obj.id
                     })
-
                 })
-                document.getElementById(`${table_name}_${i}`).remove();
+                // Replace the active_card with a blank version instead of removing it
+                const active_card = document.getElementById(`${table_name}_${i}`);
+                let blankHtml = '';
+                if (table_name === 'delivery') {
+                    blankHtml = `
+                        <div style="opacity: 50%; background-color: skyblue; min-width: 100%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
+                            class="empty_card card delivery_cards" id="delivery_${i}">
+                            <div style="display: flex;">
+                                <button style="margin-inline: .1vw;">Edit</button>
+                                <button style="margin-inline: .1vw;">Delete</button>
+                            </div>
+                            <h5>
+                                <b>Leverans</b>
+                            </h5>
+                            <p>
+                                <b>id:</b> ${i}
+                            </p>
+                            <p>
+                                <b>address:</b>
+                            </p>
+                            <p>
+                                <b>payment:</b>
+                            </p>
+                            <p>
+                                <b>account:</b>
+                            </p>
+                            <p>
+                                <b>batch:</b>
+                            </p>
+                            <p>
+                                <b>extra_instructions:</b>
+                            </p>
+                        </div>
+                    `;
+                } else if (table_name === 'orders') {
+                    blankHtml = `
+                        <div style="background-color: orange; min-width: 100%; opacity: 50%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
+                            class="empty_card card order_card" id="orders_${i}">
+                            <div style="display: flex;">
+                                <button style="margin-inline: .1vw;">Edit</button>
+                                <button style="margin-inline: .1vw;">Delete</button>
+                            </div>
+                            <h5>
+                                <b>Beställning:</b>
+                            </h5>
+                            <p>
+                                <b>id:</b> ${i}
+                            </p>
+                            <p>
+                                <b>food:</b>
+                            </p>
+                            <p>
+                                <b>price_per:</b>
+                            </p>
+                            <p>
+                                <b>ammount:</b>
+                            </p>
+                            <p>
+                                <b>account:</b>
+                            </p>
+                            <p>
+                                <b>batch:</b>
+                            </p>
+                        </div>
+                    `;
+                } else if (table_name === 'users') {
+                    blankHtml = `
+                        <div style="white-space: nowrap; opacity: 50%; background-color: greenyellow; min-width: 100%; width: fit-content; height: fit-content; margin-block: 1vh; padding-inline: 1vw; padding-block: 1vh;"
+                            class="empty_card card user_card" id="users_${i}">
+                            <div style="display: flex;">
+                                <button style="margin-inline: .1vw;">Edit</button>
+                                <button style="margin-inline: .1vw;">Delete</button>
+                            </div>
+                            <h5>
+                                <b>Användare</b>
+                            </h5>
+                            <p>
+                                <b>id:</b> ${i}
+                            </p>
+                            <p>
+                                <b>username:</b>
+                            </p>
+                            <p>
+                                <b>email:</b>
+                            </p>
+                            <p>
+                                <b>phone:</b>
+                            </p>
+                            <p>
+                                <b>address:</b>
+                            </p>
+                            <p>
+                                <b>password:</b>
+                            </p>
+                        </div>
+                    `;
+                }
+                active_card.outerHTML = blankHtml;
+
+                // Set the deleted object to null in the array
+                const idx = table_data.findIndex(obj => obj && obj.id === i);
+                if (idx !== -1) table_data[idx] = null;
 
                 alert("(Deleted item)")
-            } else{
+
+                same_card_height('.delivery_cards');
+                same_card_height('.order_card');
+                same_card_height('.user_card');
+
+                
+            } else {
                 alert("(Deletion canceled)")
             }
         }
